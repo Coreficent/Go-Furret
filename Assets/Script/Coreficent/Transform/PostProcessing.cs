@@ -6,8 +6,8 @@ public class PostProcessing : MonoBehaviour
 {
     public Material Outline;
 
-    private void OnRenderImage(RenderTexture source, RenderTexture destination)
-    {
-        Graphics.Blit(source, destination, Outline);
-    }
+    //private void OnRenderImage(RenderTexture source, RenderTexture destination)
+    //{
+        // Graphics.Blit(source, destination, Outline);
+    //}
 }

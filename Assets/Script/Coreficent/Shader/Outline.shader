@@ -1,88 +1,95 @@
-﻿Shader "Coreficent/Outline"
-{
-    Properties
-    {
+﻿Shader "Tutorial/020_InvertedHull/Surface" {
+    Properties {
+        _Color ("Tint", Color) = (0, 0, 0, 1)
         _MainTex ("Texture", 2D) = "white" {}
-        _DeltaX ("Delta X", Float) = 0.01
-		_DeltaY ("Delta Y", Float) = 0.01
-    }
-    SubShader
-    {
-        // No culling or depth
-        Cull Off ZWrite Off ZTest Always
+        _Smoothness ("Smoothness", Range(0, 1)) = 0
+        _Metallic ("Metalness", Range(0, 1)) = 0
+        [HDR] _Emission ("Emission", color) = (0,0,0)
 
-        Pass
-        {
+        _OutlineColor ("Outline Color", Color) = (0, 0, 0, 1)
+        _OutlineThickness ("Outline Thickness", Range(0,1)) = 100.0
+    }
+    SubShader {
+        //the material is completely non-transparent and is rendered at the same time as the other opaque geometry
+        Tags{ "RenderType"="Opaque" "Queue"="Geometry"}
+
+        CGPROGRAM
+        //the shader is a surface shader, meaning that it will be extended by unity in the background
+        //to have fancy lighting and other features
+        //our surface shader function is called surf and we use our custom lighting model
+        //fullforwardshadows makes sure unity adds the shadow passes the shader might need
+        //vertex:vert makes the shader use vert as a vertex shader function
+        #pragma surface surf Standard fullforwardshadows
+        #pragma target 3.0
+
+        sampler2D _MainTex;
+        fixed4 _Color;
+
+        half _Smoothness;
+        half _Metallic;
+        half3 _Emission;
+
+        //input struct which is automatically filled by unity
+        struct Input {
+            float2 uv_MainTex;
+        };
+
+        //the surface shader function which sets parameters the lighting function then uses
+        void surf (Input i, inout SurfaceOutputStandard o) {
+            //read albedo color from texture and apply tint
+            fixed4 col = tex2D(_MainTex, i.uv_MainTex);
+            col *= _Color;
+            o.Albedo = col.rgb;
+            //just apply the values for metalness, smoothness and emission
+            o.Metallic = _Metallic;
+            o.Smoothness = _Smoothness;
+            o.Emission = _Emission;
+        }
+        ENDCG
+
+        //The second pass where we render the outlines
+        Pass{
+            Cull Front
+
             CGPROGRAM
+
+            //include useful shader functions
+            #include "UnityCG.cginc"
+
+            //define vertex and fragment shader
             #pragma vertex vert
             #pragma fragment frag
 
-            #include "UnityCG.cginc"
+            //tint of the texture
+            fixed4 _OutlineColor;
+            float _OutlineThickness;
 
-            struct appdata
-            {
+            //the object data that's put into the vertex shader
+            struct appdata{
                 float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
+                float4 normal : NORMAL;
             };
 
-            struct v2f
-            {
-                float2 uv : TEXCOORD0;
-                float4 vertex : SV_POSITION;
+            //the data that's used to generate fragments and can be read by the fragment shader
+            struct v2f{
+                float4 position : SV_POSITION;
             };
 
-            v2f vert (appdata v)
-            {
+            //the vertex shader
+            v2f vert(appdata v){
                 v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+                //convert the vertex positions from object space to clip space so they can be rendered
+                o.position = UnityObjectToClipPos(v.vertex + normalize(v.normal) * _OutlineThickness);
                 return o;
             }
 
-            sampler2D _MainTex;
-            float _DeltaX;
-		    float _DeltaY;
-
-            float sobel (sampler2D tex, float2 uv) {
-			    float2 delta = float2(_DeltaX, _DeltaY);
-			
-			    float4 hr = float4(0, 0, 0, 0);
-			    float4 vt = float4(0, 0, 0, 0);
-			
-			    hr += tex2D(tex, (uv + float2(-1.0, -1.0) * delta)) *  1.0;
-			    hr += tex2D(tex, (uv + float2( 0.0, -1.0) * delta)) *  0.0;
-			    hr += tex2D(tex, (uv + float2( 1.0, -1.0) * delta)) * -1.0;
-			    hr += tex2D(tex, (uv + float2(-1.0,  0.0) * delta)) *  2.0;
-			    hr += tex2D(tex, (uv + float2( 0.0,  0.0) * delta)) *  0.0;
-			    hr += tex2D(tex, (uv + float2( 1.0,  0.0) * delta)) * -2.0;
-			    hr += tex2D(tex, (uv + float2(-1.0,  1.0) * delta)) *  1.0;
-			    hr += tex2D(tex, (uv + float2( 0.0,  1.0) * delta)) *  0.0;
-			    hr += tex2D(tex, (uv + float2( 1.0,  1.0) * delta)) * -1.0;
-			
-			    vt += tex2D(tex, (uv + float2(-1.0, -1.0) * delta)) *  1.0;
-			    vt += tex2D(tex, (uv + float2( 0.0, -1.0) * delta)) *  2.0;
-			    vt += tex2D(tex, (uv + float2( 1.0, -1.0) * delta)) *  1.0;
-			    vt += tex2D(tex, (uv + float2(-1.0,  0.0) * delta)) *  0.0;
-			    vt += tex2D(tex, (uv + float2( 0.0,  0.0) * delta)) *  0.0;
-			    vt += tex2D(tex, (uv + float2( 1.0,  0.0) * delta)) *  0.0;
-			    vt += tex2D(tex, (uv + float2(-1.0,  1.0) * delta)) * -1.0;
-			    vt += tex2D(tex, (uv + float2( 0.0,  1.0) * delta)) * -2.0;
-			    vt += tex2D(tex, (uv + float2( 1.0,  1.0) * delta)) * -1.0;
-			
-			    return sqrt(hr * hr + vt * vt);
-		    }
-            
-            fixed4 frag (v2f i) : SV_Target
-            {
-                //fixed4 col = tex2D(_MainTex, i.uv);
-                // just invert the colors
-                //col.rgb = 1 - col.rgb;
-                //return col;
-
-                float s = sobel(_MainTex, i.uv);
-			    return float4(s, s, s, 1);
+            //the fragment shader
+            fixed4 frag(v2f i) : SV_TARGET{
+                return _OutlineColor;
             }
+
             ENDCG
         }
     }
+    FallBack "Standard"
 }
