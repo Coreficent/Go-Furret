@@ -1,4 +1,4 @@
-﻿Shader "Coreficent/Fur"
+﻿Shader "Coreficent/Body"
 {
     Properties
     {
