@@ -53,8 +53,8 @@
 
             //the fragment shader
             fixed4 frag(v2f i) : SV_TARGET{
-                fixed4 col = tex2D(_MainTex, i.uv);
-                col *= _Color;
+                float2 uv = 1.0 - abs(frac(i.uv * 0.5) * 2.0 - 1.0);
+                fixed4 col = tex2D(_MainTex, uv);
                 return col;
             }
 
