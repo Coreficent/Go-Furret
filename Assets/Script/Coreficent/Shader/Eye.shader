@@ -47,7 +47,9 @@
             fixed4 frag (v2f i) : SV_Target
             {
                 // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
+                // eye shader
+                float2 uv = float2(i.uv[0] * 2.0, i.uv[1]);
+                fixed4 col = tex2D(_MainTex, uv);
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
