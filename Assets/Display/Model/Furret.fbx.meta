@@ -11,7 +11,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pm0162_00_Body1.tga
-    second: {fileID: 2100000, guid: 06706deae9431694d98adf6f3428d45f, type: 2}
+    second: {fileID: 2100000, guid: a8c37d2993d97354d99653db95e20312, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
