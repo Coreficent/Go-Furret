@@ -6,7 +6,22 @@ ModelImporter:
   - first:
       74: 7938840184749009419
     second: model_skeleton|a_walk
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pm0162_00_Body1.tga
+    second: {fileID: 2100000, guid: a8c37d2993d97354d99653db95e20312, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pm0162_00_Eye1.tga
+    second: {fileID: 2100000, guid: fc0ff0047e0f2b643a4c71a57ac40c89, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pm0162_00_Mouth1.tga
+    second: {fileID: 2100000, guid: 75563651b4753d6479de17af2a5c4533, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
