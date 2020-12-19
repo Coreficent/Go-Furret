@@ -55,7 +55,7 @@
             fixed4 frag(v2f i) : SV_TARGET{
                 // sample the texture
                 // TODO need to only modify u and v independently with uniforms
-                fixed4 col = tex2D(_MainTex, i.uv * 1.0);
+                fixed4 col = tex2D(_MainTex, float2(i.uv[0] * 2.0 + 1.0 * 0.0, i.uv[1] + 0.25 * 0.0));
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
