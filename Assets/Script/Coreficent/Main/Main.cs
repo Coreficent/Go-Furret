@@ -15,6 +15,9 @@
         {
             SanityCheck.Check(this, Furret);
             _controller = new Controller(Furret.GetComponent<Animator>());
+            Furret.transform.Find("model").GetComponent<SkinnedMeshRenderer>().materials[0].SetFloat("_OutlineThickness", 4.0f);
+            Furret.transform.Find("model").GetComponent<SkinnedMeshRenderer>().materials[1].SetFloat("_OutlineThickness", 4.0f);
+            Furret.transform.Find("model").GetComponent<SkinnedMeshRenderer>().materials[2].SetFloat("_OutlineThickness", 4.0f);
         }
         private void Update()
         {
