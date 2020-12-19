@@ -11,6 +11,7 @@
         private void Start()
         {
             SanityCheck.Check(this, Furret);
+            Furret.GetComponent<Animator>().SetBool("Started", true);
         }
         private void Update()
         {
