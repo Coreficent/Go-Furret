@@ -3,6 +3,7 @@
     Properties{
         _OutlineColor ("Outline Color", Color) = (0, 0, 0, 1)
         _OutlineThickness ("Outline Thickness", Range(0, 5.0)) = 1.0
+        _ExpressionIndex ("Expression Index", Float) = 0.0
 
         _Color ("Tint", Color) = (0, 0, 0, 1)
         _MainTex ("Texture", 2D) = "white" {}
@@ -30,6 +31,9 @@
             //tint of the texture
             fixed4 _Color;
 
+            //control the Expression
+            float _ExpressionIndex;
+
             //the object data that's put into the vertex shader
             struct appdata{
                 float4 vertex : POSITION;
@@ -55,7 +59,7 @@
             fixed4 frag(v2f i) : SV_TARGET{
                 // sample the texture
                 // TODO need to only modify u and v independently with uniforms
-                fixed4 col = tex2D(_MainTex, float2(i.uv[0] * 2.0 + 1.0 * 0.0, i.uv[1] + 0.25 * 0.0));
+                fixed4 col = tex2D(_MainTex, float2(i.uv[0] * 2.0 + 1.0 * 0.0, i.uv[1] + 0.25 * _ExpressionIndex));
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
