@@ -10,11 +10,11 @@
     {
         public GameObject Furret;
 
-        private FurretControl _furretControl;
+        private Controller _controller;
         private void Start()
         {
             SanityCheck.Check(this, Furret);
-            _furretControl = new FurretControl(Furret.GetComponent<Animator>());
+            _controller = new Controller(Furret.GetComponent<Animator>());
         }
         private void Update()
         {
@@ -26,7 +26,7 @@
                 draw graphics
                 play sounds
              */
-            _furretControl.Run();
+            _controller.Run();
         }
     }
 }
