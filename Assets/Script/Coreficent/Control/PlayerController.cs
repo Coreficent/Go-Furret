@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class Controller
+    public class PlayerController
     {
         private Animator _animator;
 
-        public Controller(Animator animator)
+        public PlayerController(Animator animator)
         {
             _animator = animator;
         }
