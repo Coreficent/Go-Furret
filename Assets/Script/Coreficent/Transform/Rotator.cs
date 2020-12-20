@@ -17,9 +17,9 @@
 
         private void ControlRotation()
         {
-            // TODO: cap the speed to rotation speed when rotating both axes
-            transform.rotation *= Quaternion.AngleAxis(_rotationSpeed * Input.GetAxis(_horizontalControl) * Time.deltaTime, transform.InverseTransformDirection(-Vector3.up));
-            transform.rotation *= Quaternion.AngleAxis(_rotationSpeed * Input.GetAxis(_verticalControl) * Time.deltaTime, transform.InverseTransformDirection(-Vector3.left));
+            Vector3 unitVector = new Vector3(Input.GetAxis(_horizontalControl), Input.GetAxis(_verticalControl)).normalized;
+            transform.rotation *= Quaternion.AngleAxis(_rotationSpeed * unitVector.x * Time.deltaTime, transform.InverseTransformDirection(-Vector3.up));
+            transform.rotation *= Quaternion.AngleAxis(_rotationSpeed * unitVector.y * Time.deltaTime, transform.InverseTransformDirection(-Vector3.left));
         }
     }
 }
