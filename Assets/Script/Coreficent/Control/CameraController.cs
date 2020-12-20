@@ -9,7 +9,7 @@
     {
         public GameObject Player;
 
-        private Vector3 _distance = new Vector3(0.0f, 50.0f, -150.0f);
+        private Vector3 _distance = new Vector3(0.0f, -150.0f, -150.0f);
 
         private void Start()
         {
@@ -18,6 +18,7 @@
         private void Update()
         {
             transform.position = Player.transform.position + _distance;
+            transform.rotation = Quaternion.LookRotation(Player.transform.position - transform.position);
         }
     }
 }
