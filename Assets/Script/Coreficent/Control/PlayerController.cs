@@ -6,12 +6,15 @@
 
     public class PlayerController : MonoBehaviour
     {
-        private readonly string _verticalControl = "Vertical";
-        private readonly string _horizontalControl = "Horizontal";
-        private float _walkSpeed = 500.0f;
-        private float _rotationSpeed = 10.0f;
         private Animator _animator;
         private Vector3 inputDirection;
+
+        private readonly string _verticalControl = "Vertical";
+        private readonly string _horizontalControl = "Horizontal";
+        private readonly float radius = 500.0f;
+
+        private float _walkSpeed = 500.0f;
+        private float _rotationSpeed = 10.0f;
 
         private void Start()
         {
@@ -28,6 +31,7 @@
                 CalculatetRotation();
                 CalculateMovement();
             }
+            ApplyPhysics();
         }
 
         private void CalculatetRotation()
@@ -39,6 +43,11 @@
         {
             Vector3 direction = (transform.rotation * Vector3.up).normalized;
             transform.position += direction * _walkSpeed * Time.deltaTime;
+        }
+
+        private void ApplyPhysics()
+        {
+            transform.position = transform.position.normalized * radius;
         }
     }
 }
