@@ -518,6 +518,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &968026730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968026727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0140025b11fd44a4c8f0c7fa90a130f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1054618087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -533,7 +545,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4a70e0bf7c33c8544bbbb55dbd155c2b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 198.91
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a70e0bf7c33c8544bbbb55dbd155c2b,
         type: 3}
@@ -543,22 +555,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4a70e0bf7c33c8544bbbb55dbd155c2b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.18301274
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a70e0bf7c33c8544bbbb55dbd155c2b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6830127
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a70e0bf7c33c8544bbbb55dbd155c2b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.6830127
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a70e0bf7c33c8544bbbb55dbd155c2b,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.18301274
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a70e0bf7c33c8544bbbb55dbd155c2b,
         type: 3}
@@ -568,12 +580,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4a70e0bf7c33c8544bbbb55dbd155c2b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a70e0bf7c33c8544bbbb55dbd155c2b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 150
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a70e0bf7c33c8544bbbb55dbd155c2b,
         type: 3}
@@ -664,7 +676,7 @@ GameObject:
   - component: {fileID: 1204364121}
   - component: {fileID: 1204364120}
   m_Layer: 0
-  m_Name: UnlitSphere
+  m_Name: BasicSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

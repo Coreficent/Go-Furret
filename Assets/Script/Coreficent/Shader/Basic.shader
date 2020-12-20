@@ -1,8 +1,10 @@
-﻿Shader "Unlit/Unlit"
+﻿Shader "Coreficent/Basic"
 {
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _OutlineColor ("Outline Color", Color) = (0, 0, 0, 1)
+        _OutlineThickness ("Outline Thickness", Range(0, 5.0)) = 1.0
     }
     SubShader
     {
@@ -52,6 +54,22 @@
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
             }
+            ENDCG
+        }
+
+        //The second pass where we render the outlines
+        Pass{
+            Cull front
+
+            CGPROGRAM
+
+            //define vertex and fragment shader
+            #pragma vertex vert
+            #pragma fragment frag
+
+            //using outline shader
+            #include "../HLSL/Outline.hlsl"
+
             ENDCG
         }
     }
