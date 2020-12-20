@@ -9,7 +9,7 @@
     {
         public GameObject Player;
 
-        private Vector3 _distance = new Vector3(0.0f, -150.0f, -150.0f);
+        private Vector3 _distance = new Vector3(0.0f, -250.0f, -150.0f);
 
         private void Start()
         {

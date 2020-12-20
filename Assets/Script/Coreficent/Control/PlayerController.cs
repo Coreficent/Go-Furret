@@ -18,7 +18,7 @@
         public void Run()
         {
             _animator.SetBool("Started", Input.GetKey(KeyCode.S));
-            _player.transform.rotation = Quaternion.LookRotation(_player.transform.position * -1.0f);
+            _player.transform.rotation = Quaternion.LookRotation(_player.transform.position * -1.0f, Vector3.down);
         }
     }
 }
