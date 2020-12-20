@@ -10,11 +10,9 @@
     {
         public GameObject Furret;
 
-        private PlayerController _controller;
         private void Start()
         {
             SanityCheck.Check(this, Furret);
-            _controller = new PlayerController(Furret);
             Furret.transform.Find("model").GetComponent<SkinnedMeshRenderer>().materials[2].SetFloat("_ExpressionIndex", 1.0f);
         }
         private void Update()
@@ -27,7 +25,6 @@
                 draw graphics
                 play sounds
              */
-            _controller.Run();
         }
     }
 }
