@@ -5,7 +5,7 @@
 
     public class SanityCheck
     {
-        public static bool DebugMode = false;
+        public static bool DebugMode = true;
 
         public static void Check(object owner, params object[] variables)
         {
