@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using UnityEngine;
     using Coreficent.Utility;
-    using Coreficent.Control;
 
     public class Main : MonoBehaviour
     {
