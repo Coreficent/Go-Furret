@@ -14,7 +14,7 @@
 
         void Update()
         {
-            transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * Time.deltaTime * _turnAmount);
+            
         }
     }
 }
