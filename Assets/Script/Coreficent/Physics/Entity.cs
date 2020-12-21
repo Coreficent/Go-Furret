@@ -8,7 +8,10 @@
     {
         public GameObject Planet;
 
-        private float _turnAmount = 50.0f;
+        private float _turnAmount = 250.0f;
+        private float _walkSpeed = 100.0f;
+        private Vector3 _inputDirection = new Vector3();
+
 
         private void Awake()
         {
@@ -18,12 +21,16 @@
 
         private void Update()
         {
-            transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * Time.deltaTime * _turnAmount);
+            
         }
 
         private void FixedUpdate()
         {
             Planet.GetComponent<Planet>().CalculatePhysics(gameObject);
+
+            transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * _turnAmount * Time.fixedDeltaTime);
+
+            GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + transform.TransformDirection(new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical")).normalized) * _walkSpeed * Time.fixedDeltaTime);
         }
     }
 }
