@@ -25,18 +25,37 @@
         {
             _animator.SetBool("Started", Input.GetKey(KeyCode.Alpha1));
 
-            inputDirection = new Vector2(Input.GetAxis(_horizontalControl), Input.GetAxis(_verticalControl)).normalized;
+            inputDirection = new Vector3(Input.GetAxis(_horizontalControl), Input.GetAxis(_verticalControl)).normalized;
             if (inputDirection.magnitude > 0.5f)
             {
                 CalculatetRotation();
-                CalculateMovement();
+                //CalculateMovement();
             }
-            ApplyPhysics();
+            //ApplyPhysics();
         }
 
         private void CalculatetRotation()
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(transform.position * -1.0f, inputDirection), _rotationSpeed * Time.deltaTime);
+            var from = transform.position * -1.0f;
+
+
+            //var q = Quaternion.AngleAxis(Vector3.Angle(new Vector3(0.0f, 0.0f, -500.0f), transform.position), new Vector3(0.0f, 0.0f, -500.0f));
+
+            //var to = q * inputDirection;
+
+            //var to = transform.InverseTransformDirection(inputDirection);
+
+            //var to = inputDirection;
+            //var to = transform.Find("guide").transform.InverseTransformVector(inputDirection);
+
+            Quaternion q = Quaternion.FromToRotation(new Vector3(0.0f, 0.0f, -500.0f), transform.position);
+
+            var to = q * inputDirection;
+
+            Debug.DrawLine(new Vector3(), from * 500.0f, Color.blue);
+            Debug.DrawLine(new Vector3(), to * 500.0f, Color.red);
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(from, to), _rotationSpeed * Time.deltaTime);
         }
 
         private void CalculateMovement()
