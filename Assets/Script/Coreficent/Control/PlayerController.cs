@@ -29,7 +29,7 @@
             if (inputDirection.magnitude > 0.5f)
             {
                 CalculatetRotation();
-                //CalculateMovement();
+                CalculateMovement();
             }
             //ApplyPhysics();
         }
@@ -60,8 +60,11 @@
 
         private void CalculateMovement()
         {
-            Vector3 direction = (transform.rotation * Vector3.up).normalized;
-            transform.position += direction * _walkSpeed * Time.deltaTime;
+            //Vector3 direction = (transform.rotation * Vector3.up).normalized;
+            Quaternion q = Quaternion.FromToRotation(new Vector3(0.0f, 0.0f, -500.0f), transform.position);
+
+            var to = q * inputDirection;
+            transform.position += to.normalized * _walkSpeed * Time.deltaTime;
         }
 
         private void ApplyPhysics()
