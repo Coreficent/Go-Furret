@@ -17,6 +17,8 @@
         }
         private void Update()
         {
+            Furret.transform.Find("Display").GetComponent<Animator>().SetBool("Started", Input.GetKey(KeyCode.Alpha1));
+
             /*
                 check for user input
                 run AI
