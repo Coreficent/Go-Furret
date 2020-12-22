@@ -21,7 +21,7 @@
             #pragma fragment frag
             #pragma multi_compile_fog
 
-            #include "../HLSL/Unlit.hlsl"
+            #include "../HLSL/Unillumination.hlsl"
 
             ENDCG
         }

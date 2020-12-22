@@ -1,5 +1,5 @@
-#ifndef UNLIT_INCLUDED
-#define UNLIT_INCLUDED
+#ifndef UNILLUMINATION_INCLUDED
+#define UNILLUMINATION_INCLUDED
 
 #include "UnityCG.cginc"
 
