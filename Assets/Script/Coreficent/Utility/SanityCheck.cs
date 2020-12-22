@@ -5,13 +5,12 @@
 
     public class SanityCheck
     {
-        public static bool DebugMode = true;
-
         public static void Check(object owner, params object[] variables)
         {
-            if (ApplicationMode.State == ApplicationMode.Mode.Debug)
+            if (ApplicationMode._applicationMode.DebugMode)
             {
                 bool sanityCheckPassed = true;
+
                 foreach (object i in variables)
                 {
                     if (i == null)

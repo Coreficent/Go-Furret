@@ -1,12 +1,26 @@
 ﻿namespace Coreficent.Utility
 {
-    public class ApplicationMode
+    using UnityEngine;
+
+    public class ApplicationMode : MonoBehaviour
     {
-        public static Mode State = Mode.Debug;
-        public enum Mode
+        internal static ApplicationMode _applicationMode = null;
+
+        public ApplicationState Mode = ApplicationState.Debug;
+        public enum ApplicationState
         {
             Debug,
             Release
+        }
+
+        private void Start()
+        {
+            _applicationMode = this;
+        }
+
+        internal bool DebugMode
+        {
+            get { return Mode == ApplicationState.Debug; }
         }
     }
 }
