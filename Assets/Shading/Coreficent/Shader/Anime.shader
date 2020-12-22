@@ -1,4 +1,4 @@
-﻿Shader "Coreficent/Outline"
+﻿Shader "Coreficent/Anime"
 {
     Properties
     {
