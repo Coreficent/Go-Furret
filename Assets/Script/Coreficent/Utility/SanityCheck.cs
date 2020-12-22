@@ -5,6 +5,7 @@
 
     public class SanityCheck
     {
+        private static readonly string _delimiter = "::";
         public static void Check(object owner, params object[] variables)
         {
             if (ApplicationMode._applicationMode.DebugMode)
@@ -16,13 +17,13 @@
                     if (i == null)
                     {
                         sanityCheckPassed = false;
-                        Debug.Log(owner + "::" + "has an unexpected null variable in" + "::" + SceneManager.GetActiveScene().name);
+                        Debug.Log(owner + _delimiter + "has an unexpected null variable in" + _delimiter + SceneManager.GetActiveScene().name);
                     }
                 }
 
                 if (sanityCheckPassed)
                 {
-                    Debug.Log(owner + "::" + "sanity check passed.");
+                    Debug.Log(owner + _delimiter + "sanity check passed.");
                 }
             }
         }
