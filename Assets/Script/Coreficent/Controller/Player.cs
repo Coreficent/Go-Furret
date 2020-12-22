@@ -9,7 +9,7 @@
         private float _turnAmount = 50.0f;
         void Start()
         {
-
+            
         }
 
         void Update()

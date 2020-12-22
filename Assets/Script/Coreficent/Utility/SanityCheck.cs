@@ -9,19 +9,22 @@
 
         public static void Check(object owner, params object[] variables)
         {
-            bool sanityCheckPassed = true;
-            foreach (object i in variables)
+            if (ApplicationMode.State == ApplicationMode.Mode.Debug)
             {
-                if (i == null)
+                bool sanityCheckPassed = true;
+                foreach (object i in variables)
                 {
-                    sanityCheckPassed = false;
-                    Debug.Log(owner + "::" + "has an unexpected null variable in" + "::" + SceneManager.GetActiveScene().name);
+                    if (i == null)
+                    {
+                        sanityCheckPassed = false;
+                        Debug.Log(owner + "::" + "has an unexpected null variable in" + "::" + SceneManager.GetActiveScene().name);
+                    }
                 }
-            }
 
-            if (DebugMode && sanityCheckPassed)
-            {
-                Debug.Log(owner + "::" + "sanity check passed.");
+                if (sanityCheckPassed)
+                {
+                    Debug.Log(owner + "::" + "sanity check passed.");
+                }
             }
         }
     }
