@@ -1,19 +1,19 @@
 ﻿namespace Coreficent.Controller
 {
+    using Coreficent.Utility;
     using UnityEngine;
 
     public class CameraController : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        public GameObject Furret;
+        private void Start()
         {
-
+            SanityCheck.Check(this, Furret);
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
-
+            transform.rotation = Quaternion.LookRotation(Furret.transform.position - transform.position);
         }
     }
 }
