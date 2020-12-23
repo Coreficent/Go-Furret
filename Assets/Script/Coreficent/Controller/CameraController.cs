@@ -5,21 +5,32 @@
 
     public class CameraController : MonoBehaviour
     {
-        public GameObject Furret;
+        public GameObject Player;
 
-        private Vector3 _offset = new Vector3(0.0f, 250.0f, 0.0f);
+        private Vector3 _verticalOffset = new Vector3(0.0f, 250.0f, 0.0f);
+        private float _maximumDistance = 500.0f;
+        private float _movementDistance = 10.0f;
 
         private void Start()
         {
-            SanityCheck.Check(this, Furret);
+            SanityCheck.Check(this, Player);
         }
 
         private void Update()
         {
-            DebugRender.Draw(Furret.transform.position, Furret.transform.position + Furret.transform.TransformVector(_offset), Color.black);
-            DebugRender.Draw(transform.position, Furret.transform.position + Furret.transform.TransformVector(_offset), Color.black);
+            Vector3 playerTop = Player.transform.position + Player.transform.TransformVector(_verticalOffset);
 
-            transform.rotation = Quaternion.LookRotation(Furret.transform.position - transform.position);
+            DebugRender.Draw(Player.transform.position, playerTop, Color.black);
+            DebugRender.Draw(transform.position, playerTop, Color.black);
+
+            Vector3 distance = playerTop - transform.position;
+
+            if (distance.magnitude > _maximumDistance)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, playerTop, _movementDistance); ;
+            }
+
+            transform.rotation = Quaternion.LookRotation(Player.transform.position - transform.position, playerTop);
         }
     }
 }

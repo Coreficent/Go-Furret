@@ -13,7 +13,7 @@
             Release
         }
 
-        private void Start()
+        private void Awake()
         {
             _applicationMode = this;
         }
