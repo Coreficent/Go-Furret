@@ -30,7 +30,7 @@
 
             transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * _turnAmount * Time.fixedDeltaTime);
 
-            GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + transform.TransformDirection(new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical")).normalized) * _walkSpeed * Time.fixedDeltaTime);
+            GetComponent<Rigidbody>().MovePosition(GetComponent<Rigidbody>().position + transform.TransformDirection(new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical"))) * _walkSpeed * Time.fixedDeltaTime);
         }
     }
 }

@@ -4,14 +4,65 @@ ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
+      74: -2714326950589364991
+    second: model_skeleton|anger
+  - first:
+      74: 9154809882565045716
+    second: model_skeleton|cast
+  - first:
+      74: 2248384312083712267
+    second: model_skeleton|consume
+  - first:
+      74: -7097325213106778092
+    second: model_skeleton|dance
+  - first:
+      74: 4086138435020347952
+    second: model_skeleton|delight
+  - first:
+      74: 6542215427436299867
+    second: model_skeleton|devour
+  - first:
+      74: -7950123943772779125
+    second: model_skeleton|drowse
+  - first:
+      74: -3036019962051248862
+    second: model_skeleton|eat
+  - first:
+      74: 2558308697030776378
+    second: model_skeleton|faint
+  - first:
+      74: -7103408049081657007
+    second: model_skeleton|fall
+  - first:
+      74: 4633096756235821002
+    second: model_skeleton|hit
+  - first:
+      74: -8104332656585495068
+    second: model_skeleton|hurt
+  - first:
       74: -6920815494900106534
     second: model_skeleton|jump
+  - first:
+      74: -3717954216260281667
+    second: model_skeleton|land
+  - first:
+      74: -5302065678509400648
+    second: model_skeleton|reject
   - first:
       74: -8069350119045769475
     second: model_skeleton|run
   - first:
+      74: 576792656782800726
+    second: model_skeleton|sleep
+  - first:
       74: 433719544120720318
     second: model_skeleton|stand
+  - first:
+      74: -4606706921713819959
+    second: model_skeleton|wait
+  - first:
+      74: 2383536293598427010
+    second: model_skeleton|wake
   - first:
       74: 2563814912249498981
     second: model_skeleton|walk
@@ -57,123 +108,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: model_skeleton|jump
-      takeName: model_skeleton|jump
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 49
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: model_skeleton|run
-      takeName: model_skeleton|run
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 8
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: model_skeleton|stand
-      takeName: model_skeleton|stand
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 59
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: model_skeleton|walk
-      takeName: model_skeleton|walk
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 14
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 0
   meshes:
     lODScreenPercentages: []
