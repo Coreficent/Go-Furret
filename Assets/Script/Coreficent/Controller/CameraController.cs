@@ -9,6 +9,7 @@
 
         private Vector3 _verticalOffset = new Vector3(0.0f, 250.0f, 0.0f);
         private float _maximumDistance = 500.0f;
+        private float _minimumDistance = 150.0f;
         private float _movementDistance = 10.0f;
 
         private void Start()
@@ -23,11 +24,18 @@
             DebugRender.Draw(Player.transform.position, playerTop, Color.black);
             DebugRender.Draw(transform.position, playerTop, Color.black);
 
-            Vector3 distance = playerTop - transform.position;
+            Vector3 distanceTop = playerTop - transform.position;
 
-            if (distance.magnitude > _maximumDistance)
+            if (distanceTop.magnitude > _maximumDistance)
             {
                 transform.position = Vector3.MoveTowards(transform.position, playerTop, _movementDistance); ;
+            }
+
+            Vector3 distancePlayer = Player.transform.position - transform.position;
+
+            if (distancePlayer.magnitude < _minimumDistance)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, playerTop * 2.0f, _movementDistance);
             }
 
             transform.rotation = Quaternion.LookRotation(Player.transform.position - transform.position, playerTop);
