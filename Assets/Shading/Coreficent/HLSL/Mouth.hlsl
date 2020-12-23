@@ -5,6 +5,7 @@
 
 float _ExpressionIndex;
 float _ShadeDarkness;
+float _ShadeThreshold;
 float4 _MainTex_ST;
 sampler2D _MainTex;
 
@@ -43,7 +44,7 @@ fixed4 frag(v2f i) : SV_TARGET
     UNITY_APPLY_FOG(i.fogCoord, col);
 
     // calculate the light intensity using dot product
-    return col * (dot(_WorldSpaceLightPos0, normalize(i.worldNormal)) > 0 ? 1 : _ShadeDarkness);
+    return col * (dot(_WorldSpaceLightPos0, normalize(i.worldNormal)) > _ShadeThreshold ? 1 : _ShadeDarkness);
 }
 
 #endif
