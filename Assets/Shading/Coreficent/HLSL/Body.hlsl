@@ -19,16 +19,18 @@ struct v2f
 {
     float2 uv : TEXCOORD0;
     float3 worldNormal : NORMAL;
-    float4 position : SV_POSITION;
+    float4 vertex : SV_POSITION;
+    UNITY_FOG_COORDS(1)
 };
 
 v2f vert(appdata v)
 {
     v2f o;
 
-    o.position = UnityObjectToClipPos(v.vertex);
+    o.vertex = UnityObjectToClipPos(v.vertex);
     o.uv = TRANSFORM_TEX(v.uv, _MainTex);
     o.worldNormal = UnityObjectToWorldNormal(v.normal);
+    UNITY_TRANSFER_FOG(o,o.vertex);
 
     return o;
 }
