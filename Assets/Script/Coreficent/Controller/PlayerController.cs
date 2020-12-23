@@ -1,5 +1,6 @@
-﻿namespace Coreficent.Physics
+﻿namespace Coreficent.Controller
 {
+    using Coreficent.Physics;
     using UnityEngine;
 
     public class PlayerController : MonoBehaviour
