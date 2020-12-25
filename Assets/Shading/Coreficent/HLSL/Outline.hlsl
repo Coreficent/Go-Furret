@@ -11,7 +11,11 @@ sampler2D _MainTex;
 struct appdata
 {
     float2 uv : TEXCOORD0;
-    float3 normal : NORMAL;
+    #ifdef USE_PRECALCULATED_NORMAL
+        float3 normal : TEXCOORD1;
+    #else
+        float3 normal : NORMAL;
+    #endif
     float4 vertex : POSITION;
 };
 

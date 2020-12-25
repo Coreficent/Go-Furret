@@ -28,7 +28,7 @@
 
             if (distanceTop.magnitude > _maximumDistance)
             {
-                transform.position = Vector3.MoveTowards(transform.position, playerTop, _movementDistance); ;
+                transform.position = Vector3.MoveTowards(transform.position, playerTop, _movementDistance);
             }
 
             Vector3 distancePlayer = Player.transform.position - transform.position;
