@@ -1,10 +1,12 @@
 #ifndef EYE_INCLUDED
 #define EYE_INCLUDED
 
+#include "AutoLight.cginc"
 #include "UnityCG.cginc"
 
-float _ShadeDarkness;
+float _ShadingDarkness;
 float _ShadeThreshold;
+float _ShadowThreshold;
 float4 _MainTex_ST;
 sampler2D _MainTex;
 
@@ -12,25 +14,27 @@ struct appdata
 {
     float2 uv : TEXCOORD0;
     float3 normal : NORMAL;
-    float4 vertex : POSITION;
+    float4 pos : POSITION;
 };
 
 struct v2f
 {
     float2 uv : TEXCOORD0;
     float3 worldNormal : NORMAL;
-    float4 vertex : SV_POSITION;
-    UNITY_FOG_COORDS(1)
+    float4 pos : SV_POSITION;
+    SHADOW_COORDS(1)
+    UNITY_FOG_COORDS(2)
 };
 
 v2f vert(appdata v)
 {
     v2f o;
 
-    o.vertex = UnityObjectToClipPos(v.vertex);
+    o.pos = UnityObjectToClipPos(v.pos);
     o.uv = TRANSFORM_TEX(v.uv, _MainTex);
     o.worldNormal = UnityObjectToWorldNormal(v.normal);
-    UNITY_TRANSFER_FOG(o,o.vertex);
+    TRANSFER_SHADOW(o);
+    UNITY_TRANSFER_FOG(o, o.pos);
 
     return o;
 }
@@ -42,8 +46,19 @@ fixed4 frag(v2f i) : SV_TARGET
 
     UNITY_APPLY_FOG(i.fogCoord, col);
 
+    float fullLighting = 1.0;
+    float lightIntensity = fullLighting;
+
+    float shadow = SHADOW_ATTENUATION(i);
+    // shadow <= _ShadowThreshold
+    float shadowIntensity = lerp(fullLighting, _ShadingDarkness, step(shadow, _ShadowThreshold));
+
+    float lightAmount = dot(_WorldSpaceLightPos0, normalize(i.worldNormal)) * 0.5 + 0.5;
+    // lightDirection <= _ShadeThreshold
+    float shadeIntensity = lerp(fullLighting, _ShadingDarkness, step(lightAmount, _ShadeThreshold));
+
     // calculate the light intensity using dot product
-    return col * (dot(_WorldSpaceLightPos0, normalize(i.worldNormal)) > _ShadeThreshold ? 1 : _ShadeDarkness);
+    return col * min(shadowIntensity, shadeIntensity); 
 }
 
 #endif

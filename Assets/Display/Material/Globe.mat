@@ -81,13 +81,15 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _OutlineDarkness: 0
-    - _OutlineThickness: 0
+    - _OutlineThickness: 0.01
     - _Parallax: 0.02
     - _PrecalculatedNormal: 0
     - _RimAmount: 0.62
     - _RimThreshold: 0.148
     - _ShadeDarkness: 0
-    - _ShadeThreshold: -1
+    - _ShadeThreshold: 0.5
+    - _ShadingDarkness: 0.5
+    - _ShadowThreshold: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

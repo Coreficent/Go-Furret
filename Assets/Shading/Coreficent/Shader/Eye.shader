@@ -2,12 +2,12 @@
 {
     Properties
     {
-        _Color ("Tint", Color) = (0, 0, 0, 1)
         _MainTex ("Texture", 2D) = "white" {}
         _OutlineDarkness ("Outline Darkness", Range(0.0, 2.0)) = 0.0
         _OutlineThickness ("Outline Thickness", Range(0.0, 2.0)) = 1.0
-        _ShadeDarkness ("Shade Darkness", Range(0.0, 1.0)) = 0.5
-        _ShadeThreshold ("Shade Threshold", Range(-1.0, 1.0)) = 0.0
+        _ShadingDarkness ("Shading Darkness", Range(0.0, 1.0)) = 0.5
+        _ShadowThreshold ("Shadow Threshold", Range(0.0, 1.0)) = 0.5
+        _ShadeThreshold ("Shade Threshold", Range(0.0, 1.0)) = 0.5
     }
 
     SubShader
@@ -29,6 +29,7 @@
 
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_fwdbase
 
             ENDCG
         }

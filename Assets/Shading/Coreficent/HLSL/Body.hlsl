@@ -2,13 +2,11 @@
 #define BODY_INCLUDED
 
 #include "AutoLight.cginc"
-#include "Lighting.cginc"
 #include "UnityCG.cginc"
 
 float _ShadingDarkness;
 float _ShadeThreshold;
 float _ShadowThreshold;
-
 float4 _MainTex_ST;
 sampler2D _MainTex;
 
@@ -24,9 +22,8 @@ struct v2f
     float2 uv : TEXCOORD0;
     float3 worldNormal : NORMAL;
     float4 pos : SV_POSITION;
-
-    SHADOW_COORDS(4)
-    UNITY_FOG_COORDS(5)
+    SHADOW_COORDS(1)
+    UNITY_FOG_COORDS(2)
 };
 
 v2f vert(appdata v)
@@ -49,24 +46,19 @@ fixed4 frag(v2f i) : SV_TARGET
 
     UNITY_APPLY_FOG(i.fogCoord, col);
 
-    float shadow = SHADOW_ATTENUATION(i);
-
     float fullLighting = 1.0;
     float lightIntensity = fullLighting;
 
-    if(shadow <= _ShadowThreshold) {
-        //lightIntensity = _ShadingDarkness;
-    }
-
+    float shadow = SHADOW_ATTENUATION(i);
     // shadow <= _ShadowThreshold
-   float shadowIntensity = lerp(fullLighting, _ShadingDarkness, step(shadow, _ShadowThreshold));
+    float shadowIntensity = lerp(fullLighting, _ShadingDarkness, step(shadow, _ShadowThreshold));
 
-   float lightDirection = dot(_WorldSpaceLightPos0, normalize(i.worldNormal)) * 0.5 + 0.5;
-   // lightDirection <= _ShadeThreshold
-   float shadeIntensity = lerp(fullLighting, _ShadingDarkness, step(lightDirection, _ShadeThreshold));
+    float lightAmount = dot(_WorldSpaceLightPos0, normalize(i.worldNormal)) * 0.5 + 0.5;
+    // lightDirection <= _ShadeThreshold
+    float shadeIntensity = lerp(fullLighting, _ShadingDarkness, step(lightAmount, _ShadeThreshold));
 
-   // calculate the light intensity using dot product
-   return col * min(shadowIntensity, shadeIntensity); 
+    // calculate the light intensity using dot product
+    return col * min(shadowIntensity, shadeIntensity); 
 }
 
 #endif

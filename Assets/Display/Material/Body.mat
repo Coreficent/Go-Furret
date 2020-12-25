@@ -76,7 +76,7 @@ Material:
     - _RimAmount: 1
     - _RimThreshold: 1
     - _ShadeDarkness: 0.5
-    - _ShadeThreshold: 0
+    - _ShadeThreshold: 0.5
     - _ShadingDarkness: 0.5
     - _ShadowThreshold: 0.5
     - _SmoothnessTextureChannel: 0
