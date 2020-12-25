@@ -27,6 +27,8 @@
 
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_fog
+            #pragma multi_compile_fwdbase
 
             #include "../HLSL/Body.hlsl"
 

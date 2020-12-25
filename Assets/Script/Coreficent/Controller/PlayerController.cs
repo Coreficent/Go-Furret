@@ -8,7 +8,7 @@
         public GameObject Planet;
 
         private float _turnAmount = 250.0f;
-        private float _walkSpeed = 250.0f;
+        private float _walkSpeed = 2.5f;
 
         private void Awake()
         {

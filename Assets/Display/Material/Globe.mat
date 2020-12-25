@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Globe
   m_Shader: {fileID: 4800000, guid: be2ed0ef469cc3c42bdc7971a28673a6, type: 3}
-  m_ShaderKeywords: USE_PRECALCULATED_NORMAL
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -81,12 +81,12 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _OutlineDarkness: 0
-    - _OutlineThickness: 0.01
+    - _OutlineThickness: 0
     - _Parallax: 0.02
-    - _PrecalculatedNormal: 1
+    - _PrecalculatedNormal: 0
     - _RimAmount: 0.62
     - _RimThreshold: 0.148
-    - _ShadeDarkness: 0.5
+    - _ShadeDarkness: 0
     - _ShadeThreshold: -1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
