@@ -4,7 +4,7 @@
     {
         [Toggle(USE_PRECALCULATED_NORMAL)] _PrecalculatedNormal("Use Custom Normals", int) = 0
         _MainTex ("Texture", 2D) = "white" {}
-        _OutlineDarkness ("Outline Darkness", Range(0.0, 2.0)) = 0.0
+        _OutlineDarkness ("Outline Darkness", Range(0.0, 1.0)) = 0.0
         _OutlineThickness ("Outline Thickness", Range(0.0, 2.0)) = 1.0
         _ShadingDarkness ("Shading Darkness", Range(0.0, 1.0)) = 0.5
         _ShadowThreshold ("Shadow Threshold", Range(0.0, 1.0)) = 0.5

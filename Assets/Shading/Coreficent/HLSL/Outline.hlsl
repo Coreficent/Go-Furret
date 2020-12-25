@@ -22,14 +22,14 @@ struct appdata
 struct v2f
 {
     float2 uv : TEXCOORD0;
-    float4 position : SV_POSITION;
+    float4 pos : SV_POSITION;
 };
 
 v2f vert(appdata v)
 {
     v2f o;
 
-    o.position = UnityObjectToClipPos(normalize(v.normal) * _OutlineThickness + v.vertex);
+    o.pos = UnityObjectToClipPos(normalize(v.normal) * _OutlineThickness + v.vertex);
     o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
     return o;
