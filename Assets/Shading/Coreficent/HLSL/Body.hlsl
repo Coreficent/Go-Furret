@@ -51,18 +51,22 @@ fixed4 frag(v2f i) : SV_TARGET
 
     float shadow = SHADOW_ATTENUATION(i);
 
-    float lightIntensity = 1.0;
+    float fullLighting = 1.0;
+    float lightIntensity = fullLighting;
 
     if(shadow <= _ShadowThreshold) {
-        lightIntensity = _ShadingDarkness;
+        //lightIntensity = _ShadingDarkness;
     }
 
-    if(dot(_WorldSpaceLightPos0, normalize(i.worldNormal)) * 0.5 + 0.5 < _ShadeThreshold) {
-        lightIntensity = _ShadingDarkness;
-    }
-    
-    // calculate the light intensity using dot product
-    return col * lightIntensity; 
+    // shadow <= _ShadowThreshold
+   float shadowIntensity = lerp(fullLighting, _ShadingDarkness, step(shadow, _ShadowThreshold));
+
+   float lightDirection = dot(_WorldSpaceLightPos0, normalize(i.worldNormal)) * 0.5 + 0.5;
+   // lightDirection <= _ShadeThreshold
+   float shadeIntensity = lerp(fullLighting, _ShadingDarkness, step(lightDirection, _ShadeThreshold));
+
+   // calculate the light intensity using dot product
+   return col * min(shadowIntensity, shadeIntensity); 
 }
 
 #endif
