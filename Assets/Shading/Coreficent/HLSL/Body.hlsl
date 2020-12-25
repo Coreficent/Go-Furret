@@ -5,8 +5,10 @@
 #include "Lighting.cginc"
 #include "UnityCG.cginc"
 
-float _ShadeDarkness;
+float _ShadingDarkness;
 float _ShadeThreshold;
+float _ShadowThreshold;
+
 float4 _MainTex_ST;
 sampler2D _MainTex;
 
@@ -49,8 +51,18 @@ fixed4 frag(v2f i) : SV_TARGET
 
     float shadow = SHADOW_ATTENUATION(i);
 
+    float lightIntensity = 1.0;
+
+    if(shadow <= _ShadowThreshold) {
+        lightIntensity = _ShadingDarkness;
+    }
+
+    if(dot(_WorldSpaceLightPos0, normalize(i.worldNormal)) * 0.5 + 0.5 < _ShadeThreshold) {
+        lightIntensity = _ShadingDarkness;
+    }
+    
     // calculate the light intensity using dot product
-    return col * (dot(_WorldSpaceLightPos0, normalize(i.worldNormal)) > _ShadeThreshold ? 1 : _ShadeDarkness) * shadow;
+    return col * lightIntensity; 
 }
 
 #endif
