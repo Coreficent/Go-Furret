@@ -14,7 +14,7 @@
 
                 foreach (object i in variables)
                 {
-                    if (i == null)
+                    if (i == null || i.ToString() == "null")
                     {
                         sanityCheckPassed = false;
                         Debug.Log(owner + _delimiter + "has an unexpected null variable in" + _delimiter + SceneManager.GetActiveScene().name);
@@ -24,6 +24,11 @@
                 if (sanityCheckPassed)
                 {
                     Debug.Log(owner + _delimiter + "sanity check passed.");
+                }
+                else
+                {
+                    Time.timeScale = 0.0f;
+                    Debug.Log(owner + _delimiter + "sanity check failed.");
                 }
             }
         }
