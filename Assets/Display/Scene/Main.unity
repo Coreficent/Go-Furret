@@ -189,7 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93bb82c580fb6d246a5a482212321556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Planet: {fileID: 1204364118}
+  _planet: {fileID: 1204364123}
+  Speed: 0
 --- !u!136 &250366572
 CapsuleCollider:
   m_ObjectHideFlags: 0
