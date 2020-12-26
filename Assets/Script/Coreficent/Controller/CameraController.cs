@@ -8,6 +8,11 @@
         public GameObject Player;
         public float HorizontalOffset = -1.0f;
         public float VerticalOffset = 1.0f;
+        public float RotationSpeed = 5.0f;
+
+        private float _radian = 0.0f;
+        private Vector3 _verticalVector = new Vector3();
+        private Vector3 _horizontalVector = new Vector3();
 
         private void Start()
         {
@@ -16,17 +21,30 @@
 
         private void Update()
         {
-            Transform playerTransform = Player.transform;
-            Vector3 playerPosition = playerTransform.position;
+            UpdatePosition();
+            UpdateRotation();
+        }
 
-            Vector3 verticalPosition = playerPosition + playerTransform.TransformVector(new Vector3(0.0f, VerticalOffset, 0.0f));
-            Vector3 horizontalPosition = playerTransform.TransformVector(new Vector3(0.0f, 0.0f, HorizontalOffset));
+        private void UpdatePosition()
+        {
+            _radian -= Input.GetKey(KeyCode.Q) ? RotationSpeed * Mathf.Deg2Rad : 0.0f * Time.deltaTime;
+            _radian += Input.GetKey(KeyCode.E) ? RotationSpeed * Mathf.Deg2Rad : 0.0f * Time.deltaTime;
+            _verticalVector.y = VerticalOffset;
+            Vector3 verticalPosition = Player.transform.position + Player.transform.TransformVector(_verticalVector);
 
-            DebugRender.Draw(playerTransform.position, verticalPosition, Color.black);
+            _horizontalVector.x = Mathf.Sin(_radian) * HorizontalOffset;
+            _horizontalVector.z = Mathf.Cos(_radian) * HorizontalOffset;
+            Vector3 horizontalPosition = Player.transform.TransformVector(_horizontalVector);
+
+            DebugRender.Draw(Player.transform.position, verticalPosition, Color.black);
             DebugRender.Draw(verticalPosition, verticalPosition + horizontalPosition, Color.black);
 
             transform.position = verticalPosition + horizontalPosition;
-            transform.rotation = Quaternion.LookRotation(playerTransform.position - transform.position, verticalPosition);
+        }
+
+        private void UpdateRotation()
+        {
+            transform.rotation = Quaternion.LookRotation((Player.transform.position - transform.position).normalized, Player.transform.position.normalized);
         }
     }
 }
