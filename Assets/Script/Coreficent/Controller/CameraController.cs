@@ -6,11 +6,8 @@
     public class CameraController : MonoBehaviour
     {
         public GameObject Player;
-
-        private Vector3 _verticalOffset = new Vector3(0.0f, 2.0f, 0.0f);
-        private float _maximumDistance = 5.0f;
-        private float _minimumDistance = 1.0f;
-        private float _movementDistance = 1.0f;
+        public float OffsetX = 1.0f;
+        public float OffsetY = -1.0f;
 
         private void Start()
         {
@@ -19,14 +16,17 @@
 
         private void Update()
         {
-            Vector3 verticalPosition = Player.transform.position + Player.transform.TransformVector(_verticalOffset);
-            Vector3 horizontalPosition = Player.transform.TransformVector(new Vector3(0.0f, 0.0f, -2.0f));
+            Transform playerTransform = Player.transform;
+            Vector3 playerPosition = playerTransform.position;
 
-            DebugRender.Draw(Player.transform.position, verticalPosition, Color.black);
+            Vector3 verticalPosition = playerPosition + playerTransform.TransformVector(new Vector3(0.0f, 2.0f, 0.0f));
+            Vector3 horizontalPosition = playerTransform.TransformVector(new Vector3(0.0f, 0.0f, -2.0f));
+
+            DebugRender.Draw(playerTransform.position, verticalPosition, Color.black);
             DebugRender.Draw(verticalPosition, verticalPosition + horizontalPosition, Color.black);
 
             transform.position = verticalPosition + horizontalPosition;
-            transform.rotation = Quaternion.LookRotation(Player.transform.position - transform.position, verticalPosition);
+            transform.rotation = Quaternion.LookRotation(playerTransform.position - transform.position, verticalPosition);
         }
     }
 }
