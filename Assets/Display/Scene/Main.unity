@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93bb82c580fb6d246a5a482212321556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _turnSpeed: 180
+  _turnSpeed: 90
   _walkSpeed: 2
   _planet: {fileID: 1204364123}
   _rigidbody: {fileID: 250366573}
@@ -583,7 +583,7 @@ MonoBehaviour:
   Player: {fileID: 250366569}
   HorizontalOffset: -2
   VerticalOffset: 1
-  RotationSpeed: 3
+  RotationSpeed: 1
 --- !u!1 &1200558546
 GameObject:
   m_ObjectHideFlags: 0
