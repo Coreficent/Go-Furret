@@ -11,9 +11,20 @@
     {
         // Store these outline normals in the specified UV/Texcoord channel
         // This corresponds to the TEXCOORD_ semantics in HLSL
-        [SerializeField] private int storeInTexcoordChannel = 1;
+        [SerializeField] private int storeInTexcoordChannel = 3;
         // The maximum distance apart two vertices must be to be merged
         [SerializeField] private float cospatialVertexDistance = 0.01f;
+
+        private bool UsePrecalculatedNormal
+        {
+            set
+            {
+                foreach (Material material in GetComponent<MeshRenderer>().sharedMaterials)
+                {
+                    material.SetFloat("_PrecalculatedNormal", value ? 1.0f : 0.0f);
+                }
+            }
+        }
 
         // This class holds the accumulated normal for merged, or cospatial, vertices
         private class CospatialVertex
@@ -74,7 +85,15 @@
 
             // Store the outline normals in the mesh's UV channel
             mesh.SetUVs(storeInTexcoordChannel, outlineNormals);
+
+            UsePrecalculatedNormal = true;
         }
+
+        private void OnApplicationQuit()
+        {
+            UsePrecalculatedNormal = false;
+        }
+
 
         private void FindCospatialVertices(Vector3[] vertices, int[] indices, List<CospatialVertex> registry)
         {

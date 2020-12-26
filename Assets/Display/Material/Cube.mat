@@ -57,6 +57,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
+    - _ColorMask: 15
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -69,13 +70,22 @@ Material:
     - _OutlineDarkness: 0
     - _OutlineThickness: 0.134
     - _Parallax: 0.02
-    - _PrecalculatedNormal: 1
+    - _PrecalculatedNormal: 0
     - _ShadeDarkness: 0.5
     - _ShadeThreshold: 0
+    - _ShadingDarkness: 0.5
+    - _ShadowThreshold: 0.5
     - _SmoothnessTextureChannel: 0
+    - _SomethingHidden: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
     - _UVSec: 0
+    - _UseUIAlphaClip: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

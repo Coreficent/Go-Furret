@@ -2,7 +2,7 @@
 {
     Properties
     {
-        [Toggle(USE_PRECALCULATED_NORMAL)] _PrecalculatedNormal("Use Custom Normals", int) = 0
+        _PrecalculatedNormal("Use Custom Normals", Range(0.0, 1.0)) = 0.0
         _MainTex ("Texture", 2D) = "white" {}
         _OutlineDarkness ("Outline Darkness", Range(0.0, 1.0)) = 0.0
         _OutlineThickness ("Outline Thickness", Range(0.0, 1.0)) = 1.0
@@ -44,8 +44,6 @@
 
             #pragma vertex vert
             #pragma fragment frag
-
-            #pragma shader_feature USE_PRECALCULATED_NORMAL
 
             #include "../HLSL/Outline.hlsl"
 
