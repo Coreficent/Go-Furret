@@ -7,10 +7,10 @@
     {
         public GameObject Player;
 
-        private Vector3 _verticalOffset = new Vector3(0.0f, 250.0f, 0.0f);
-        private float _maximumDistance = 500.0f;
-        private float _minimumDistance = 150.0f;
-        private float _movementDistance = 10.0f;
+        private Vector3 _verticalOffset = new Vector3(0.0f, 2.0f, 0.0f);
+        private float _maximumDistance = 5.0f;
+        private float _minimumDistance = 1.0f;
+        private float _movementDistance = 1.0f;
 
         private void Start()
         {
@@ -19,26 +19,14 @@
 
         private void Update()
         {
-            Vector3 playerTop = Player.transform.position + Player.transform.TransformVector(_verticalOffset);
+            Vector3 verticalPosition = Player.transform.position + Player.transform.TransformVector(_verticalOffset);
+            Vector3 horizontalPosition = Player.transform.TransformVector(new Vector3(0.0f, 0.0f, -2.0f));
 
-            DebugRender.Draw(Player.transform.position, playerTop, Color.black);
-            DebugRender.Draw(transform.position, playerTop, Color.black);
+            DebugRender.Draw(Player.transform.position, verticalPosition, Color.black);
+            DebugRender.Draw(verticalPosition, verticalPosition + horizontalPosition, Color.black);
 
-            Vector3 distanceTop = playerTop - transform.position;
-
-            if (distanceTop.magnitude > _maximumDistance)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, playerTop, _movementDistance);
-            }
-
-            Vector3 distancePlayer = Player.transform.position - transform.position;
-
-            if (distancePlayer.magnitude < _minimumDistance)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, playerTop * 2.0f, _movementDistance);
-            }
-
-            transform.rotation = Quaternion.LookRotation(Player.transform.position - transform.position, playerTop);
+            transform.position = verticalPosition + horizontalPosition;
+            transform.rotation = Quaternion.LookRotation(Player.transform.position - transform.position, verticalPosition);
         }
     }
 }
