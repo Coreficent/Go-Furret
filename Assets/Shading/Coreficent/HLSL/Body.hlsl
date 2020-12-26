@@ -42,7 +42,9 @@ v2f vert(appdata v)
 fixed4 frag(v2f i) : SV_TARGET
 {
     // calculate mirrored texture coordinates
-    fixed4 col = tex2D(_MainTex, 1.0 - abs(frac(i.uv * 0.5) * 2.0 - 1.0));
+    float u = 1.0 - abs(frac(i.uv[0] * 0.5) * 2.0 - 1.0);
+    float v = i.uv[1];
+    fixed4 col = tex2D(_MainTex, float2(u, v));
 
     UNITY_APPLY_FOG(i.fogCoord, col);
 
