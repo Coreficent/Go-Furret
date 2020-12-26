@@ -1,22 +1,21 @@
 ﻿namespace Coreficent.Controller
 {
-
-    using System.Collections;
-    using System.Collections.Generic;
+    using Coreficent.Utility;
     using UnityEngine;
 
     public class AnimationController : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        [SerializeField] private PlayerController _playerController;
+        [SerializeField] private Animator _playerAnimator;
 
+        private void Start()
+        {
+            SanityCheck.Check(this, _playerController, _playerAnimator);
         }
 
-        // Update is called once per frame
         void Update()
         {
-
+            _playerAnimator.SetFloat("Speed", _playerController.Speed);
         }
     }
 }

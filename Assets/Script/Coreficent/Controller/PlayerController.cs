@@ -6,12 +6,13 @@
 
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private float _turnSpeed = 180.0f;
+        [SerializeField] private float _walkSpeed = 5.0f;
         [SerializeField] private Planet _planet;
         [SerializeField] private Rigidbody _rigidbody;
 
         private Vector3 _velocity = new Vector3();
-        private float _turnAmount = 250.0f;
-        private float _walkSpeed = 2.5f;
+
         private float _speed = 0.0f;
 
         public float Speed
@@ -20,7 +21,7 @@
             set { _speed = value; }
         }
 
-        private void Awake()
+        private void Start()
         {
             SanityCheck.Check(this, _rigidbody, _planet);
 
@@ -32,7 +33,7 @@
         {
             _planet.CalculatePhysics(gameObject);
 
-            transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * _turnAmount * Time.fixedDeltaTime);
+            transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * _turnSpeed * Time.fixedDeltaTime);
 
             Speed = Input.GetAxis("Vertical") * _walkSpeed;
 
