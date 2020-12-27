@@ -53,7 +53,7 @@
             for (var i = 0; i < normals.Length; ++i)
             {
                 VertexAttribute cospatial = vertexAttributes[cospatialIndexBuffer[i]];
-                normals[i] = cospatial.normal.normalized;
+                normals[i] = cospatial.Normal.normalized;
             }
 
             mesh.SetUVs(_texCoord, normals);
@@ -69,43 +69,38 @@
         {
             List<VertexAttribute> vertexAttributes = new List<VertexAttribute>();
 
+            VertexAttribute inspector = new VertexAttribute
+            {
+                MergeDistance = _mergeDistance
+            };
+
             for (var i = 0; i < vertices.Length; ++i)
             {
-                int vertexIndex = VertexIndexOf(vertices[i], vertexAttributes);
+                inspector.Position = vertices[i];
 
-                if (vertexIndex != -1)
-                {
-                    indices[i] = vertexIndex;
-                }
-                else
+                int vertexIndex = vertexAttributes.IndexOf(inspector);
+
+                if (vertexIndex == -1)
                 {
                     indices[i] = vertexAttributes.Count;
                     vertexAttributes.Add(new VertexAttribute()
                     {
-                        position = vertices[i],
-                        normal = Vector3.zero,
+                        Position = vertices[i],
+                        Normal = Vector3.zero,
                     });
+                }
+                else
+                {
+                    indices[i] = vertexIndex;
                 }
             }
 
             return vertexAttributes;
         }
 
-        private int VertexIndexOf(Vector3 position, List<VertexAttribute> vertexAttributes)
-        {
-            for (var i = 0; i < vertexAttributes.Count; ++i)
-            {
-                if (Vector3.Distance(vertexAttributes[i].position, position) <= _mergeDistance)
-                {
-                    return i;
-                }
-            }
-            return -1;
-        }
-
         private void AddWeightedNormal(Vector3 weightedNormal, int vertexIndex, int[] cospatialIndexBuffer, List<VertexAttribute> vertexAttributes)
         {
-            vertexAttributes[cospatialIndexBuffer[vertexIndex]].normal += weightedNormal;
+            vertexAttributes[cospatialIndexBuffer[vertexIndex]].Normal += weightedNormal;
         }
     }
 }
