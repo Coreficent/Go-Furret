@@ -1,19 +1,12 @@
 ﻿namespace Coreficent.Shading
 {
-
     using System.Collections.Generic;
     using UnityEngine;
 
-    // Require a mesh filter component
-    // This script, unfortunately, does not support skinned meshes
-    [RequireComponent(typeof(MeshFilter))]
     public class NormalRectifier : MonoBehaviour
     {
-        // Store these outline normals in the specified UV/Texcoord channel
-        // This corresponds to the TEXCOORD_ semantics in HLSL
-        [SerializeField] private int storeInTexcoordChannel = 3;
-        // The maximum distance apart two vertices must be to be merged
-        [SerializeField] private float cospatialVertexDistance = 0.01f;
+        [SerializeField] private int _texCoord = 3;
+        [SerializeField] private float _mergeDistance = 0.01f;
 
         private bool UsePrecalculatedNormal
         {
@@ -26,66 +19,45 @@
             }
         }
 
-        // This class holds the accumulated normal for merged, or cospatial, vertices
-        private class CospatialVertex
-        {
-            public Vector3 position;
-            public Vector3 accumulatedNormal;
-        }
-
-        // We'll run the algorithm in the start function
-        // It would be better to run this in the editor at compile time, but that's another video
         private void Start()
         {
-            // Get the mesh
             Mesh mesh = GetComponent<MeshFilter>().mesh;
+            Vector3[] vertexBuffer = mesh.vertices;
+            int[] indexBuffer = mesh.triangles;
 
-            // Copy the vertices and triangle arrays from the mesh
-            Vector3[] vertices = mesh.vertices;
-            int[] triangles = mesh.triangles;
-            // Create a new outline normal array
-            Vector3[] outlineNormals = new Vector3[vertices.Length];
+            int[] cospatialIndexBuffer = new int[vertexBuffer.Length];
+            List<VertexAttribute> vertexAttributes = CalculateCospatialIndexBuffer(vertexBuffer, cospatialIndexBuffer);
 
-            // Create a data structure to find and compile cospacial vertices, or vertices which
-            // are so close together we'll consider them the same vertex
-            List<CospatialVertex> cospatialVerticesData = new List<CospatialVertex>();
-            // This array maps vertex index -> cospatialVerticesData index
-            int[] cospacialVertexIndices = new int[vertices.Length];
-            FindCospatialVertices(vertices, cospacialVertexIndices, cospatialVerticesData);
-
-            // Unity stores triangles as three vertex indices, so for every three entries there is one triangle
-            int numTriangles = triangles.Length / 3;
-            // For each triangle
-            for (int t = 0; t < numTriangles; t++)
+            for (var i = 0; i < indexBuffer.Length / 3; ++i)
             {
-                // Get the three vertex indices making up this triangle
-                int vertexStart = t * 3;
-                int v1Index = triangles[vertexStart];
-                int v2Index = triangles[vertexStart + 1];
-                int v3Index = triangles[vertexStart + 2];
-                // Get this triangle's normal vector and the weight for each vertex
-                ComputeNormalAndWeights(vertices[v1Index], vertices[v2Index], vertices[v3Index], out Vector3 normal, out Vector3 weights);
-                // Add the weighted normal to each cospatial vertex data instance
-                AddWeightedNormal(normal * weights.x, v1Index, cospacialVertexIndices, cospatialVerticesData);
-                AddWeightedNormal(normal * weights.y, v2Index, cospacialVertexIndices, cospatialVerticesData);
-                AddWeightedNormal(normal * weights.z, v3Index, cospacialVertexIndices, cospatialVerticesData);
+                int vertexOffset = i * 3;
+
+                int indexX = indexBuffer[vertexOffset + 0];
+                int indexY = indexBuffer[vertexOffset + 1];
+                int indexZ = indexBuffer[vertexOffset + 2];
+
+                Vector3 vertexA = vertexBuffer[indexX];
+                Vector3 vertexB = vertexBuffer[indexY];
+                Vector3 vertexC = vertexBuffer[indexZ];
+
+                Vector3 normal = Vector3.Cross(vertexB - vertexA, vertexC - vertexA).normalized;
+                Vector3 weight = new Vector3(Vector3.Angle(vertexB - vertexA, vertexC - vertexA), Vector3.Angle(vertexC - vertexB, vertexA - vertexB), Vector3.Angle(vertexA - vertexC, vertexB - vertexC));
+
+                AddWeightedNormal(normal * weight.x, indexX, cospatialIndexBuffer, vertexAttributes);
+                AddWeightedNormal(normal * weight.y, indexY, cospatialIndexBuffer, vertexAttributes);
+                AddWeightedNormal(normal * weight.z, indexZ, cospatialIndexBuffer, vertexAttributes);
             }
 
-            // For each vertex
-            for (int v = 0; v < outlineNormals.Length; v++)
+            Vector3[] normals = new Vector3[vertexBuffer.Length];
+
+            for (int i = 0; i < normals.Length; ++i)
             {
-                // Find the cospacial registry index for this vertex
-                int cvIndex = cospacialVertexIndices[v];
-                // Get the cospatial data object
-                var cospatial = cospatialVerticesData[cvIndex];
-                // Normalize the accumulated normal
-                // This averages it
-                outlineNormals[v] = cospatial.accumulatedNormal.normalized;
+                int cvIndex = cospatialIndexBuffer[i];
+                var cospatial = vertexAttributes[cvIndex];
+                normals[i] = cospatial.normal.normalized;
             }
 
-            // Store the outline normals in the mesh's UV channel
-            mesh.SetUVs(storeInTexcoordChannel, outlineNormals);
-
+            mesh.SetUVs(_texCoord, normals);
             UsePrecalculatedNormal = true;
         }
 
@@ -94,66 +66,47 @@
             UsePrecalculatedNormal = false;
         }
 
-
-        private void FindCospatialVertices(Vector3[] vertices, int[] indices, List<CospatialVertex> registry)
+        private List<VertexAttribute> CalculateCospatialIndexBuffer(Vector3[] vertices, int[] indices)
         {
-            // For each vertex
-            for (int v = 0; v < vertices.Length; v++)
+            List<VertexAttribute> vertexAttributes = new List<VertexAttribute>();
+
+            for (var i = 0; i < vertices.Length; ++i)
             {
-                if (SearchForPreviouslyRegisteredCV(vertices[v], registry, out int index))
+                int vertexIndex = VertexIndexOf(vertices[i], vertexAttributes);
+
+                if (vertexIndex != -1)
                 {
-                    // If this vertex is cospatial with another, then register the data index
-                    indices[v] = index;
+                    indices[i] = vertexIndex;
                 }
                 else
                 {
-                    // If this vertex is unique, create a new cospacial vertex data object
-                    var cospatialEntry = new CospatialVertex()
+                    indices[i] = vertexAttributes.Count;
+                    vertexAttributes.Add(new VertexAttribute()
                     {
-                        position = vertices[v],
-                        accumulatedNormal = Vector3.zero,
-                    };
-                    // Set the cospatial index to this new object's index in the list
-                    indices[v] = registry.Count;
-                    registry.Add(cospatialEntry);
+                        position = vertices[i],
+                        normal = Vector3.zero,
+                    });
                 }
             }
+
+            return vertexAttributes;
         }
 
-        private bool SearchForPreviouslyRegisteredCV(Vector3 position, List<CospatialVertex> registry, out int index)
+        private int VertexIndexOf(Vector3 position, List<VertexAttribute> registry)
         {
-            // For each registry entry
-            for (int i = 0; i < registry.Count; i++)
+            for (var i = 0; i < registry.Count; i++)
             {
-                // If the vertex is close enough, consider it cospatial
-                if (Vector3.Distance(registry[i].position, position) <= cospatialVertexDistance)
+                if (Vector3.Distance(registry[i].position, position) <= _mergeDistance)
                 {
-                    index = i;
-                    return true;
+                    return i;
                 }
             }
-            index = -1;
-            return false;
+            return -1;
         }
 
-        private void ComputeNormalAndWeights(Vector3 a, Vector3 b, Vector3 c, out Vector3 normal, out Vector3 weights)
+        private void AddWeightedNormal(Vector3 weightedNormal, int vertexIndex, int[] cospatialIndexBuffer, List<VertexAttribute> vertexAttributes)
         {
-            // The normal of a triangle is the normal of a plane containing the triangle
-            // We can calculate this by constructing two vectors on the plane and taking their cross product
-            // Unity's triangles are wound clockwise, so taking the cross product this way will produce a normal
-            // pointing the right way
-            normal = Vector3.Cross(b - a, c - a).normalized;
-            // We want to weight each normal by the angle between the two triangle lines containing this point
-            // This makes it so vertices on faces made from very many triangles are not over counted
-            weights = new Vector3(Vector3.Angle(b - a, c - a), Vector3.Angle(c - b, a - b), Vector3.Angle(a - c, b - c));
-        }
-
-        private void AddWeightedNormal(Vector3 weightedNormal, int vertexIndex, int[] cvIndices, List<CospatialVertex> cvRegistry)
-        {
-            // Find the cospatial vertex data index
-            int cvIndex = cvIndices[vertexIndex];
-            // Add the weighted normal
-            cvRegistry[cvIndex].accumulatedNormal += weightedNormal;
+            vertexAttributes[cospatialIndexBuffer[vertexIndex]].normal += weightedNormal;
         }
     }
 }
