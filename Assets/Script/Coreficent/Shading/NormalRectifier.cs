@@ -84,13 +84,10 @@
                         Position = vertices[i],
                         Normal = Vector3.zero,
                     });
-
-                    Debug.Log("-1");
                 }
                 else
                 {
                     indices[i] = vertexIndex;
-                    Debug.Log("not -1");
                 }
             }
 
