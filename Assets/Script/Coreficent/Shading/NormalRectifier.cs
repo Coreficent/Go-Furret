@@ -50,10 +50,9 @@
 
             Vector3[] normals = new Vector3[vertexBuffer.Length];
 
-            for (int i = 0; i < normals.Length; ++i)
+            for (var i = 0; i < normals.Length; ++i)
             {
-                int cvIndex = cospatialIndexBuffer[i];
-                var cospatial = vertexAttributes[cvIndex];
+                VertexAttribute cospatial = vertexAttributes[cospatialIndexBuffer[i]];
                 normals[i] = cospatial.normal.normalized;
             }
 
@@ -92,11 +91,11 @@
             return vertexAttributes;
         }
 
-        private int VertexIndexOf(Vector3 position, List<VertexAttribute> registry)
+        private int VertexIndexOf(Vector3 position, List<VertexAttribute> vertexAttributes)
         {
-            for (var i = 0; i < registry.Count; i++)
+            for (var i = 0; i < vertexAttributes.Count; ++i)
             {
-                if (Vector3.Distance(registry[i].position, position) <= _mergeDistance)
+                if (Vector3.Distance(vertexAttributes[i].position, position) <= _mergeDistance)
                 {
                     return i;
                 }
