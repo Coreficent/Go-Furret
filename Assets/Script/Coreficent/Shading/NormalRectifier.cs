@@ -26,7 +26,7 @@
             int[] indexBuffer = mesh.triangles;
 
             int[] cospatialIndexBuffer = new int[vertexBuffer.Length];
-            List<VertexAttribute> vertexAttributes = CalculateCospatialIndexBuffer(vertexBuffer, cospatialIndexBuffer);
+            List<CospatialAccumulator> accumulators = CalculateCospatialIndexBuffer(vertexBuffer, cospatialIndexBuffer);
 
             for (var i = 0; i < indexBuffer.Length / 3; ++i)
             {
@@ -43,18 +43,16 @@
                 Vector3 normal = Vector3.Cross(vertexB - vertexA, vertexC - vertexA).normalized;
                 Vector3 weight = new Vector3(Vector3.Angle(vertexB - vertexA, vertexC - vertexA), Vector3.Angle(vertexC - vertexB, vertexA - vertexB), Vector3.Angle(vertexA - vertexC, vertexB - vertexC));
 
-
-                vertexAttributes[cospatialIndexBuffer[indexX]].Normal += normal * weight.x;
-                vertexAttributes[cospatialIndexBuffer[indexY]].Normal += normal * weight.y;
-                vertexAttributes[cospatialIndexBuffer[indexZ]].Normal += normal * weight.z;
+                accumulators[cospatialIndexBuffer[indexX]].Normal += normal * weight.x;
+                accumulators[cospatialIndexBuffer[indexY]].Normal += normal * weight.y;
+                accumulators[cospatialIndexBuffer[indexZ]].Normal += normal * weight.z;
             }
 
             Vector3[] normals = new Vector3[vertexBuffer.Length];
 
             for (var i = 0; i < normals.Length; ++i)
             {
-                VertexAttribute cospatial = vertexAttributes[cospatialIndexBuffer[i]];
-                normals[i] = cospatial.Normal.normalized;
+                normals[i] = accumulators[cospatialIndexBuffer[i]].Normal.normalized;
             }
 
             mesh.SetUVs(_texCoord, normals);
@@ -66,11 +64,11 @@
             UsePrecalculatedNormal = false;
         }
 
-        private List<VertexAttribute> CalculateCospatialIndexBuffer(Vector3[] vertices, int[] indices)
+        private List<CospatialAccumulator> CalculateCospatialIndexBuffer(Vector3[] vertices, int[] indices)
         {
-            List<VertexAttribute> vertexAttributes = new List<VertexAttribute>();
+            List<CospatialAccumulator> vertexAttributes = new List<CospatialAccumulator>();
 
-            VertexAttribute inspector = new VertexAttribute
+            CospatialAccumulator inspector = new CospatialAccumulator
             {
                 MergeDistance = _mergeDistance
             };
@@ -84,7 +82,7 @@
                 if (vertexIndex == -1)
                 {
                     indices[i] = vertexAttributes.Count;
-                    vertexAttributes.Add(new VertexAttribute()
+                    vertexAttributes.Add(new CospatialAccumulator()
                     {
                         Position = vertices[i],
                         Normal = Vector3.zero,

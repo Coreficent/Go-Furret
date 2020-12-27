@@ -2,13 +2,13 @@
 {
     using System;
     using UnityEngine;
-    internal class VertexAttribute : IEquatable<VertexAttribute>
+    internal class CospatialAccumulator : IEquatable<CospatialAccumulator>
     {
         public Vector3 Position = new Vector3();
         public Vector3 Normal = new Vector3();
         public float MergeDistance = 0.0f;
 
-        public bool Equals(VertexAttribute other)
+        public bool Equals(CospatialAccumulator other)
         {
             if (other == null)
             {
