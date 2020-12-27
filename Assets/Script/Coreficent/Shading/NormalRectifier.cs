@@ -6,8 +6,9 @@
 
     public class NormalRectifier : MonoBehaviour
     {
-        [SerializeField] private int _texCoord = 3;
         [SerializeField] private float _mergeDistance = 0.01f;
+
+        readonly private int _texCoord = 3;
 
         private bool UsePrecalculatedNormal
         {
