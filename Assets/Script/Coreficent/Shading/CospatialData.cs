@@ -2,9 +2,9 @@
 
 namespace Coreficent.Shading
 {
-    internal class CospatialData 
+    internal class CospatialData
     {
-        public int[] CospatialIndexBuffer = new int[0];
+        public List<int> CospatialIndexBuffer = new List<int>();
         public List<CospatialAccumulator> Accumulators = new List<CospatialAccumulator>();
     }
 }

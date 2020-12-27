@@ -1,6 +1,7 @@
 ﻿namespace Coreficent.Shading
 {
     using System.Collections.Generic;
+    using System.Linq;
     using UnityEngine;
 
     public class NormalRectifier : MonoBehaviour
@@ -25,8 +26,8 @@
             Vector3[] vertexBuffer = mesh.vertices;
             int[] indexBuffer = mesh.triangles;
 
-            CospatialData cospatialData =CalculateCospatialIndexBuffer(vertexBuffer);
-            int[] cospatialIndexBuffer = cospatialData.CospatialIndexBuffer;
+            CospatialData cospatialData = CalculateCospatialIndexBuffer(vertexBuffer);
+            List<int> cospatialIndexBuffer = cospatialData.CospatialIndexBuffer;
             List<CospatialAccumulator> accumulators = cospatialData.Accumulators;
 
             for (var i = 0; i < indexBuffer.Length / 3; ++i)
@@ -69,10 +70,10 @@
         {
             CospatialData cospatial = new CospatialData
             {
-                CospatialIndexBuffer = new int[vertexBuffer.Length],
+                CospatialIndexBuffer = new List<int>(Enumerable.Range(0, vertexBuffer.Length).Select(a => 0)),
                 Accumulators = new List<CospatialAccumulator>()
             };
-
+            
             CospatialAccumulator inspector = new CospatialAccumulator();
 
             for (var i = 0; i < vertexBuffer.Length; ++i)
