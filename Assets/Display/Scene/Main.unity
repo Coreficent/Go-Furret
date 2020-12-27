@@ -806,8 +806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77009754290b5964087189bc22018812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storeInTexcoordChannel: 3
-  cospatialVertexDistance: 0.01
+  _mergeDistance: 0.01
 --- !u!65 &2096230382
 BoxCollider:
   m_ObjectHideFlags: 0
