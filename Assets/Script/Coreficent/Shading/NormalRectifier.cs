@@ -24,7 +24,7 @@
             Mesh mesh = GetComponent<MeshFilter>().mesh;
             Vector3[] vertexBuffer = mesh.vertices;
             int[] indexBuffer = mesh.triangles;
-
+            
             int[] cospatialIndexBuffer = new int[vertexBuffer.Length];
             List<CospatialAccumulator> accumulators = CalculateCospatialIndexBuffer(vertexBuffer, cospatialIndexBuffer);
 
@@ -68,16 +68,13 @@
         {
             List<CospatialAccumulator> vertexAttributes = new List<CospatialAccumulator>();
 
-            CospatialAccumulator inspector = new CospatialAccumulator
-            {
-                MergeDistance = _mergeDistance
-            };
+            CospatialAccumulator inspector = new CospatialAccumulator();
 
             for (var i = 0; i < vertices.Length; ++i)
             {
                 inspector.Position = vertices[i];
 
-                int vertexIndex = vertexAttributes.IndexOf(inspector);
+                int vertexIndex = vertexAttributes.FindIndex(a => Vector3.Distance(a.Position, inspector.Position) <= _mergeDistance);
 
                 if (vertexIndex == -1)
                 {
@@ -87,10 +84,13 @@
                         Position = vertices[i],
                         Normal = Vector3.zero,
                     });
+
+                    Debug.Log("-1");
                 }
                 else
                 {
                     indices[i] = vertexIndex;
+                    Debug.Log("not -1");
                 }
             }
 
