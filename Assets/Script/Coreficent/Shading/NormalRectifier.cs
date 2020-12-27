@@ -24,9 +24,10 @@
             Mesh mesh = GetComponent<MeshFilter>().mesh;
             Vector3[] vertexBuffer = mesh.vertices;
             int[] indexBuffer = mesh.triangles;
-            
-            int[] cospatialIndexBuffer = new int[vertexBuffer.Length];
-            List<CospatialAccumulator> accumulators = CalculateCospatialIndexBuffer(vertexBuffer, cospatialIndexBuffer);
+
+            CospatialData cospatialData =CalculateCospatialIndexBuffer(vertexBuffer);
+            int[] cospatialIndexBuffer = cospatialData.CospatialIndexBuffer;
+            List<CospatialAccumulator> accumulators = cospatialData.Accumulators;
 
             for (var i = 0; i < indexBuffer.Length / 3; ++i)
             {
@@ -64,34 +65,38 @@
             UsePrecalculatedNormal = false;
         }
 
-        private List<CospatialAccumulator> CalculateCospatialIndexBuffer(Vector3[] vertices, int[] indices)
+        private CospatialData CalculateCospatialIndexBuffer(Vector3[] vertexBuffer)
         {
-            List<CospatialAccumulator> vertexAttributes = new List<CospatialAccumulator>();
+            CospatialData cospatial = new CospatialData
+            {
+                CospatialIndexBuffer = new int[vertexBuffer.Length],
+                Accumulators = new List<CospatialAccumulator>()
+            };
 
             CospatialAccumulator inspector = new CospatialAccumulator();
 
-            for (var i = 0; i < vertices.Length; ++i)
+            for (var i = 0; i < vertexBuffer.Length; ++i)
             {
-                inspector.Position = vertices[i];
+                inspector.Position = vertexBuffer[i];
 
-                int vertexIndex = vertexAttributes.FindIndex(a => Vector3.Distance(a.Position, inspector.Position) <= _mergeDistance);
+                int vertexIndex = cospatial.Accumulators.FindIndex(a => Vector3.Distance(a.Position, inspector.Position) <= _mergeDistance);
 
                 if (vertexIndex == -1)
                 {
-                    indices[i] = vertexAttributes.Count;
-                    vertexAttributes.Add(new CospatialAccumulator()
+                    cospatial.CospatialIndexBuffer[i] = cospatial.Accumulators.Count;
+                    cospatial.Accumulators.Add(new CospatialAccumulator()
                     {
-                        Position = vertices[i],
+                        Position = vertexBuffer[i],
                         Normal = Vector3.zero,
                     });
                 }
                 else
                 {
-                    indices[i] = vertexIndex;
+                    cospatial.CospatialIndexBuffer[i] = vertexIndex;
                 }
             }
 
-            return vertexAttributes;
+            return cospatial;
         }
     }
 }
