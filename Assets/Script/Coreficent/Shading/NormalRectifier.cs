@@ -43,9 +43,10 @@
                 Vector3 normal = Vector3.Cross(vertexB - vertexA, vertexC - vertexA).normalized;
                 Vector3 weight = new Vector3(Vector3.Angle(vertexB - vertexA, vertexC - vertexA), Vector3.Angle(vertexC - vertexB, vertexA - vertexB), Vector3.Angle(vertexA - vertexC, vertexB - vertexC));
 
-                AddWeightedNormal(normal * weight.x, indexX, cospatialIndexBuffer, vertexAttributes);
-                AddWeightedNormal(normal * weight.y, indexY, cospatialIndexBuffer, vertexAttributes);
-                AddWeightedNormal(normal * weight.z, indexZ, cospatialIndexBuffer, vertexAttributes);
+
+                vertexAttributes[cospatialIndexBuffer[indexX]].Normal += normal * weight.x;
+                vertexAttributes[cospatialIndexBuffer[indexY]].Normal += normal * weight.y;
+                vertexAttributes[cospatialIndexBuffer[indexZ]].Normal += normal * weight.z;
             }
 
             Vector3[] normals = new Vector3[vertexBuffer.Length];
@@ -96,11 +97,6 @@
             }
 
             return vertexAttributes;
-        }
-
-        private void AddWeightedNormal(Vector3 weightedNormal, int vertexIndex, int[] cospatialIndexBuffer, List<VertexAttribute> vertexAttributes)
-        {
-            vertexAttributes[cospatialIndexBuffer[vertexIndex]].Normal += weightedNormal;
         }
     }
 }
