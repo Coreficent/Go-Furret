@@ -29,7 +29,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4785035758912456291}
   m_Layer: 0
-  m_Name: Furret 1
+  m_Name: Furret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
