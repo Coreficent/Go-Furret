@@ -6,10 +6,11 @@
 
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private float _turnSpeed = 180.0f;
-        [SerializeField] private float _walkSpeed = 5.0f;
         [SerializeField] private Planet _planet;
         [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private float _turnSpeed = 90.0f;
+        [SerializeField] private float _walkSpeed = 1.0f;
+        [SerializeField] private float _jumpSpeed = 100.0f;
 
         private Vector3 _velocity = new Vector3();
 
@@ -39,6 +40,23 @@
 
             _velocity.z = Speed * Time.fixedDeltaTime;
             _rigidbody.MovePosition(_rigidbody.position + transform.TransformDirection(_velocity));
+
+
+
+            Debug.DrawRay(transform.position + transform.TransformDirection(new Vector3(0, 1.50f, 0)), -transform.up);
+
+            if (Physics.Raycast(transform.position + transform.TransformDirection(new Vector3(0.0f, GetComponent<CapsuleCollider>().center.y, 0.0f)), -transform.up, GetComponent<CapsuleCollider>().height))
+            {
+                DebugLogger.Log("true");
+                if (Input.GetButtonDown("Jump"))
+                {
+                    _rigidbody.AddForce(transform.up * _jumpSpeed);
+                }
+            }
+            else
+            {
+                DebugLogger.Log("false");
+            }
         }
     }
 }
