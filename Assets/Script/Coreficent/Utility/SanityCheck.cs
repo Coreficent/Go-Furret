@@ -8,7 +8,7 @@
         private static readonly string _delimiter = "::";
         public static void Check(object owner, params object[] variables)
         {
-            if (ApplicationMode._applicationMode.DebugMode)
+            if (ApplicationMode.DebugMode == ApplicationMode.ApplicationState.Debug)
             {
                 bool sanityCheckPassed = true;
 
@@ -24,11 +24,6 @@
                 if (sanityCheckPassed)
                 {
                     Debug.Log(owner + _delimiter + "sanity check passed.");
-                }
-                else
-                {
-                    Time.timeScale = 0.0f;
-                    Debug.Log(owner + _delimiter + "sanity check failed.");
                 }
             }
         }

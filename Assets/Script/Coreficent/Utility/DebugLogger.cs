@@ -5,12 +5,28 @@
     public class DebugLogger
     {
         private static readonly string _delimiter = "::";
+        private static readonly string _ender = ".";
 
         public static void ToDo(object message)
         {
             Output("Todo", message);
         }
-
+        public static void Awake(object message)
+        {
+            Initialize("Awake", message);
+        }
+        public static void Start(object message)
+        {
+            Initialize("Start", message);
+        }
+        public static void Initialize(string name, object message)
+        {
+            Log("Initialized" + _delimiter + name, message);
+        }
+        public static void Log(string name, object message)
+        {
+            Log(name + _delimiter + message);
+        }
         public static void Log(object message)
         {
             Output("Log", message);
@@ -27,9 +43,9 @@
 
         private static void Output(string messageType, object message)
         {
-            if (ApplicationMode._applicationMode.DebugMode)
+            if (ApplicationMode.DebugMode == ApplicationMode.ApplicationState.Debug)
             {
-                Debug.Log(messageType + _delimiter + message);
+                Debug.Log(messageType + _delimiter + message + _ender);
             }
         }
     }

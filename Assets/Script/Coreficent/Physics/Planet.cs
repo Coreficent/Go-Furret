@@ -1,16 +1,14 @@
 ﻿namespace Coreficent.Physics
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
-    public class Planet : MonoBehaviour
-    {
-        public float Gravity = -50.0f;
 
-        private void Awake()
+    public class Planet : StationaryObject
+    {
+        public float Gravity = -1.0f;
+
+        protected override void Awake()
         {
-            GetComponent<Rigidbody>().useGravity = false;
-            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            base.Awake();
         }
         public void CalculatePhysics(GameObject entity)
         {

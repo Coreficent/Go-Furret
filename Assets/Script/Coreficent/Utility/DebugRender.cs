@@ -6,7 +6,7 @@
     {
         public static void Draw(Vector3 start, Vector3 end, Color color)
         {
-            if (ApplicationMode._applicationMode.DebugMode)
+            if (ApplicationMode.DebugMode == ApplicationMode.ApplicationState.Debug)
             {
                 Debug.DrawLine(start, end, color);
             }

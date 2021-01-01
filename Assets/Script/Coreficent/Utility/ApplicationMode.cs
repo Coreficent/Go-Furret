@@ -4,9 +4,10 @@
 
     public class ApplicationMode : MonoBehaviour
     {
-        internal static ApplicationMode _applicationMode = null;
+        internal static ApplicationState DebugMode = ApplicationState.Debug;
 
-        public ApplicationState Mode = ApplicationState.Debug;
+        [SerializeField] private ApplicationState _mode = ApplicationState.Debug;
+
         public enum ApplicationState
         {
             Debug,
@@ -15,12 +16,8 @@
 
         private void Awake()
         {
-            _applicationMode = this;
-        }
-
-        internal bool DebugMode
-        {
-            get { return Mode == ApplicationState.Debug; }
+            DebugMode = _mode;
+            DebugLogger.Awake(this);
         }
     }
 }
