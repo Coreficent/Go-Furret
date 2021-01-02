@@ -5,7 +5,7 @@
         [HideInInspector] _PrecalculatedNormal("Use Custom Normals", Range(0.0, 1.0)) = 0.0
         _MainTex ("Texture", 2D) = "white" {}
         _OutlineDarkness ("Outline Darkness", Range(0.0, 1.0)) = 0.0
-        _OutlineThickness ("Outline Thickness", Range(0.0, 1.0)) = 1.0
+        _OutlineThickness ("Outline Thickness", Range(0.0, 1.0)) = 0.5
         _ShadingDarkness ("Shading Darkness", Range(0.0, 1.0)) = 0.5
         _ShadowThreshold ("Shadow Threshold", Range(0.0, 1.0)) = 0.5
         _ShadeThreshold ("Shade Threshold", Range(0.0, 1.0)) = 0.5

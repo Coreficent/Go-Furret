@@ -24,6 +24,12 @@
         private void Start()
         {
             Mesh mesh = GetComponent<MeshFilter>().mesh;
+
+            if (mesh == null)
+            {
+                mesh = GetComponent<SkinnedMeshRenderer>().sharedMesh;
+            }
+
             Vector3[] vertexBuffer = mesh.vertices;
             int[] indexBuffer = mesh.triangles;
 
@@ -74,7 +80,7 @@
                 CospatialIndexBuffer = new List<int>(Enumerable.Range(0, vertexBuffer.Length).Select(a => 0)),
                 Accumulators = new List<CospatialAccumulator>()
             };
-            
+
             CospatialAccumulator inspector = new CospatialAccumulator();
 
             for (var i = 0; i < vertexBuffer.Length; ++i)
