@@ -45,7 +45,7 @@
 
 
 
-            Debug.DrawRay(transform.position + transform.TransformDirection(new Vector3(0, 1.50f, 0)), -transform.up);
+            // Debug.DrawRay(transform.position + transform.TransformDirection(new Vector3(0, 1.50f, 0)), -transform.up);
 
             if (!_jumping && Physics.Raycast(transform.position + transform.TransformDirection(new Vector3(0.0f, GetComponent<CapsuleCollider>().center.y, 0.0f)), -transform.up, GetComponent<CapsuleCollider>().height))
             {
