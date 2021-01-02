@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5ddbdbe36ae034346ad4ef57a217a188
+guid: e01f8f549d7fc9b4d8de8ed3e0027087
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -7,13 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: trees_bottom_trees_bottom_chip_wood_aMat
-    second: {fileID: 2100000, guid: 78366e3e46177fd41a04c65a97664986, type: 2}
+      name: stitchMat
+    second: {fileID: 2100000, guid: 6b0de2f226f19304385df2eba84c0a17, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: trees_top_trees_top_MaterialMat
-    second: {fileID: 2100000, guid: d1cfb99d7960ed14893a6495c6b93ed1, type: 2}
+      name: treeMat
+    second: {fileID: 2100000, guid: 5b4cd5855ce89cb4b84ecf3ee5bbe813, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: woodMat
+    second: {fileID: 2100000, guid: 6b0de2f226f19304385df2eba84c0a17, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c4899bf22948a7242a34cdaef382618e
+guid: 9989368e7a388d0479ca179c827f6c2f
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: N64Tree__a_treeMat
-    second: {fileID: 2100000, guid: d1cfb99d7960ed14893a6495c6b93ed1, type: 2}
+      name: Wood_mat
+    second: {fileID: 2100000, guid: 5b4cd5855ce89cb4b84ecf3ee5bbe813, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lawn_mat
+    second: {fileID: 2100000, guid: e0547d4fa9cf5ab4b8fd98ce133eb0c2, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
