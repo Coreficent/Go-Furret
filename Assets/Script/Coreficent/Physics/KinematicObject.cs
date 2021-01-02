@@ -4,7 +4,7 @@
     using UnityEngine;
 
     [RequireComponent(typeof(Rigidbody))]
-    public class StationaryObject : MonoBehaviour
+    public class KinematicObject : MonoBehaviour
     {
         protected Rigidbody _rigidbody;
 
@@ -15,6 +15,7 @@
             SanityCheck.Check(this, _rigidbody);
 
             _rigidbody.useGravity = false;
+            _rigidbody.isKinematic = true;
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         }
     }

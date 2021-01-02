@@ -2,7 +2,7 @@
 {
     using UnityEngine;
 
-    public class Planet : StationaryObject
+    public class Planet : KinematicObject
     {
         public float Gravity = -1.0f;
 
