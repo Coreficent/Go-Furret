@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 753ae8d1959005a468c814dd47daf2e9
+guid: 25164cdf9b2cdc042b89a21d57b2a9fe
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -7,13 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: cmp_obj_pot01_body01_001
-    second: {fileID: 2100000, guid: 768ebf47f13ee5c4695a62830e64213e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: cmp_obj_pot01_sauce01_001
-    second: {fileID: 2100000, guid: 0dca88445555f6343ab86023a11bf5c8, type: 2}
+      name: defaultMat
+    second: {fileID: 2100000, guid: d1cfb99d7960ed14893a6495c6b93ed1, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

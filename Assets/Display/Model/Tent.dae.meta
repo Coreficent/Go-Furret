@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 753ae8d1959005a468c814dd47daf2e9
+guid: 2496ea3b611c73049adeb8718648eeb7
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -7,13 +7,33 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: cmp_obj_pot01_body01_001
-    second: {fileID: 2100000, guid: 768ebf47f13ee5c4695a62830e64213e, type: 2}
+      name: unit_obj_tent01_cloth01_01_01_bld
+    second: {fileID: 2100000, guid: f99ee870555bd9640b1546bc0808abd5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: cmp_obj_pot01_sauce01_001
-    second: {fileID: 2100000, guid: 0dca88445555f6343ab86023a11bf5c8, type: 2}
+      name: unit_obj_tent01_cloth01_02
+    second: {fileID: 2100000, guid: f99ee870555bd9640b1546bc0808abd5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: unit_obj_tent01_cloth02
+    second: {fileID: 2100000, guid: f99ee870555bd9640b1546bc0808abd5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: unit_obj_tent01_logo01_tp
+    second: {fileID: 2100000, guid: f99ee870555bd9640b1546bc0808abd5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: unit_obj_tent01_parts01_01
+    second: {fileID: 2100000, guid: ccb033da8f02ddf4fb546e5c26215f24, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: unit_obj_tent01_parts01_02
+    second: {fileID: 2100000, guid: ccb033da8f02ddf4fb546e5c26215f24, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

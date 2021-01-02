@@ -3,6 +3,7 @@
     Properties
     {
         [HideInInspector] _PrecalculatedNormal("Use Custom Normals", Range(0.0, 1.0)) = 0.0
+        _Color ("Color", Color) = (1.0, 1.0, 1.0, 1.0)
         _MainTex ("Texture", 2D) = "white" {}
         _OutlineDarkness ("Outline Darkness", Range(0.0, 1.0)) = 0.0
         _OutlineThickness ("Outline Thickness", Range(0.0, 1.0)) = 0.5
