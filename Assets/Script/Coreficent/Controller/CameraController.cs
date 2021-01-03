@@ -14,12 +14,12 @@
         private Vector3 _verticalVector = new Vector3();
         private Vector3 _horizontalVector = new Vector3();
 
-        private void Start()
+        protected void Start()
         {
             SanityCheck.Check(this, Player);
         }
 
-        private void Update()
+        protected void Update()
         {
             UpdatePosition();
             UpdateRotation();
