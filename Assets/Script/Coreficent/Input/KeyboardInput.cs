@@ -6,27 +6,23 @@
     {
         [SerializeField] private float _acceleration;
 
-        private float _forward = 0.0f;
+        private KeyState _forward;
 
         protected void Start()
         {
             SanityCheck.Check(this, _acceleration);
+
+            _forward = new KeyState(_acceleration, KeyCode.W);
+        }
+
+        protected void Update()
+        {
+            _forward.Run();
         }
 
         public float Forward
         {
-            get
-            {
-                if (_forward < 1.0f)
-                {
-                    _forward += _acceleration;
-                }
-                else
-                {
-                    _forward = 1.0f;
-                }
-                return _forward;
-            }
+            get { return _forward.Axis; }
         }
     }
 }

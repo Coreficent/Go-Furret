@@ -1,13 +1,16 @@
 ﻿namespace Coreficent.Controller
 {
+    using Coreficent.Input;
     using Coreficent.Physics;
     using Coreficent.Utility;
     using UnityEngine;
 
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private KeyboardInput _keyboardInput;
         [SerializeField] private Planet _planet;
         [SerializeField] private Rigidbody _rigidbody;
+
         [SerializeField] private float _turnSpeed = 90.0f;
         [SerializeField] private float _walkSpeed = 1.0f;
         [SerializeField] private float _jumpSpeed = 100.0f;
@@ -16,6 +19,7 @@
 
         private float _speed = 0.0f;
 
+        // temp
         public GameObject LookObject;
 
         public float Speed
@@ -26,7 +30,7 @@
 
         protected void Start()
         {
-            SanityCheck.Check(this, _rigidbody, _planet);
+            SanityCheck.Check(this, _keyboardInput, _rigidbody, _planet);
 
             _rigidbody.useGravity = false;
             _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
@@ -59,7 +63,7 @@
 
             transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * _turnSpeed * Time.fixedDeltaTime);
 
-            Speed = Input.GetAxis("Vertical") * _walkSpeed;
+            Speed = _keyboardInput.Forward * _walkSpeed;
 
             _velocity.z = Speed * Time.fixedDeltaTime;
             _rigidbody.MovePosition(_rigidbody.position + transform.TransformDirection(_velocity));
