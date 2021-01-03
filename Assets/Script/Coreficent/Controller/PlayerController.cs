@@ -26,9 +26,6 @@
         {
             SanityCheck.Check(this, _keyboardInput, _rigidbody, _planet);
 
-            _rigidbody.useGravity = false;
-            _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-
             _planet.Characters.Add(gameObject);
         }
         protected void Update()

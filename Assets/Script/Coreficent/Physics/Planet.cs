@@ -6,13 +6,25 @@
     public class Planet : KinematicObject
     {
         public List<GameObject> Characters = new List<GameObject>();
-        public List<GameObject> GameObjects = new List<GameObject>();
+        public List<GameObject> Entities = new List<GameObject>();
 
         public float Gravity = -1.0f;
 
         protected override void Start()
         {
             base.Start();
+            foreach (GameObject character in Characters)
+            {
+                Rigidbody rigidbody = character.GetComponent<Rigidbody>();
+                rigidbody.useGravity = false;
+                rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            }
+            foreach (GameObject entity in Entities)
+            {
+                Rigidbody rigidbody = entity.GetComponent<Rigidbody>();
+                rigidbody.useGravity = false;
+                rigidbody.angularDrag = 1.0f;
+            }
         }
 
         protected void FixedUpdate()
@@ -22,12 +34,11 @@
                 ApplyPhysics(character);
                 StandUp(character);
             }
-            foreach (GameObject gameObject in GameObjects)
+            foreach (GameObject entity in Entities)
             {
-                ApplyPhysics(gameObject);
+                ApplyPhysics(entity);
             }
         }
-
 
         private void ApplyPhysics(GameObject entity)
         {
