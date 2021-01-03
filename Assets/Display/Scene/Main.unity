@@ -224,6 +224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 183563105}
+  - component: {fileID: 183563106}
   m_Layer: 0
   m_Name: Nanab
   m_TagString: Untagged
@@ -246,6 +247,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &183563106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183563104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2b7c6dc363900a4f80471794aa56991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &356083346
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +370,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 807e1766bb003a04eaff1e33ed934de1,
         type: 3}
       propertyPath: m_Name
-      value: Razz
+      value: Display
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 807e1766bb003a04eaff1e33ed934de1, type: 3}
@@ -370,6 +383,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 461488490}
+  - component: {fileID: 461488491}
   m_Layer: 0
   m_Name: Razz
   m_TagString: Untagged
@@ -392,6 +406,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &461488491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461488489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2b7c6dc363900a4f80471794aa56991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &468189935
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,7 +654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 854610759}
   m_Layer: 0
-  m_Name: Display
+  m_Name: DisplayList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -807,7 +833,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 483e68c476de5c8448af0d9bbf0cd89b,
         type: 3}
       propertyPath: m_Name
-      value: Nanab
+      value: Display
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 483e68c476de5c8448af0d9bbf0cd89b, type: 3}
@@ -992,7 +1018,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 36d8d7e7cba29574f891780d2ca412c3,
         type: 3}
       propertyPath: m_Name
-      value: Pinap
+      value: Display
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36d8d7e7cba29574f891780d2ca412c3, type: 3}
@@ -1174,6 +1200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1451169050}
+  - component: {fileID: 1451169051}
   m_Layer: 0
   m_Name: Pinap
   m_TagString: Untagged
@@ -1196,6 +1223,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1451169051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451169049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2b7c6dc363900a4f80471794aa56991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1518679852 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2594437526721815551, guid: a50850a910c98014199544f02167eda7,
@@ -1343,7 +1382,7 @@ PrefabInstance:
     - target: {fileID: 7725658397888733747, guid: 5e762a9f9e2c9a6428e7233b4b1e86a2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7725658397888733747, guid: 5e762a9f9e2c9a6428e7233b4b1e86a2,
         type: 3}
