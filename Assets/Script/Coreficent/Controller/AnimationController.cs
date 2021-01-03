@@ -8,10 +8,17 @@
     {
         [SerializeField] private PlayerController _playerController;
         [SerializeField] private Animator _playerAnimator;
+        [SerializeField] Material _eye;
+        [SerializeField] Material _mouth;
+
+        private readonly string _expressionX = "_ExpressionX";
+        private readonly string _expressionY = "_ExpressionY";
 
         protected void Start()
         {
-            SanityCheck.Check(this, _playerController, _playerAnimator);
+            SanityCheck.Check(this, _playerController, _playerAnimator, _eye, _mouth);
+
+            DebugLogger.Start(this);
         }
 
         protected void Update()
@@ -53,25 +60,93 @@
             }
 
             string[] eye = data[0].Split(':');
+
+            if (eye.Length != 2)
+            {
+                DebugLogger.Warn("unexpected number of eye parameters in animation controller");
+            }
             if (eye[0] != "Eye")
             {
                 DebugLogger.Warn("unexpected eye data format");
             }
 
-
             string[] mouth = data[1].Split(':');
+
+            if (mouth.Length != 2)
+            {
+                DebugLogger.Warn("unexpected number of mouth parameters in animation controller");
+            }
+
             if (mouth[0] != "Mouth")
             {
                 DebugLogger.Warn("unexpected mouth data format");
             }
 
+            switch (eye[1])
+            {
+                case "Open":
+                    _eye.SetFloat(_expressionX, 0.0f);
+                    _eye.SetFloat(_expressionY, 3.0f);
+                    break;
+                case "Semi":
+                    _eye.SetFloat(_expressionX, 0.0f);
+                    _eye.SetFloat(_expressionY, 2.0f);
+                    break;
+                case "Closed":
+                    _eye.SetFloat(_expressionX, 0.0f);
+                    _eye.SetFloat(_expressionY, 1.0f);
+                    break;
+                case "Wincing":
+                    _eye.SetFloat(_expressionX, 0.0f);
+                    _eye.SetFloat(_expressionY, 0.0f);
+                    break;
+                case "Angry":
+                    _eye.SetFloat(_expressionX, 1.0f);
+                    _eye.SetFloat(_expressionY, 3.0f);
+                    break;
+                case "Happy":
+                    _eye.SetFloat(_expressionX, 1.0f);
+                    _eye.SetFloat(_expressionY, 2.0f);
+                    break;
+                case "Sad":
+                    _eye.SetFloat(_expressionX, 1.0f);
+                    _eye.SetFloat(_expressionY, 1.0f);
+                    break;
+                default:
+                    DebugLogger.Warn("unexpected eye state");
+                    break;
+            }
 
-
-            Debug.Log("event happened");
-
-            Debug.Log(animationEvent.floatParameter);
-            Debug.Log(animationEvent.stringParameter);
-            Debug.Log(animationEvent.intParameter);
+            switch (mouth[1])
+            {
+                case "Closed":
+                    _mouth.SetFloat(_expressionX, 0.0f);
+                    _mouth.SetFloat(_expressionY, 3.0f);
+                    break;
+                case "Semi":
+                    _mouth.SetFloat(_expressionX, 0.0f);
+                    _mouth.SetFloat(_expressionY, 2.0f);
+                    break;
+                case "Open":
+                    _mouth.SetFloat(_expressionX, 0.0f);
+                    _mouth.SetFloat(_expressionY, 1.0f);
+                    break;
+                case "Tense":
+                    _mouth.SetFloat(_expressionX, 0.0f);
+                    _mouth.SetFloat(_expressionY, 0.0f);
+                    break;
+                case "Happy":
+                    _mouth.SetFloat(_expressionX, 1.0f);
+                    _mouth.SetFloat(_expressionY, 3.0f);
+                    break;
+                case "Angry":
+                    _mouth.SetFloat(_expressionX, 1.0f);
+                    _mouth.SetFloat(_expressionY, 2.0f);
+                    break;
+                default:
+                    DebugLogger.Warn("unexpected mouth state");
+                    break;
+            }
         }
     }
 }

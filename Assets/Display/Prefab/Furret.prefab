@@ -33,6 +33,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerController: {fileID: 2977110022961926894}
   _playerAnimator: {fileID: 3846700413900352827}
+  _eye: {fileID: 2100000, guid: fc0ff0047e0f2b643a4c71a57ac40c89, type: 2}
+  _mouth: {fileID: 2100000, guid: 75563651b4753d6479de17af2a5c4533, type: 2}
 --- !u!1 &1702543536531425466
 GameObject:
   m_ObjectHideFlags: 0
