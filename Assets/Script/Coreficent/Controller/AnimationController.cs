@@ -18,5 +18,14 @@
             _playerAnimator.SetBool("Moving", _playerController.Speed > 0.5); ;
             _playerAnimator.SetBool("Jumping", !_playerController.Landed);
         }
+
+        public void DoSomething(AnimationEvent animationEvent)
+        {
+            Debug.Log("event happened");
+
+            Debug.Log(animationEvent.floatParameter);
+            Debug.Log(animationEvent.stringParameter);
+            Debug.Log(animationEvent.intParameter);
+        }
     }
 }

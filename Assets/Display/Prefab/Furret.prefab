@@ -19,6 +19,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7587885405962656137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509984897297144192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed1346b6047b7c45a6cfd1d6f54686d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerController: {fileID: 2977110022961926894}
+  _playerAnimator: {fileID: 3846700413900352827}
 --- !u!1 &1702543536531425466
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,7 +44,6 @@ GameObject:
   - component: {fileID: 7725658397888733747}
   - component: {fileID: 2977110022961926888}
   - component: {fileID: 2977110022961926889}
-  - component: {fileID: 2977110022961926891}
   - component: {fileID: 2977110022961926894}
   - component: {fileID: 5211709597199818775}
   m_Layer: 0
@@ -85,20 +98,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &2977110022961926891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1702543536531425466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ed1346b6047b7c45a6cfd1d6f54686d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerController: {fileID: 2977110022961926894}
-  _playerAnimator: {fileID: 3846700413900352827}
 --- !u!114 &2977110022961926894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +112,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _keyboardInput: {fileID: 0}
   _planet: {fileID: 0}
-  _rigidbody: {fileID: 2977110022961926888}
   _turnSpeed: 90
   _walkSpeed: 1
   _jumpSpeed: 100
