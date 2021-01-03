@@ -32,6 +32,7 @@ GameObject:
   - component: {fileID: 2977110022961926889}
   - component: {fileID: 2977110022961926891}
   - component: {fileID: 2977110022961926894}
+  - component: {fileID: 5211709597199818775}
   m_Layer: 0
   m_Name: Furret
   m_TagString: Untagged
@@ -116,7 +117,21 @@ MonoBehaviour:
   _turnSpeed: 90
   _walkSpeed: 1
   _jumpSpeed: 100
+  Speed: 0
   LookObject: {fileID: 0}
+--- !u!135 &5211709597199818775
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702543536531425466}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &1744549549241066705
 PrefabInstance:
   m_ObjectHideFlags: 0

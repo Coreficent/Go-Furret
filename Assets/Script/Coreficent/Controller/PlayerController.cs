@@ -53,6 +53,21 @@
             _rigidbody.MovePosition(_rigidbody.position + transform.TransformDirection(_velocity));
         }
 
+        protected void OnCollisionEnter(Collision collision)
+        {
+            Debug.Log(collision.gameObject.name);
+        }
+
+        protected void OnTriggerEnter(Collider other)
+        {
+            Debug.Log(other.gameObject.name);
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            Debug.Log(other.gameObject.name + "An object is still inside of the trigger");
+        }
+
         public bool Landed
         {
             get { return Physics.Raycast(transform.position + transform.TransformDirection(new Vector3(0.0f, GetComponent<CapsuleCollider>().center.y, 0.0f)), -transform.up, GetComponent<CapsuleCollider>().height * 0.5f + 0.125f); }
