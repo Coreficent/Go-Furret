@@ -23,8 +23,8 @@
             _right = new KeyState(_acceleration, KeyCode.D);
             _cameraLeft = new KeyState(_acceleration, KeyCode.Q);
             _cameraRight = new KeyState(_acceleration, KeyCode.E);
-            _jump = new KeyState(_acceleration, KeyCode.S);
-            _action = new KeyState(_acceleration, KeyCode.Space);
+            _jump = new KeyState(_acceleration, KeyCode.Space);
+            _action = new KeyState(_acceleration, KeyCode.S);
         }
 
         protected void Update()
