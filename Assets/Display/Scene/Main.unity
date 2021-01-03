@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3027dd4dbc6513b4091a902588d7f1d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mode: 0
+  _mode: 1
 --- !u!4 &181799894 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2594437525919588101, guid: a50850a910c98014199544f02167eda7,
@@ -896,6 +896,11 @@ PrefabInstance:
       propertyPath: _jumpSpeed
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 2977110022961926894, guid: 5e762a9f9e2c9a6428e7233b4b1e86a2,
+        type: 3}
+      propertyPath: LookObject
+      value: 
+      objectReference: {fileID: 860184643}
     - target: {fileID: 7725658397888733747, guid: 5e762a9f9e2c9a6428e7233b4b1e86a2,
         type: 3}
       propertyPath: m_LocalPosition.x

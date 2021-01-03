@@ -8,7 +8,7 @@
     {
         protected Rigidbody _rigidbody;
 
-        protected virtual void Awake()
+        protected virtual void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
 

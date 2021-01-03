@@ -6,9 +6,9 @@
     {
         public float Gravity = -1.0f;
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
+            base.Start();
         }
         public void CalculatePhysics(GameObject entity)
         {
