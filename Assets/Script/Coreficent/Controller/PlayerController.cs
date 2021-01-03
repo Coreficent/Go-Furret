@@ -61,7 +61,7 @@
             }
             _planet.CalculatePhysics(gameObject);
 
-            transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * _turnSpeed * Time.fixedDeltaTime);
+            transform.Rotate(Vector3.up * (-_keyboardInput.Left + _keyboardInput.Right) * _turnSpeed * Time.fixedDeltaTime);
 
             Speed = _keyboardInput.Forward * _walkSpeed;
 
