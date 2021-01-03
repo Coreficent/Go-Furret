@@ -11,6 +11,7 @@
         private KeyState _right;
         private KeyState _cameraLeft;
         private KeyState _cameraRight;
+        private KeyState _jump;
 
         protected void Start()
         {
@@ -21,6 +22,7 @@
             _right = new KeyState(_acceleration, KeyCode.D);
             _cameraLeft = new KeyState(_acceleration, KeyCode.Q);
             _cameraRight = new KeyState(_acceleration, KeyCode.E);
+            _jump = new KeyState(_acceleration, KeyCode.S);
         }
 
         protected void Update()
@@ -36,21 +38,30 @@
         {
             get { return _forward.Axis; }
         }
+
         public float Left
         {
             get { return _left.Axis; }
         }
+
         public float Right
         {
             get { return _right.Axis; }
         }
+
         public float CameraLeft
         {
             get { return _cameraLeft.Axis; }
         }
+
         public float CameraRight
         {
             get { return _cameraRight.Axis; }
+        }
+
+        public bool JumpIsDown
+        {
+            get { return _jump.IsDown; }
         }
     }
 }

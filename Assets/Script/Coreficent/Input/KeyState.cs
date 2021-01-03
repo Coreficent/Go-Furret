@@ -46,5 +46,10 @@
         {
             get { return _axis; }
         }
+
+        internal bool IsDown
+        {
+            get { return Input.GetKeyDown(_keyCode); }
+        }
     }
 }

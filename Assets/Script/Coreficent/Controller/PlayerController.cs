@@ -28,13 +28,15 @@
 
             _planet.Characters.Add(gameObject);
         }
+
         protected void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && Landed)
+            if (_keyboardInput.JumpIsDown && Landed)
             {
                 _rigidbody.AddForce(transform.up * _jumpSpeed);
             }
         }
+
         protected void FixedUpdate()
         {
             if (Input.GetKey(KeyCode.Alpha2))
