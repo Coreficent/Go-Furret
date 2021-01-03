@@ -15,18 +15,12 @@
         [SerializeField] private float _walkSpeed = 1.0f;
         [SerializeField] private float _jumpSpeed = 100.0f;
 
-        private Vector3 _velocity = new Vector3();
+        public float Speed = 0.0f;
 
-        private float _speed = 0.0f;
+        private Vector3 _velocity = new Vector3();
 
         // temp
         public GameObject LookObject;
-
-        public float Speed
-        {
-            get { return _speed; }
-            set { _speed = value; }
-        }
 
         protected void Start()
         {
@@ -50,11 +44,14 @@
             }
             _planet.CalculatePhysics(gameObject);
 
-            transform.Rotate(Vector3.up * (-_keyboardInput.Left + _keyboardInput.Right) * _turnSpeed * Time.fixedDeltaTime);
+            float turnSpeed = (-_keyboardInput.Left + _keyboardInput.Right);
+            transform.Rotate(Vector3.up * turnSpeed * _turnSpeed * Time.fixedDeltaTime);
 
-            Speed = _keyboardInput.Forward * _walkSpeed;
+            float forwardSpeed = _keyboardInput.Forward;
+            _velocity.z = forwardSpeed * _walkSpeed * Time.fixedDeltaTime;
 
-            _velocity.z = Speed * Time.fixedDeltaTime;
+            Speed = Mathf.Max(Mathf.Abs(forwardSpeed), Mathf.Abs(turnSpeed));
+
             _rigidbody.MovePosition(_rigidbody.position + transform.TransformDirection(_velocity));
         }
 

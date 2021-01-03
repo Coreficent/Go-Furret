@@ -15,7 +15,7 @@
 
         protected void Update()
         {
-            _playerAnimator.SetFloat("Speed", _playerController.Speed);
+            _playerAnimator.SetBool("Moving", _playerController.Speed > 0.5); ;
             _playerAnimator.SetBool("Jumping", !_playerController.Landed);
         }
     }
