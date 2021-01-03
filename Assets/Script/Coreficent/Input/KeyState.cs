@@ -51,5 +51,10 @@
         {
             get { return Input.GetKeyDown(_keyCode); }
         }
+
+        internal bool GetKey
+        {
+            get { return Input.GetKey(_keyCode); }
+        }
     }
 }

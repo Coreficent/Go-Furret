@@ -39,7 +39,7 @@
 
         protected void FixedUpdate()
         {
-            if (Input.GetKey(KeyCode.Alpha2))
+            if (_keyboardInput.GetAction)
             {
                 FaceEntity();
             }

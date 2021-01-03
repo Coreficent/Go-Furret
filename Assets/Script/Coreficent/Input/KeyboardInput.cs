@@ -12,6 +12,7 @@
         private KeyState _cameraLeft;
         private KeyState _cameraRight;
         private KeyState _jump;
+        private KeyState _action;
 
         protected void Start()
         {
@@ -23,6 +24,7 @@
             _cameraLeft = new KeyState(_acceleration, KeyCode.Q);
             _cameraRight = new KeyState(_acceleration, KeyCode.E);
             _jump = new KeyState(_acceleration, KeyCode.S);
+            _action = new KeyState(_acceleration, KeyCode.Space);
         }
 
         protected void Update()
@@ -62,6 +64,11 @@
         public bool JumpIsDown
         {
             get { return _jump.IsDown; }
+        }
+
+        public bool GetAction
+        {
+            get { return _action.GetKey; }
         }
     }
 }
