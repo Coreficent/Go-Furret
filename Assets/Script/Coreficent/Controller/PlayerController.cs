@@ -28,6 +28,8 @@
 
             _rigidbody.useGravity = false;
             _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+
+            _planet.Characters.Add(gameObject);
         }
         protected void Update()
         {
@@ -42,7 +44,6 @@
             {
                 FaceEntity();
             }
-            _planet.CalculatePhysics(gameObject);
 
             float turnSpeed = (-_keyboardInput.Left + _keyboardInput.Right);
             transform.Rotate(Vector3.up * turnSpeed * _turnSpeed * Time.fixedDeltaTime);
