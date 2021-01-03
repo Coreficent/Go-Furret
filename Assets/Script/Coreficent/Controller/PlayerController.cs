@@ -24,12 +24,19 @@
             set { _speed = value; }
         }
 
-        private void Start()
+        protected void Start()
         {
             SanityCheck.Check(this, _rigidbody, _planet);
 
             _rigidbody.useGravity = false;
             _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+        }
+        protected void Update()
+        {
+            if (Input.GetButtonDown("Jump") && Landed)
+            {
+                _rigidbody.AddForce(transform.up * _jumpSpeed);
+            }
         }
 
         public bool Landed
@@ -40,15 +47,6 @@
         public void FaceEntity()
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(LookObject.transform.position - transform.position), _turnSpeed * 0.1f * Time.fixedDeltaTime);
-        }
-
-        private void Update()
-        {
-            // Debug.DrawRay(transform.position + transform.TransformDirection(new Vector3(0, 1.50f, 0)), -transform.up);
-            if (Input.GetButtonDown("Jump") && Landed)
-            {
-                _rigidbody.AddForce(transform.up * _jumpSpeed);
-            }
         }
 
         private void FixedUpdate()
