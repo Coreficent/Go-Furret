@@ -9,7 +9,7 @@
     {
         [SerializeField] private KeyboardInput _keyboardInput;
         [SerializeField] private Planet _planet;
-        [SerializeField] private Rigidbody _rigidbody;
+
 
         [SerializeField] private float _turnSpeed = 90.0f;
         [SerializeField] private float _walkSpeed = 1.0f;
@@ -19,12 +19,18 @@
 
         private Vector3 _velocity = new Vector3();
 
+        private Rigidbody _rigidbody;
+        private CapsuleCollider _capsuleCollider;
+
         // temp
         public GameObject LookObject;
 
         protected void Start()
         {
-            SanityCheck.Check(this, _keyboardInput, _rigidbody, _planet);
+            _rigidbody = GetComponent<Rigidbody>();
+            _capsuleCollider = GetComponent<CapsuleCollider>();
+
+            SanityCheck.Check(this, _keyboardInput, _planet, _rigidbody, _capsuleCollider);
 
             _planet.Characters.Add(gameObject);
         }
@@ -72,7 +78,15 @@
 
         public bool Landed
         {
-            get { return Physics.Raycast(transform.position + transform.TransformDirection(new Vector3(0.0f, GetComponent<CapsuleCollider>().center.y, 0.0f)), -transform.up, GetComponent<CapsuleCollider>().height * 0.5f + 0.125f); }
+            get
+            {
+                Vector3 origin = transform.position + transform.TransformDirection(new Vector3(0.0f, _capsuleCollider.center.y, 0.0f));
+                float magnitude = _capsuleCollider.height * 0.5f + 0.125f;
+                Vector3 direction = -transform.up;
+
+                DebugRender.Draw(origin, origin + direction * magnitude, Color.white);
+                return Physics.Raycast(origin, direction, magnitude);
+            }
         }
 
         public void FaceEntity()
