@@ -4,6 +4,8 @@
 #include "AutoLight.cginc"
 #include "UnityCG.cginc"
 
+float _ExpressionY;
+float _ExpressionX;
 float _ShadingDarkness;
 float _ShadeThreshold;
 float _ShadowThreshold;
@@ -42,7 +44,7 @@ v2f vert(appdata v)
 fixed4 frag(v2f i) : SV_TARGET
 {
     // calculate the eye texture coordinates
-    fixed4 col = tex2D(_MainTex, float2(i.uv[0] * 2.0, i.uv[1]));
+    fixed4 col = tex2D(_MainTex, float2(i.uv[0] * 2.0 + 1.0 * _ExpressionX, i.uv[1] + 0.25 * _ExpressionY + 0.25));
 
     UNITY_APPLY_FOG(i.fogCoord, col);
 

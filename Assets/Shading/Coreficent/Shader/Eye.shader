@@ -2,6 +2,8 @@
 {
     Properties
     {
+        [HideInInspector] _ExpressionX ("Expression X", Float) = 0.0
+        [HideInInspector] _ExpressionY ("Expression Y", Float) = 0.0
         _MainTex ("Texture", 2D) = "white" {}
         _OutlineDarkness ("Outline Darkness", Range(0.0, 1.0)) = 0.0
         _OutlineThickness ("Outline Thickness", Range(0.0, 1.0)) = 1.0
