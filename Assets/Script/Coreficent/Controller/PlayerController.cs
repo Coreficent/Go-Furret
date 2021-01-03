@@ -22,8 +22,44 @@
         private Rigidbody _rigidbody;
         private CapsuleCollider _capsuleCollider;
 
+        private Color _debugColor = new Color(0.85f, 0.7f, 0.5f, 1.0f);
+        private Vector3 _landingPosition = new Vector3();
+        private Vector3 _facingPosition = new Vector3();
+
         // temp
         public GameObject LookObject;
+
+        public bool Landed
+        {
+            get
+            {
+                _landingPosition.y = _capsuleCollider.center.y;
+
+                Vector3 origin = transform.position + transform.TransformDirection(_landingPosition);
+                Vector3 direction = -transform.up;
+                float magnitude = _capsuleCollider.height * 0.5f + 0.125f;
+
+                DebugRender.Draw(origin, origin + direction * magnitude, _debugColor);
+
+                return Physics.Raycast(origin, direction, magnitude);
+            }
+        }
+
+        public bool FacingFood
+        {
+            get
+            {
+                _facingPosition.y = _capsuleCollider.center.y;
+
+                Vector3 origin = transform.position + transform.TransformDirection(_facingPosition);
+                Vector3 direction = transform.TransformDirection(Vector3.forward);
+                float magnitude = 1.0f;
+
+                DebugRender.Draw(origin, origin + direction * magnitude, _debugColor);
+
+                return Physics.Raycast(origin, direction, magnitude);
+            }
+        }
 
         protected void Start()
         {
@@ -41,15 +77,15 @@
             {
                 _rigidbody.AddForce(transform.up * _jumpSpeed);
             }
+
+            if (FacingFood)
+            {
+                Debug.Log("Facing food");
+            }
         }
 
         protected void FixedUpdate()
         {
-            if (_keyboardInput.GetAction)
-            {
-                FaceEntity();
-            }
-
             float turnSpeed = (-_keyboardInput.Left + _keyboardInput.Right);
             transform.Rotate(Vector3.up * turnSpeed * _turnSpeed * Time.fixedDeltaTime);
 
@@ -74,18 +110,9 @@
         private void OnTriggerStay(Collider other)
         {
             Debug.Log(other.gameObject.name + "An object is still inside of the trigger");
-        }
-
-        public bool Landed
-        {
-            get
+            if (_keyboardInput.GetAction)
             {
-                Vector3 origin = transform.position + transform.TransformDirection(new Vector3(0.0f, _capsuleCollider.center.y, 0.0f));
-                float magnitude = _capsuleCollider.height * 0.5f + 0.125f;
-                Vector3 direction = -transform.up;
-
-                DebugRender.Draw(origin, origin + direction * magnitude, Color.white);
-                return Physics.Raycast(origin, direction, magnitude);
+                FaceEntity();
             }
         }
 
