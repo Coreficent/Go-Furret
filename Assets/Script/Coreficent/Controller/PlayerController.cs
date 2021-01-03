@@ -16,6 +16,8 @@
 
         private float _speed = 0.0f;
 
+        public GameObject LookObject;
+
         public float Speed
         {
             get { return _speed; }
@@ -35,6 +37,10 @@
             get { return Physics.Raycast(transform.position + transform.TransformDirection(new Vector3(0.0f, GetComponent<CapsuleCollider>().center.y, 0.0f)), -transform.up, GetComponent<CapsuleCollider>().height * 0.5f + 0.125f); }
         }
 
+        public void FaceEntity()
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(LookObject.transform.position - transform.position), _turnSpeed * 0.1f * Time.fixedDeltaTime);
+        }
 
         private void Update()
         {
@@ -47,6 +53,10 @@
 
         private void FixedUpdate()
         {
+            if (Input.GetKey(KeyCode.Alpha2))
+            {
+                FaceEntity();
+            }
             _planet.CalculatePhysics(gameObject);
 
             transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * _turnSpeed * Time.fixedDeltaTime);
