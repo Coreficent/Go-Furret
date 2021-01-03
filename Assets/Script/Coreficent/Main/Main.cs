@@ -10,7 +10,8 @@
         private void Start()
         {
             SanityCheck.Check(this, Furret);
-            Furret.transform.Find("Display").transform.Find("model").GetComponent<SkinnedMeshRenderer>().materials[2].SetFloat("_ExpressionIndex", 1.0f);
+            Furret.transform.Find("Display").transform.Find("model").GetComponent<SkinnedMeshRenderer>().materials[2].SetFloat("_ExpressionX", 1.0f);
+            Furret.transform.Find("Display").transform.Find("model").GetComponent<SkinnedMeshRenderer>().materials[2].SetFloat("_ExpressionY", 2.0f);
         }
         private void Update()
         {
