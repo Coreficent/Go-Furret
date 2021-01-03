@@ -37,23 +37,12 @@
         }
         protected void Update()
         {
-            if (Input.GetButtonDown("Jump") && Landed)
+            if (Input.GetKeyDown(KeyCode.Space) && Landed)
             {
                 _rigidbody.AddForce(transform.up * _jumpSpeed);
             }
         }
-
-        public bool Landed
-        {
-            get { return Physics.Raycast(transform.position + transform.TransformDirection(new Vector3(0.0f, GetComponent<CapsuleCollider>().center.y, 0.0f)), -transform.up, GetComponent<CapsuleCollider>().height * 0.5f + 0.125f); }
-        }
-
-        public void FaceEntity()
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(LookObject.transform.position - transform.position), _turnSpeed * 0.1f * Time.fixedDeltaTime);
-        }
-
-        private void FixedUpdate()
+        protected void FixedUpdate()
         {
             if (Input.GetKey(KeyCode.Alpha2))
             {
@@ -67,6 +56,16 @@
 
             _velocity.z = Speed * Time.fixedDeltaTime;
             _rigidbody.MovePosition(_rigidbody.position + transform.TransformDirection(_velocity));
+        }
+
+        public bool Landed
+        {
+            get { return Physics.Raycast(transform.position + transform.TransformDirection(new Vector3(0.0f, GetComponent<CapsuleCollider>().center.y, 0.0f)), -transform.up, GetComponent<CapsuleCollider>().height * 0.5f + 0.125f); }
+        }
+
+        public void FaceEntity()
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(LookObject.transform.position - transform.position), _turnSpeed * 0.1f * Time.fixedDeltaTime);
         }
     }
 }
