@@ -65,7 +65,7 @@
                 case PlayerState.Stay:
                     if (Land())
                     {
-                        State = PlayerState.Stand;
+                        nextState = PlayerState.Stand;
                     }
 
                     break;
@@ -76,31 +76,32 @@
 
                     if (Land())
                     {
-                        State = PlayerState.Stand;
+                        nextState = PlayerState.Stand;
                     }
 
                     break;
 
                 case PlayerState.Stand:
-                    if (Turn())
-                    {
-                        State = PlayerState.Move;
-                    }
-                    if (Move())
-                    {
-                        State = PlayerState.Move;
-                    }
-                    if (Jump())
-                    {
-                        State = PlayerState.Float;
-                    }
+
 
                     nextState = Eat();
 
                     if (nextState == PlayerState.Reject)
                     {
-                        _time = Time.time;
-                        State = PlayerState.Reject;
+                        nextState = PlayerState.Reject;
+                    }
+
+                    if (Turn())
+                    {
+                        nextState = PlayerState.Move;
+                    }
+                    if (Move())
+                    {
+                        nextState = PlayerState.Move;
+                    }
+                    if (Jump())
+                    {
+                        nextState = PlayerState.Float;
                     }
 
                     DebugLogger.Log("eat state", nextState);
@@ -127,7 +128,7 @@
                     nextState = Reject();
 
                     DebugLogger.Log("reject return", nextState);
-                    GoTo(nextState);
+
                     break;
 
                 case PlayerState.Eat:
@@ -137,10 +138,13 @@
                     DebugLogger.Warn("unexpected player state");
                     break;
             }
+
+            GoTo(nextState);
         }
 
         private void GoTo(PlayerState nextState)
         {
+            _time = nextState == PlayerState.Stay ? _time : Time.time;
             State = nextState == PlayerState.Stay ? State : nextState;
         }
 
