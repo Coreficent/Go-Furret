@@ -15,6 +15,7 @@
 
         public enum PlayerState
         {
+            None,
             Float,
             Stand,
             Move,
@@ -29,30 +30,12 @@
         private Rigidbody _rigidbody;
         private CapsuleCollider _capsuleCollider;
 
-        private RaycastHit hitInfo = new RaycastHit();
+
         private Color _debugColor = new Color(0.85f, 0.7f, 0.5f, 1.0f);
 
         private Vector3 _landingPosition = new Vector3();
         private Vector3 _facingPosition = new Vector3();
         private Vector3 _velocity = new Vector3();
-
-
-
-        public bool FacingFood
-        {
-            get
-            {
-                _facingPosition.y = _capsuleCollider.center.y;
-
-                Vector3 origin = transform.position + transform.TransformDirection(_facingPosition);
-                Vector3 direction = transform.TransformDirection(Vector3.forward);
-                float magnitude = 1.0f;
-
-                DebugRender.Draw(origin, origin + direction * magnitude, _debugColor);
-
-                return Physics.Raycast(origin, direction, out hitInfo, magnitude);
-            }
-        }
 
         protected void Start()
         {
@@ -62,23 +45,6 @@
             SanityCheck.Check(this, _keyboardInput, _planet, _rigidbody, _capsuleCollider);
 
             _planet.Characters.Add(gameObject);
-        }
-
-        protected void Update()
-        {
-
-
-            if (_keyboardInput.GetAction)
-            {
-                if (FacingFood)
-                {
-                    Debug.Log("Facing food" + hitInfo.transform.gameObject);
-                }
-                else
-                {
-
-                }
-            }
         }
 
         protected void OnCollisionEnter(Collision collision)
@@ -100,8 +66,18 @@
         {
             DebugLogger.Log("current state", State);
 
+            PlayerState eat = PlayerState.None;
+
             switch (State)
             {
+                case PlayerState.None:
+                    if (Land())
+                    {
+                        State = PlayerState.Stand;
+                    }
+
+                    break;
+
                 case PlayerState.Float:
                     Turn();
                     Move();
@@ -126,6 +102,10 @@
                     {
                         State = PlayerState.Float;
                     }
+
+                    eat = Eat();
+
+                    DebugLogger.Log("eat state", eat);
 
                     break;
 
@@ -205,6 +185,36 @@
             //DebugLogger.Log("state up", movingUp);
 
             return rayHit && !movingUp;
+        }
+
+        public PlayerState Eat()
+        {
+            if (_keyboardInput.GetAction)
+            {
+                _facingPosition.y = _capsuleCollider.center.y;
+
+                Vector3 origin = transform.position + transform.TransformDirection(_facingPosition);
+                Vector3 direction = transform.TransformDirection(Vector3.forward);
+                float magnitude = 1.0f;
+
+                DebugRender.Draw(origin, origin + direction * magnitude, _debugColor);
+
+                RaycastHit hitInfo = new RaycastHit();
+
+                if (Physics.Raycast(origin, direction, out hitInfo, magnitude))
+                {
+                    return PlayerState.Eat;
+                }
+                else
+                {
+                    return PlayerState.Reject;
+                }
+            }
+            else
+            {
+                return PlayerState.None;
+            }
+
         }
     }
 }
