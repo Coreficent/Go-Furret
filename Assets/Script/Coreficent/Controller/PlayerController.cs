@@ -105,6 +105,11 @@
 
                     eat = Eat();
 
+                    if (eat == PlayerState.Reject)
+                    {
+                        State = PlayerState.Reject;
+                    }
+
                     DebugLogger.Log("eat state", eat);
 
                     break;
@@ -126,6 +131,8 @@
                     break;
 
                 case PlayerState.Reject:
+                    State = PlayerState.Stand;
+
                     break;
 
                 case PlayerState.Eat:

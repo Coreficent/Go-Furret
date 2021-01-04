@@ -25,6 +25,7 @@
         {
             _playerAnimator.SetBool("Moving", _playerController.State == PlayerController.PlayerState.Move);
             _playerAnimator.SetBool("Jumping", _playerController.State == PlayerController.PlayerState.Float);
+            _playerAnimator.SetBool("Rejecting", _playerController.State == PlayerController.PlayerState.Reject);
         }
 
         public void UpdateExpression(AnimationEvent animationEvent)
