@@ -36,7 +36,6 @@
         private Color _debugColor = new Color(0.85f, 0.7f, 0.5f, 1.0f);
 
         private Vector3 _landingPosition = new Vector3();
-        private Vector3 _facingPosition = new Vector3();
         private Vector3 _velocity = new Vector3();
 
         private float _time = 0.0f;
@@ -200,9 +199,7 @@
         {
             if (_keyboardInput.GetAction)
             {
-                _facingPosition.y = _capsuleCollider.center.y;
-
-                Vector3 origin = transform.position + transform.TransformDirection(_facingPosition);
+                Vector3 origin = transform.position + transform.TransformDirection(_capsuleCollider.center);
                 Vector3 direction = transform.TransformDirection(Vector3.forward);
                 float magnitude = 1.0f;
 
@@ -212,6 +209,8 @@
 
                 if (Physics.Raycast(origin, direction, out hitInfo, magnitude))
                 {
+                    DebugLogger.Log("return eat", hitInfo.transform.gameObject.name);
+
                     return PlayerState.Eat;
                 }
                 else

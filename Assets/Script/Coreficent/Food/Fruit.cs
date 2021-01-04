@@ -15,8 +15,6 @@
         {
             SanityCheck.Check(this, _planet);
 
-            _planet.Entities.Add(gameObject);
-
             foreach (Transform i in transform.Find("Display").transform)
             {
                 SkinnedMeshRenderer skinnedMeshRenderer = i.GetComponent<SkinnedMeshRenderer>();
@@ -26,12 +24,24 @@
                 }
             }
 
+            EnablePhysics();
+
             DebugLogger.Start(this);
         }
 
         protected void Update()
         {
 
+        }
+
+        public void EnablePhysics()
+        {
+            _planet.Entities.Add(gameObject);
+        }
+
+        public void DisablePhysics()
+        {
+            _planet.Entities.Remove(gameObject);
         }
     }
 }
