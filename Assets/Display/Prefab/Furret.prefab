@@ -114,11 +114,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _keyboardInput: {fileID: 0}
   _planet: {fileID: 0}
+  _animator: {fileID: 3846700413900352827}
   _turnSpeed: 90
   _walkSpeed: 1
   _jumpSpeed: 100
-  Speed: 0
-  LookObject: {fileID: 0}
+  State: 1
+  Throttle: 0
 --- !u!135 &5211709597199818775
 SphereCollider:
   m_ObjectHideFlags: 0

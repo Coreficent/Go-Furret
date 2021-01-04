@@ -9,13 +9,15 @@
     {
         [SerializeField] private KeyboardInput _keyboardInput;
         [SerializeField] private Planet _planet;
+        [SerializeField] private Animator _animator;
         [SerializeField] private float _turnSpeed = 90.0f;
         [SerializeField] private float _walkSpeed = 1.0f;
         [SerializeField] private float _jumpSpeed = 100.0f;
 
+
         public enum PlayerState
         {
-            None,
+            Stay,
             Float,
             Stand,
             Move,
@@ -37,16 +39,18 @@
         private Vector3 _facingPosition = new Vector3();
         private Vector3 _velocity = new Vector3();
 
+        private float _time = 0.0f;
+
         protected void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
             _capsuleCollider = GetComponent<CapsuleCollider>();
 
-            SanityCheck.Check(this, _keyboardInput, _planet, _rigidbody, _capsuleCollider);
+            SanityCheck.Check(this, _keyboardInput, _planet, _animator, _rigidbody, _capsuleCollider);
 
             _planet.Characters.Add(gameObject);
         }
-
+        /*
         protected void OnCollisionEnter(Collision collision)
         {
             Debug.Log(collision.gameObject.name);
@@ -61,16 +65,20 @@
         {
             Debug.Log(other.gameObject.name + "An object is still inside of the trigger");
         }
+        */
 
         protected void FixedUpdate()
         {
             DebugLogger.Log("current state", State);
 
-            PlayerState eat = PlayerState.None;
+            //DebugLogger.Log("state animation state", _animator.GetCurrentAnimatorStateInfo(0).IsName("Reject"));
+
+
+            PlayerState nextState = PlayerState.Stay;
 
             switch (State)
             {
-                case PlayerState.None:
+                case PlayerState.Stay:
                     if (Land())
                     {
                         State = PlayerState.Stand;
@@ -103,14 +111,15 @@
                         State = PlayerState.Float;
                     }
 
-                    eat = Eat();
+                    nextState = Eat();
 
-                    if (eat == PlayerState.Reject)
+                    if (nextState == PlayerState.Reject)
                     {
+                        _time = Time.time;
                         State = PlayerState.Reject;
                     }
 
-                    DebugLogger.Log("eat state", eat);
+                    DebugLogger.Log("eat state", nextState);
 
                     break;
 
@@ -131,8 +140,10 @@
                     break;
 
                 case PlayerState.Reject:
-                    State = PlayerState.Stand;
+                    nextState = Reject();
 
+                    DebugLogger.Log("reject return", nextState);
+                    GoTo(nextState);
                     break;
 
                 case PlayerState.Eat:
@@ -142,6 +153,11 @@
                     DebugLogger.Warn("unexpected player state");
                     break;
             }
+        }
+
+        private void GoTo(PlayerState nextState)
+        {
+            State = nextState == PlayerState.Stay ? State : nextState;
         }
 
         private bool Turn()
@@ -174,7 +190,7 @@
             return false;
         }
 
-        public bool Land()
+        private bool Land()
         {
             _landingPosition.y = _capsuleCollider.center.y;
 
@@ -194,7 +210,7 @@
             return rayHit && !movingUp;
         }
 
-        public PlayerState Eat()
+        private PlayerState Eat()
         {
             if (_keyboardInput.GetAction)
             {
@@ -219,9 +235,18 @@
             }
             else
             {
-                return PlayerState.None;
+                return PlayerState.Stay;
+            }
+        }
+
+        private PlayerState Reject()
+        {
+            if (Time.time - _time > 2.0f)
+            {
+                return PlayerState.Stand;
             }
 
+            return PlayerState.Stay;
         }
     }
 }
