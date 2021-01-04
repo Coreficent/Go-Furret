@@ -114,7 +114,7 @@
                     _mouth.SetFloat(_expressionX, 0.0f);
                     _mouth.SetFloat(_expressionY, 0.0f);
                     break;
-                case "Happy":
+                case "Exclaim":
                     _mouth.SetFloat(_expressionX, 1.0f);
                     _mouth.SetFloat(_expressionY, 3.0f);
                     break;
