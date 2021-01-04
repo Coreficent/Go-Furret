@@ -9,7 +9,7 @@
     {
         [SerializeField] private KeyboardInput _keyboardInput;
         [SerializeField] private Planet _planet;
-        [SerializeField] private Animator _animator;
+
         [SerializeField] private float _turnSpeed = 90.0f;
         [SerializeField] private float _walkSpeed = 1.0f;
         [SerializeField] private float _jumpSpeed = 100.0f;
@@ -46,26 +46,10 @@
             _rigidbody = GetComponent<Rigidbody>();
             _capsuleCollider = GetComponent<CapsuleCollider>();
 
-            SanityCheck.Check(this, _keyboardInput, _planet, _animator, _rigidbody, _capsuleCollider);
+            SanityCheck.Check(this, _keyboardInput, _planet, _rigidbody, _capsuleCollider);
 
             _planet.Characters.Add(gameObject);
         }
-        /*
-        protected void OnCollisionEnter(Collision collision)
-        {
-            Debug.Log(collision.gameObject.name);
-        }
-
-        protected void OnTriggerEnter(Collider other)
-        {
-            Debug.Log(other.gameObject.name);
-        }
-
-        private void OnTriggerStay(Collider other)
-        {
-            Debug.Log(other.gameObject.name + "An object is still inside of the trigger");
-        }
-        */
 
         protected void FixedUpdate()
         {
