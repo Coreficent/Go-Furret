@@ -26,6 +26,8 @@
         private Vector3 _landingPosition = new Vector3();
         private Vector3 _facingPosition = new Vector3();
 
+        private RaycastHit hitInfo = new RaycastHit();
+
         // temp
         public GameObject LookObject;
 
@@ -57,7 +59,7 @@
 
                 DebugRender.Draw(origin, origin + direction * magnitude, _debugColor);
 
-                return Physics.Raycast(origin, direction, magnitude);
+                return Physics.Raycast(origin, direction, out hitInfo, magnitude);
             }
         }
 
@@ -78,10 +80,18 @@
                 _rigidbody.AddForce(transform.up * _jumpSpeed);
             }
 
-            if (FacingFood)
+            if (_keyboardInput.GetAction)
             {
-                Debug.Log("Facing food");
+                if (FacingFood)
+                {
+                    Debug.Log("Facing food" + hitInfo.transform.gameObject);
+                }
+                else
+                {
+
+                }
             }
+
         }
 
         protected void FixedUpdate()
@@ -110,10 +120,10 @@
         private void OnTriggerStay(Collider other)
         {
             Debug.Log(other.gameObject.name + "An object is still inside of the trigger");
-            if (_keyboardInput.GetAction)
-            {
-                FaceEntity();
-            }
+            //if (_keyboardInput.GetAction)
+            //{
+            //FaceEntity();
+            //}
         }
 
         public void FaceEntity()

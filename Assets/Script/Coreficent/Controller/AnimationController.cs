@@ -29,29 +29,6 @@
 
         public void UpdateExpression(AnimationEvent animationEvent)
         {
-            /*
-            eye:
-
-            open
-            semi
-            closed
-            wincing
-            angry
-            happy
-            sad
-
-            mouth:
-
-            closed
-            semi
-            open
-            tense
-            happy
-            angry
-             */
-            JsonUtility.FromJson<Dictionary<string, string>>("");
-
-
             string[] data = animationEvent.stringParameter.Split(' ');
 
             if (data.Length != 2)
