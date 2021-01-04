@@ -78,14 +78,14 @@
                     {
                         nextState = PlayerState.Stand;
                     }
-                    
+
                     break;
 
                 case PlayerState.Stand:
-                    
-                    if (Eat() != PlayerState.Stay)
+
+                    if (Inspect() != PlayerState.Stay)
                     {
-                        nextState = Eat();
+                        nextState = Inspect();
                     }
                     if (Turn())
                     {
@@ -128,6 +128,8 @@
                     break;
 
                 case PlayerState.Eat:
+                    nextState = Eat();
+
                     break;
 
                 default:
@@ -194,7 +196,7 @@
             return rayHit && !movingUp;
         }
 
-        private PlayerState Eat()
+        private PlayerState Inspect()
         {
             if (_keyboardInput.GetAction)
             {
@@ -226,6 +228,16 @@
         private PlayerState Reject()
         {
             if (Time.time - _time > 2.0f)
+            {
+                return PlayerState.Stand;
+            }
+
+            return PlayerState.Stay;
+        }
+
+        private PlayerState Eat()
+        {
+            if (Time.time - _time > 5.0f)
             {
                 return PlayerState.Stand;
             }
