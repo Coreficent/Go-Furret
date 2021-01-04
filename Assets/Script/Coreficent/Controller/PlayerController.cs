@@ -78,19 +78,15 @@
                     {
                         nextState = PlayerState.Stand;
                     }
-
+                    
                     break;
 
                 case PlayerState.Stand:
-
-
-                    nextState = Eat();
-
-                    if (nextState == PlayerState.Reject)
+                    
+                    if (Eat() != PlayerState.Stay)
                     {
-                        nextState = PlayerState.Reject;
+                        nextState = Eat();
                     }
-
                     if (Turn())
                     {
                         nextState = PlayerState.Move;
@@ -114,12 +110,12 @@
 
                     if (!turning && !moving)
                     {
-                        State = PlayerState.Stand;
+                        nextState = PlayerState.Stand;
                     }
 
                     if (Jump())
                     {
-                        State = PlayerState.Float;
+                        nextState = PlayerState.Float;
                     }
 
                     break;
