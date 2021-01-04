@@ -25,7 +25,6 @@
 
         public float Speed = 0.0f;
 
-
         private Rigidbody _rigidbody;
         private CapsuleCollider _capsuleCollider;
 
@@ -36,28 +35,7 @@
         private Vector3 _facingPosition = new Vector3();
         private Vector3 _velocity = new Vector3();
 
-        public bool Landing
-        {
-            get
-            {
-                _landingPosition.y = _capsuleCollider.center.y;
 
-                Vector3 origin = transform.position + transform.TransformDirection(_landingPosition);
-                Vector3 direction = -transform.up;
-                float magnitude = _capsuleCollider.height * 0.5f + 0.125f;
-
-                DebugRender.Draw(origin, origin + direction * magnitude, _debugColor);
-
-                bool rayHit = Physics.Raycast(origin, direction, magnitude);
-
-                bool movingUp = Vector3.Dot(Vector3.Normalize(_rigidbody.velocity), transform.up) >= 0.0f;
-
-                //DebugLogger.Log("state ray", rayHit);
-                //DebugLogger.Log("state up", movingUp);
-
-                return rayHit && !movingUp;
-            }
-        }
 
         public bool FacingFood
         {
@@ -124,7 +102,9 @@
             switch (State)
             {
                 case PlayerState.Float:
-                    if (Landing)
+                    Move();
+
+                    if (Land())
                     {
                         State = PlayerState.Land;
                     }
@@ -184,6 +164,26 @@
             }
 
             return false;
+        }
+
+        public bool Land()
+        {
+            _landingPosition.y = _capsuleCollider.center.y;
+
+            Vector3 origin = transform.position + transform.TransformDirection(_landingPosition);
+            Vector3 direction = -transform.up;
+            float magnitude = _capsuleCollider.height * 0.5f + 0.125f;
+
+            DebugRender.Draw(origin, origin + direction * magnitude, _debugColor);
+
+            bool rayHit = Physics.Raycast(origin, direction, magnitude);
+
+            bool movingUp = Vector3.Dot(Vector3.Normalize(_rigidbody.velocity), transform.up) >= 0.0f;
+
+            //DebugLogger.Log("state ray", rayHit);
+            //DebugLogger.Log("state up", movingUp);
+
+            return rayHit && !movingUp;
         }
     }
 }
