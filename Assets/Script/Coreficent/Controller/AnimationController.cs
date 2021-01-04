@@ -23,7 +23,7 @@
 
         protected void Update()
         {
-            _playerAnimator.SetBool("Moving", _playerController.State == PlayerController.PlayerState.Land && _playerController.Speed > 0.5);
+            _playerAnimator.SetBool("Moving", _playerController.State == PlayerController.PlayerState.Move);
             _playerAnimator.SetBool("Jumping", _playerController.State == PlayerController.PlayerState.Float);
         }
 

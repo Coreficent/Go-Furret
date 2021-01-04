@@ -16,14 +16,15 @@
         public enum PlayerState
         {
             Float,
-            Land,
+            Stand,
+            Move,
             Reject,
             Eat
         }
 
         public PlayerState State = PlayerState.Float;
 
-        public float Speed = 0.0f;
+        public float Throttle = 0.0f;
 
         private Rigidbody _rigidbody;
         private CapsuleCollider _capsuleCollider;
@@ -102,20 +103,40 @@
             switch (State)
             {
                 case PlayerState.Float:
+                    Turn();
                     Move();
 
                     if (Land())
                     {
-                        State = PlayerState.Land;
+                        State = PlayerState.Stand;
                     }
 
                     break;
 
-                case PlayerState.Land:
-                    float rotateSpeed = Turn();
-                    float moveSpeed = Move();
+                case PlayerState.Stand:
+                    if (Turn())
+                    {
+                        State = PlayerState.Move;
+                    }
+                    if (Move())
+                    {
+                        State = PlayerState.Move;
+                    }
+                    if (Jump())
+                    {
+                        State = PlayerState.Float;
+                    }
 
-                    Speed = Mathf.Max(rotateSpeed, moveSpeed);
+                    break;
+
+                case PlayerState.Move:
+                    bool turning = Turn();
+                    bool moving = Move();
+
+                    if (!turning && !moving)
+                    {
+                        State = PlayerState.Stand;
+                    }
 
                     if (Jump())
                     {
@@ -136,23 +157,23 @@
             }
         }
 
-        private float Turn()
+        private bool Turn()
         {
             float turnSpeed = (-_keyboardInput.Left + _keyboardInput.Right);
 
             transform.Rotate(Vector3.up * turnSpeed * _turnSpeed * Time.fixedDeltaTime);
 
-            return Mathf.Abs(turnSpeed);
+            return Mathf.Abs(turnSpeed) > 0.0f;
         }
 
-        private float Move()
+        private bool Move()
         {
             float forwardSpeed = _keyboardInput.Forward;
 
             _velocity.z = forwardSpeed * _walkSpeed * Time.fixedDeltaTime;
             _rigidbody.MovePosition(_rigidbody.position + transform.TransformDirection(_velocity));
 
-            return Mathf.Abs(forwardSpeed);
+            return Mathf.Abs(forwardSpeed) > 0.0f;
         }
 
         private bool Jump()
