@@ -3,6 +3,7 @@
     using Coreficent.Input;
     using Coreficent.Physics;
     using Coreficent.Utility;
+    using Food.Fruit;
     using UnityEngine;
 
     public class PlayerController : MonoBehaviour
@@ -137,6 +138,23 @@
             }
 
             GoTo(nextState);
+        }
+
+        private void OnCollisionStay(Collision collision)
+        {
+            Fruit fruit = collision.gameObject.GetComponent<Fruit>();
+            if (fruit)
+            {
+                Vector3 fruitDirection = Vector3.Normalize(collision.gameObject.transform.position - transform.position);
+
+                Vector3 forceVector = Vector3.Normalize(transform.forward - fruitDirection) * 1.0f;
+
+                DebugRender.Draw(transform.position, transform.position + forceVector, _debugColor);
+
+                //DebugRender.Draw(collision.gameObject.transform.position, collision.gameObject.transform.position + forceVector * 5.0f, _debugColor);
+
+                collision.gameObject.GetComponent<Rigidbody>().AddForce(forceVector);
+            }
         }
 
         private void GoTo(PlayerState nextState)
