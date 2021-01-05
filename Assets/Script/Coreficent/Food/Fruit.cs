@@ -35,11 +35,6 @@
             DebugLogger.Start(this);
         }
 
-        protected void Update()
-        {
-
-        }
-
         public override void Feed(float percentage)
         {
             percentage = Mathf.Clamp(percentage, 0.0f, 1.0f);
@@ -49,17 +44,17 @@
 
         private void HideMesh(int index)
         {
-            index = Mathf.Clamp(index, 0, 3);
+            index = Mathf.Clamp(index, 0, _skinnedMeshRenderers.Count - 1);
             _skinnedMeshRenderers[index].enabled = false;
         }
 
         private void ShowMesh(int index)
         {
-            index = Mathf.Clamp(index, 0, 3);
+            index = Mathf.Clamp(index, 0, _skinnedMeshRenderers.Count - 1);
             _skinnedMeshRenderers[index].enabled = true;
         }
 
-        public void Pool()
+        public override void Pool()
         {
             DisablePhysics();
             HideMesh(0);
@@ -70,7 +65,7 @@
             transform.position = Vector3.zero;
         }
 
-        public void Poll()
+        public override void Poll()
         {
             EnablePhysics();
             ShowMesh(0);

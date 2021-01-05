@@ -13,14 +13,15 @@
         private readonly List<GameObject> _fruitVacuum = new List<GameObject>();
         private int _lastVacuumSize = 0;
 
-        private enum CookerState
+        public enum CookerState
         {
             Vacuum,
             Cook,
-            Create
+            Create,
+            Serve
         }
 
-        private CookerState _cookerState = CookerState.Vacuum;
+        public CookerState State = CookerState.Vacuum;
 
         // Start is called before the first frame update
         protected override void Start()
@@ -35,7 +36,7 @@
         // Update is called once per frame
         protected void Update()
         {
-            switch (_cookerState)
+            switch (State)
             {
                 case CookerState.Vacuum:
                     foreach (GameObject fruit in _fruitVacuum)
@@ -57,7 +58,7 @@
 
                         if (fruit.transform.localScale.magnitude < 0.1f)
                         {
-                            _cookerState = CookerState.Create;
+                            State = CookerState.Create;
                         }
                     }
 
@@ -72,8 +73,14 @@
                     else
                     {
                         _bean.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                        _cookerState = CookerState.Vacuum;
+                        State = CookerState.Serve;
                     }
+
+                    break;
+
+                case CookerState.Serve:
+
+                    DebugLogger.Log("serving");
 
                     break;
 
@@ -122,7 +129,7 @@
 
             _bean.transform.localScale *= 0.1f;
 
-            _cookerState = CookerState.Cook;
+            State = CookerState.Cook;
         }
     }
 }

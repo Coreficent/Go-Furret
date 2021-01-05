@@ -28,7 +28,8 @@
             Eat,
             Shake,
             Throw,
-            Cook
+            Cook,
+            Consume
         }
 
         public PlayerState State = PlayerState.Float;
@@ -87,14 +88,7 @@
 
                 case PlayerState.Stand:
 
-                    if (Inspect() != PlayerState.Stay)
-                    {
-                        nextState = Inspect();
-                        if (nextState == PlayerState.Eat)
-                        {
-                            _hitInfo.collider.gameObject.GetComponent<Fruit>().DisablePhysics();
-                        }
-                    }
+
                     if (Turn())
                     {
                         nextState = PlayerState.Move;
@@ -107,8 +101,19 @@
                     {
                         nextState = PlayerState.Float;
                     }
+                    PlayerState inspectState = Inspect();
 
-                    DebugLogger.Log("eat state", nextState);
+                    if (inspectState != PlayerState.Stay)
+                    {
+                        nextState = inspectState;
+
+                        if (nextState == PlayerState.Eat)
+                        {
+                            _hitInfo.collider.gameObject.GetComponent<Fruit>().DisablePhysics();
+                        }
+
+                        DebugLogger.Log("inspect state", nextState);
+                    }
 
                     break;
 
@@ -158,6 +163,10 @@
 
                 case PlayerState.Cook:
                     nextState = Cook();
+                    break;
+
+                case PlayerState.Consume:
+                    nextState = Consume();
                     break;
 
                 default:
@@ -263,8 +272,20 @@
                     }
                     else if (_hitInfo.collider.gameObject.GetComponent<Cooker>())
                     {
-                        _cooker.Cook();
-                        return PlayerState.Cook;
+                        if (_cooker.State == Cooker.CookerState.Vacuum)
+                        {
+                            _cooker.Cook();
+                            DebugLogger.Log("player start cooking");
+                            return PlayerState.Cook;
+                        }
+                        else if (_cooker.State == Cooker.CookerState.Serve)
+                        {
+                            return PlayerState.Consume;
+                        }
+                        else
+                        {
+                            return PlayerState.Stay;
+                        }
                     }
                     else
                     {
@@ -294,18 +315,18 @@
 
         private PlayerState Eat()
         {
-            Fruit fruit = _hitInfo.collider.gameObject.GetComponent<Fruit>();
+            Edible edible = _hitInfo.collider.gameObject.GetComponent<Edible>();
 
             // TODO use the same variable or use a timer class Time.time - _time > 5.0f
             DebugLogger.ToDo("use a timer");
 
             if (Time.time - _time > 5.0f)
             {
-                fruit.Pool();
+                edible.Pool();
                 return PlayerState.Stand;
             }
 
-            fruit.Feed((Time.time - _time) / 5.0f);
+            edible.Feed((Time.time - _time) / 5.0f);
 
             return PlayerState.Stay;
         }
@@ -335,6 +356,18 @@
         }
 
         private PlayerState Cook()
+        {
+            DebugLogger.Log("player cooking");
+
+            if (Time.time - _time > 5.0f)
+            {
+                return PlayerState.Stand;
+            }
+
+            return PlayerState.Stay;
+        }
+
+        private PlayerState Consume()
         {
             if (Time.time - _time > 5.0f)
             {
