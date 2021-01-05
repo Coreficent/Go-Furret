@@ -45,7 +45,20 @@
         {
             if (ApplicationMode.DebugMode == ApplicationMode.ApplicationState.Debug)
             {
-                Debug.Log(messageType + _delimiter + message + _ender);
+                switch (messageType)
+                {
+                    case "Error":
+                        Debug.LogError(messageType + _delimiter + message + _ender);
+                        break;
+
+                    case "Warn":
+                        Debug.LogWarning(messageType + _delimiter + message + _ender);
+                        break;
+
+                    default:
+                        Debug.Log(messageType + _delimiter + message + _ender);
+                        break;
+                }
             }
         }
     }
