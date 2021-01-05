@@ -55,6 +55,10 @@
                         Debug.LogWarning(messageType + _delimiter + message + _ender);
                         break;
 
+                    case "Todo":
+                        Debug.LogWarning(messageType + _delimiter + message + _ender);
+                        break;
+
                     default:
                         Debug.Log(messageType + _delimiter + message + _ender);
                         break;

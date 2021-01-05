@@ -23,6 +23,10 @@
             HideAllMesh();
             ShowMesh(0);
 
+            Pool();
+
+            DebugLogger.Log("pool test started");
+
             DebugLogger.Start(this);
         }
 
@@ -35,22 +39,24 @@
 
         public override void Pool()
         {
-            DebugLogger.ToDo("pool");
+            HideAllMesh();
+            transform.rotation = Quaternion.identity;
+            transform.position = Vector3.zero;
         }
 
         public override void Poll()
         {
-            DebugLogger.ToDo("poll");
+            ShowAllMesh();
         }
 
-        private void ShowMesh(int index)
+        public void ShowMesh(int index)
         {
             HideAllMesh();
             index = Mathf.Clamp(index, 0, _meshRenderers.Count - 1);
             _meshRenderers[index].enabled = true;
         }
 
-        private void HideMesh(int index)
+        public void HideMesh(int index)
         {
             ShowAllMesh();
             index = Mathf.Clamp(index, 0, _meshRenderers.Count - 1);

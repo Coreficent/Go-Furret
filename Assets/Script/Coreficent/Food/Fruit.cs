@@ -30,8 +30,6 @@
                 }
             }
 
-            EnablePhysics();
-
             DebugLogger.Start(this);
         }
 
@@ -42,25 +40,38 @@
             HideMesh(index);
         }
 
-        private void HideMesh(int index)
-        {
-            index = Mathf.Clamp(index, 0, _skinnedMeshRenderers.Count - 1);
-            _skinnedMeshRenderers[index].enabled = false;
-        }
-
-        private void ShowMesh(int index)
+        public void ShowMesh(int index)
         {
             index = Mathf.Clamp(index, 0, _skinnedMeshRenderers.Count - 1);
             _skinnedMeshRenderers[index].enabled = true;
         }
 
+        public void HideMesh(int index)
+        {
+            index = Mathf.Clamp(index, 0, _skinnedMeshRenderers.Count - 1);
+            _skinnedMeshRenderers[index].enabled = false;
+        }
+
+        private void ShowAllMesh()
+        {
+            foreach (SkinnedMeshRenderer meshRenderer in _skinnedMeshRenderers)
+            {
+                meshRenderer.enabled = true;
+            }
+        }
+
+        private void HideAllMesh()
+        {
+            foreach (SkinnedMeshRenderer meshRenderer in _skinnedMeshRenderers)
+            {
+                meshRenderer.enabled = false;
+            }
+        }
+
         public override void Pool()
         {
             DisablePhysics();
-            HideMesh(0);
-            HideMesh(1);
-            HideMesh(2);
-            HideMesh(3);
+            HideAllMesh();
             transform.rotation = Quaternion.identity;
             transform.position = Vector3.zero;
         }
@@ -68,10 +79,7 @@
         public override void Poll()
         {
             EnablePhysics();
-            ShowMesh(0);
-            ShowMesh(1);
-            ShowMesh(2);
-            ShowMesh(3);
+            ShowAllMesh();
         }
 
         public void EnablePhysics()

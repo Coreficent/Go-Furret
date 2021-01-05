@@ -28,7 +28,7 @@
 
             SanityCheck.Check(this, _bean);
 
-            
+            DebugLogger.Log("pool test polled");
 
             DebugLogger.Start(this);
         }
@@ -135,6 +135,7 @@
             DebugLogger.ToDo("disable vaccuum");
 
             _bean.transform.localScale *= 0.1f;
+            _bean.transform.position = transform.position + transform.TransformDirection(new Vector3(0.0f, 1.0f, 0.0f));
 
             State = CookerState.Cook;
         }

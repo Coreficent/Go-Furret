@@ -52,8 +52,6 @@
             _capsuleCollider = GetComponent<CapsuleCollider>();
 
             SanityCheck.Check(this, _keyboardInput, _planet, _cooker, _rigidbody, _capsuleCollider);
-
-            _planet.Characters.Add(gameObject);
         }
 
         protected void FixedUpdate()
