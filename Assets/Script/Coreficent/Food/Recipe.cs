@@ -6,9 +6,6 @@
 
     public class Recipe : MonoBehaviour
     {
-
-
-
         // Start is called before the first frame update
         protected void Start()
         {
@@ -20,5 +17,7 @@
         {
 
         }
+
+        
     }
 }

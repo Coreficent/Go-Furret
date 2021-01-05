@@ -27,7 +27,8 @@
             Reject,
             Eat,
             Shake,
-            Throw
+            Throw,
+            Cook
         }
 
         public PlayerState State = PlayerState.Float;
@@ -151,6 +152,10 @@
 
                     break;
 
+                case PlayerState.Cook:
+                    nextState = Cook();
+                    break;
+
                 default:
                     DebugLogger.Warn("unexpected player state");
                     break;
@@ -252,6 +257,11 @@
                     {
                         return PlayerState.Shake;
                     }
+                    else if (_hitInfo.collider.gameObject.GetComponent<Cooker>())
+                    {
+                        _cooker.Cook();
+                        return PlayerState.Cook;
+                    }
                     else
                     {
                         return PlayerState.Stay;
@@ -328,6 +338,16 @@
         private PlayerState Throw()
         {
             if (Time.time - _time > 0.5f)
+            {
+                return PlayerState.Stand;
+            }
+
+            return PlayerState.Stay;
+        }
+
+        private PlayerState Cook()
+        {
+            if (Time.time - _time > 5.0f)
             {
                 return PlayerState.Stand;
             }
