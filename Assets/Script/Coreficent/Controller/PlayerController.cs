@@ -9,15 +9,6 @@
 
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private KeyboardInput _keyboardInput;
-        [SerializeField] private Planet _planet;
-        [SerializeField] private Cooker _cooker;
-
-        [SerializeField] private float _turnSpeed = 90.0f;
-        [SerializeField] private float _walkSpeed = 1.0f;
-        [SerializeField] private float _jumpSpeed = 100.0f;
-
-
         public enum PlayerState
         {
             Stay,
@@ -29,8 +20,17 @@
             Shake,
             Throw,
             Cook,
-            Consume
+            Consume,
+            Search
         }
+
+        [SerializeField] private KeyboardInput _keyboardInput;
+        [SerializeField] private Planet _planet;
+        [SerializeField] private Cooker _cooker;
+
+        [SerializeField] private float _turnSpeed = 90.0f;
+        [SerializeField] private float _walkSpeed = 1.0f;
+        [SerializeField] private float _jumpSpeed = 100.0f;
 
         public PlayerState State = PlayerState.Float;
 
@@ -170,6 +170,10 @@
                     nextState = Consume();
                     break;
 
+                case PlayerState.Search:
+                    nextState = Search();
+                    break;
+
                 default:
                     DebugLogger.Warn("unexpected player state");
                     break;
@@ -301,7 +305,7 @@
                 }
                 else
                 {
-                    return PlayerState.Reject;
+                    return PlayerState.Search;
                 }
             }
             else
@@ -388,6 +392,16 @@
             }
 
             edible.Feed((Time.time - _time) / 10.0f);
+
+            return PlayerState.Stay;
+        }
+
+        private PlayerState Search()
+        {
+            if (Time.time - _time > 2.0f)
+            {
+                return PlayerState.Stand;
+            }
 
             return PlayerState.Stay;
         }
