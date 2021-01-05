@@ -1,20 +1,23 @@
 ﻿namespace Coreficent.Food
 {
+    using Coreficent.Physics;
     using Coreficent.Utility;
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class Cooker : MonoBehaviour
+    public class Cooker : KinematicObject
     {
         public List<GameObject> FruitVacuum = new List<GameObject>();
         private int _lastVacuumSize = 0;
 
 
         // Start is called before the first frame update
-        protected void Start()
+        protected override void Start()
         {
+            base.Start();
 
+            DebugLogger.Start(this);
         }
 
         // Update is called once per frame
