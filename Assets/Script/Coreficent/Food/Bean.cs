@@ -20,12 +20,7 @@
                 }
             }
 
-            HideAllMesh();
-            ShowMesh(0);
-
             Pool();
-
-            DebugLogger.Log("pool test started");
 
             DebugLogger.Start(this);
         }
@@ -46,7 +41,8 @@
 
         public override void Poll()
         {
-            ShowAllMesh();
+            HideAllMesh();
+            ShowMesh(0);
         }
 
         public void ShowMesh(int index)

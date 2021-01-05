@@ -134,6 +134,7 @@
         {
             DebugLogger.ToDo("disable vaccuum");
 
+            _bean.Poll();
             _bean.transform.localScale *= 0.1f;
             _bean.transform.position = transform.position + transform.TransformDirection(new Vector3(0.0f, 1.0f, 0.0f));
 
