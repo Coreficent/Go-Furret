@@ -20,6 +20,9 @@
                 }
             }
 
+            HideAllMesh();
+            ShowMesh(0);
+
             DebugLogger.Start(this);
         }
 

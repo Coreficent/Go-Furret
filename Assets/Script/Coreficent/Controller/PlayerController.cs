@@ -275,9 +275,15 @@
                     {
                         if (_cooker.State == Cooker.CookerState.Vacuum)
                         {
-                            _cooker.Cook();
-                            DebugLogger.Log("player start cooking");
-                            return PlayerState.Cook;
+                            if (_cooker.CanCook())
+                            {
+                                _cooker.Cook();
+                                return PlayerState.Cook;
+                            }
+                            else
+                            {
+                                return PlayerState.Reject;
+                            }
                         }
                         else if (_cooker.State == Cooker.CookerState.Serve)
                         {

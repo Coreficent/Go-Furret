@@ -126,6 +126,11 @@
             }
         }
 
+        public bool CanCook()
+        {
+            return _fruitVacuum.Count > 0;
+        }
+
         public void Cook()
         {
             DebugLogger.ToDo("disable vaccuum");
