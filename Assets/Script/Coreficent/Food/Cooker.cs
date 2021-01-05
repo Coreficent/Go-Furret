@@ -73,6 +73,13 @@
                     if (_timeController.Passed(_cookTime))
                     {
                         _timeController.Reset();
+
+                        foreach (GameObject fruit in _fruitVacuum)
+                        {
+                            fruit.GetComponent<Fruit>().Pool();
+                        }
+
+                        _fruitVacuum.Clear();
                         State = CookerState.Create;
                     }
 
