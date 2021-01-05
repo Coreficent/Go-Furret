@@ -9,8 +9,11 @@
     {
         [SerializeField] private Bean _bean;
 
+        public float CookTime = 5.0f;
+
         private readonly List<GameObject> _fruitVacuum = new List<GameObject>();
         private int _lastVacuumSize = 0;
+        private float _time = 0.0f;
 
         public enum CookerState
         {
@@ -51,15 +54,17 @@
                     break;
 
                 case CookerState.Cook:
+                    if (Time.time - _time > CookTime)
+                    {
+                        State = CookerState.Create;
+                    }
+
                     foreach (GameObject fruit in _fruitVacuum)
                     {
-                        fruit.transform.localScale *= 0.9f;
-
-                        if (fruit.transform.localScale.magnitude < 0.1f)
-                        {
-                            State = CookerState.Create;
-                        }
+                        fruit.transform.localScale = Vector3.one * (1.0f - ((Time.time - _time) / CookTime));
                     }
+
+                    DebugLogger.Log("ratio", (Time.time - _time) / CookTime);
 
                     break;
 
@@ -138,6 +143,7 @@
             _bean.transform.localScale *= 0.1f;
             _bean.transform.position = transform.position + transform.TransformDirection(new Vector3(0.0f, 1.0f, 0.0f));
 
+            _time = Time.time;
             State = CookerState.Cook;
         }
 

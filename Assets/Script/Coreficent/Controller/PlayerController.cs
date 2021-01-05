@@ -368,7 +368,7 @@
         {
             DebugLogger.Log("player cooking");
 
-            if (Time.time - _time > 5.0f)
+            if (Time.time - _time > _cooker.CookTime)
             {
                 return PlayerState.Stand;
             }
