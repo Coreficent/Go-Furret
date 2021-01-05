@@ -3,7 +3,7 @@
     using Coreficent.Input;
     using Coreficent.Physics;
     using Coreficent.Utility;
-    using Food.Fruit;
+    using Coreficent.Food;
     using UnityEngine;
 
     public class PlayerController : MonoBehaviour

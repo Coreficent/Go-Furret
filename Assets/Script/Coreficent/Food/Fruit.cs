@@ -1,4 +1,4 @@
-﻿namespace Food.Fruit
+﻿namespace Coreficent.Food
 {
     using Coreficent.Physics;
     using Coreficent.Utility;
