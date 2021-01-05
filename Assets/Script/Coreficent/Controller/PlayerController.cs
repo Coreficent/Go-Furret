@@ -5,6 +5,7 @@
     using Coreficent.Utility;
     using Coreficent.Food;
     using UnityEngine;
+    using Coreficent.Plant;
 
     public class PlayerController : MonoBehaviour
     {
@@ -23,7 +24,8 @@
             Stand,
             Move,
             Reject,
-            Eat
+            Eat,
+            Shake
         }
 
         public PlayerState State = PlayerState.Float;
@@ -131,6 +133,11 @@
 
                     break;
 
+                case PlayerState.Shake:
+                    nextState = Shake();
+
+                    break;
+
                 default:
                     DebugLogger.Warn("unexpected player state");
                     break;
@@ -224,9 +231,18 @@
 
                 if (Physics.Raycast(origin, direction, out _hitInfo, magnitude))
                 {
-                    DebugLogger.Log("return eat", _hitInfo.transform.gameObject.name);
-
-                    return PlayerState.Eat;
+                    if (_hitInfo.collider.gameObject.GetComponent<Fruit>())
+                    {
+                        return PlayerState.Eat;
+                    }
+                    else if (_hitInfo.collider.gameObject.GetComponent<PokeTree>())
+                    {
+                        return PlayerState.Shake;
+                    }
+                    else
+                    {
+                        return PlayerState.Stay;
+                    }
                 }
                 else
                 {
@@ -274,6 +290,16 @@
             else if (timePassed > 1.0f)
             {
                 fruit.DisplayState(1);
+            }
+
+            return PlayerState.Stay;
+        }
+
+        private PlayerState Shake()
+        {
+            if (Time.time - _time > 2.0f)
+            {
+                return PlayerState.Stand;
             }
 
             return PlayerState.Stay;
