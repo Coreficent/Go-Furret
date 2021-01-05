@@ -7,9 +7,17 @@
         private static readonly string _delimiter = "::";
         private static readonly string _ender = ".";
 
+        public static void Bug(object message)
+        {
+            Output("Bug", message);
+        }
         public static void ToDo(object message)
         {
             Output("Todo", message);
+        }
+        public static void Construct(object message)
+        {
+            Initialize("Construct", message);
         }
         public static void Awake(object message)
         {

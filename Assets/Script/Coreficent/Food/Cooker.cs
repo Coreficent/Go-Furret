@@ -1,5 +1,6 @@
 ﻿namespace Coreficent.Food
 {
+    using Coreficent.Controller;
     using Coreficent.Physics;
     using Coreficent.Utility;
     using System.Collections.Generic;
@@ -12,8 +13,10 @@
         public float CookTime = 5.0f;
 
         private readonly List<GameObject> _fruitVacuum = new List<GameObject>();
+        private readonly TimeController _timeController = new TimeController();
+
         private int _lastVacuumSize = 0;
-        private float _time = 0.0f;
+
 
         public enum CookerState
         {
@@ -54,17 +57,16 @@
                     break;
 
                 case CookerState.Cook:
-                    if (Time.time - _time > CookTime)
+                    DebugLogger.Bug("cooking in cooker");
+                    if (_timeController.Passed(CookTime))
                     {
                         State = CookerState.Create;
                     }
 
                     foreach (GameObject fruit in _fruitVacuum)
                     {
-                        fruit.transform.localScale = Vector3.one * (1.0f - ((Time.time - _time) / CookTime));
+                        fruit.transform.localScale = Vector3.one * (1.0f - _timeController.TimePassed / CookTime);
                     }
-
-                    DebugLogger.Log("ratio", (Time.time - _time) / CookTime);
 
                     break;
 
@@ -143,7 +145,7 @@
             _bean.transform.localScale *= 0.1f;
             _bean.transform.position = transform.position + transform.TransformDirection(new Vector3(0.0f, 1.0f, 0.0f));
 
-            _time = Time.time;
+            _timeController.Reset();
             State = CookerState.Cook;
         }
 
