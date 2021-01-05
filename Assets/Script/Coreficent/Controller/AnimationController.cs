@@ -30,6 +30,7 @@
             _playerAnimator.SetBool("Shaking", _playerController.State == PlayerController.PlayerState.Shake);
             _playerAnimator.SetBool("Throwing", _playerController.State == PlayerController.PlayerState.Throw);
             _playerAnimator.SetBool("Cooking", _playerController.State == PlayerController.PlayerState.Cook);
+            _playerAnimator.SetBool("Consuming", _playerController.State == PlayerController.PlayerState.Consume);
         }
 
         public void UpdateExpression(AnimationEvent animationEvent)
