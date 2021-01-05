@@ -16,8 +16,8 @@
         private readonly TimeController _timeController = new TimeController();
 
         private int _lastVacuumSize = 0;
-        private float _cookTime = 5.0f;
-        private float _createTime = 5.0f;
+        private float _cookTime = 4.0f;
+        private float _createTime = 2.0f;
 
         public enum CookerState
         {
@@ -65,10 +65,9 @@
                 case CookerState.Cook:
                     DebugLogger.Bug("cooking in cooker");
 
-
                     foreach (GameObject fruit in _fruitVacuum)
                     {
-                        fruit.transform.localScale = Vector3.one * (1.0f - _timeController.TimePassed / _cookTime);
+                        fruit.transform.localScale = Vector3.one * (1.0f - _timeController.Progress(_cookTime));
                     }
 
                     if (_timeController.Passed(_cookTime))
@@ -81,7 +80,7 @@
 
                 case CookerState.Create:
 
-                    _bean.transform.localScale = Vector3.one * (_timeController.TimePassed / _cookTime);
+                    _bean.transform.localScale = Vector3.one * _timeController.Progress(_createTime);
 
                     if (_timeController.Passed(_createTime))
                     {

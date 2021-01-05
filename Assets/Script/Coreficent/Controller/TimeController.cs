@@ -27,5 +27,10 @@
         {
             return TimePassed > time;
         }
+
+        public float Progress(float time)
+        {
+            return TimePassed / time;
+        }
     }
 }
