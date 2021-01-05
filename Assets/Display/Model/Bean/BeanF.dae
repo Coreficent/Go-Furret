@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <created>2016-11-29T17:45:21Z</created>
+    <modified>2016-11-29T17:45:21Z</modified>
+  </asset>
+  <library_images>
+    <image id="Image">
+      <init_from>pb0009_00_t01.tga.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="VisualMaterial" name="pb0009_00_t01_tga">
+      <instance_effect url="#Effect"/>
+      <extra>
+        <technique profile="FCOLLADA">
+          <user_properties>pb0009_00_t01.tga.png</user_properties>
+        </technique>
+      </extra>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="Effect" name="pb0009_00_t01_tga">
+      <profile_COMMON>
+        <newparam sid="Image-surface">
+          <surface type="2D">
+            <init_from>Image</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="Image-sampler">
+          <sampler2D>
+            <source>Image-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="Image-sampler" texcoord=""/>
+            </diffuse>
+            <specular>
+              <color>1 1 1 1</color>
+            </specular>
+            <shininess>
+              <float>0</float>
+            </shininess>
+            <transparent opaque="A_ONE">
+              <color>0 0 0 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1.55</float>
+            </index_of_refraction>
+          </phong>
+          <extra>
+            <technique profile="FCOLLADA">
+              <spec_level>
+                <float>0</float>
+              </spec_level>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="FCOLLADA">
+          <user_properties>pb0009_00_t01.tga.png</user_properties>
+        </technique>
+      </extra>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="Geometry" name="mesh0">
+      <mesh>
+        <source id="GeometrySource" name="mesh0Pos">
+          <float_array id="GeometrySource-array" count="96">0.161762 0.120654 -1.68305 -0.802803 0.238867 -0.560012 -0.630264 0.966825 -0.99029 0.161767 0.966825 -1.45059 1.29646 0.966825 -1.00796 1.4246 -0.126356 -1.20567 0.141181 -0.220122 -0.901578 -0.430535 -0.425965 -0.587859 -0.132195 -0.6105 -0.203066 0.170988 1.68388 -0.226047 -0.864517 0.966824 0.380924 1.29646 0.966825 -1.00796 1.43 0.921033 0.167248 1.86379 0.37248 -0.097508 1.4246 -0.126356 -1.20567 1.47665 0.202873 0.549791 0.196526 0.966824 1.04694 1.56275 -0.266528 0.485254 0.196526 0.255673 1.33813 -1.20529 0.441866 0.614225 -1.11293 0.735758 0.082446 -1.20529 0.441866 0.614225 0.196526 -0.266528 0.851332 0.667787 -0.6105 -0.444785 0.196526 -0.6105 0.175932 -0.325748 -0.6105 0.035989 0.969417 -0.55128 -0.003254 0.196526 -0.266528 0.851332 -0.84239 -0.266528 0.572955 1.56275 -0.266528 0.485254 1.86379 0.37248 -0.097508 -0.84239 -0.266528 0.572955</float_array>
+          <technique_common>
+            <accessor source="#GeometrySource-array" count="32" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="GeometrySource1" name="mesh0Nrm">
+          <float_array id="GeometrySource1-array" count="96">-0.225697 -0.336988 -0.914057 -0.863115 -0.352018 -0.362099 -0.718644 0.475515 -0.507382 -0.064348 0.618999 -0.782751 0.603647 0.578233 -0.548869 0.545512 -0.668798 -0.5051 -0.019667 -0.876546 -0.480916 -0.395089 -0.833107 -0.387088 -0.079186 -0.963888 -0.254263 -0.022707 0.99906 -0.036932 -0.593768 0.756491 0.274154 0.603647 0.578233 -0.548869 0.645991 0.673219 0.359822 0.978234 0.175208 0.111179 0.545512 -0.668798 -0.5051 0.650157 0.160777 0.742595 0.156769 0.651204 0.742534 0.663216 -0.643205 0.382665 0.007059 -0.087746 0.996118 -0.865599 -0.096907 0.491271 -0.929157 0.325467 -0.175326 -0.865599 -0.096907 0.491271 -0.069934 -0.671945 0.737292 0.05604 -0.964506 -0.258046 -0.003008 -0.971168 0.238376 -0.454124 -0.890766 -0.017524 0.297799 -0.952968 0.056286 -0.069934 -0.671945 0.737292 -0.537304 -0.771843 0.339945 0.663216 -0.643205 0.382665 0.978234 0.175208 0.111179 -0.537304 -0.771843 0.339945</float_array>
+          <technique_common>
+            <accessor source="#GeometrySource1-array" count="32" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="GeometrySource2" name="mesh0UV">
+          <float_array id="GeometrySource2-array" count="64">0.499339 0.548752 0.49832 0.578325 0.484043 0.567597 0.479174 0.545323 0.495609 0.513885 0.524332 0.527837 0.514241 0.558077 0.512768 0.572277 0.523748 0.574541 0.460924 0.572929 0.476712 0.600366 0.442148 0.544006 0.43009 0.571042 0.413918 0.564189 0.414985 0.52887 0.416993 0.585079 0.448692 0.595582 0.406027 0.58955 0.440467 0.607014 0.473511 0.618194 0.486573 0.59528 0.495261 0.607996 0.431898 0.618669 0.531765 0.557146 0.535275 0.575815 0.523607 0.581813 0.544267 0.558114 0.548084 0.589838 0.517801 0.601536 0.56475 0.552784 0.560502 0.528341 0.457273 0.63096</float_array>
+          <technique_common>
+            <accessor source="#GeometrySource2-array" count="32" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Geometry-vertices">
+          <input semantic="POSITION" source="#GeometrySource"/>
+          <input semantic="NORMAL" source="#GeometrySource1"/>
+          <input semantic="TEXCOORD" source="#GeometrySource2"/>
+        </vertices>
+        <triangles material="VisualMaterial0" count="46">
+          <input semantic="VERTEX" source="#Geometry-vertices" offset="0"/>
+          <p>0 1 2 3 0 2 3 4 0 0 4 5 5 6 0 7 0 6 1 0 7 6 8 7 3 2 9 2 10 9 3 9 11 11 9 12 13 11 12 14 11 13 15 13 12 12 16 15 9 10 16 12 9 16 17 13 15 18 15 16 19 16 10 18 16 19 20 10 2 20 2 1 20 1 21 10 20 21 17 15 22 22 15 18 19 22 18 23 6 5 6 23 8 8 23 24 8 25 7 25 1 7 24 25 8 26 23 5 24 23 26 26 27 24 28 24 27 25 28 1 1 28 21 24 28 25 29 26 5 29 27 26 29 5 30 31 22 19</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="VisualSceneNode" name="rdmscene">
+      <node id="VisualSceneNode1" name="mesh0" type="NODE">
+        <matrix>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#Geometry">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="VisualMaterial0" target="#VisualMaterial"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#VisualSceneNode"/>
+  </scene>
+</COLLADA>
