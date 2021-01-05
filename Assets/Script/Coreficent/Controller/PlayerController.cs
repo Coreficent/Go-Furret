@@ -224,7 +224,7 @@
 
         private bool Jump()
         {
-            if (_keyboardInput.JumpIsDown)
+            if (_keyboardInput.GetJump)
             {
                 _rigidbody.AddForce(transform.up * _jumpSpeed);
                 return true;

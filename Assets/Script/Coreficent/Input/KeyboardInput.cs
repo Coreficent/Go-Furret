@@ -61,9 +61,9 @@
             get { return _cameraRight.Axis; }
         }
 
-        public bool JumpIsDown
+        public bool GetJump
         {
-            get { return _jump.IsDown; }
+            get { return _jump.GetKey; }
         }
 
         public bool GetAction
