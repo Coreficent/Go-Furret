@@ -40,7 +40,7 @@
 
                 other.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                other.gameObject.GetComponent<SphereCollider>().enabled = false;
+                other.gameObject.GetComponent<Collider>().enabled = false;
 
                 //other.gameObject.GetComponent<Animator>().Play("Cook");
 
