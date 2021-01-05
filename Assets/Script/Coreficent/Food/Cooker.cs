@@ -118,6 +118,9 @@
             }
             else
             {
+                DebugLogger.Log("_lastVacuumSize", _lastVacuumSize);
+                DebugLogger.Log("_fruitVacuum.Count", _fruitVacuum.Count);
+
                 _lastVacuumSize = _fruitVacuum.Count;
                 return true;
             }
