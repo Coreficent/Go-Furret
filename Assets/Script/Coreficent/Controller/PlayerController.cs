@@ -32,10 +32,9 @@
 
         private Rigidbody _rigidbody;
         private CapsuleCollider _capsuleCollider;
-
+        private RaycastHit _hitInfo;
 
         private Color _debugColor = new Color(0.85f, 0.7f, 0.5f, 1.0f);
-
         private Vector3 _landingPosition = new Vector3();
         private Vector3 _velocity = new Vector3();
 
@@ -223,11 +222,9 @@
 
                 DebugRender.Draw(origin, origin + direction * magnitude, _debugColor);
 
-                RaycastHit hitInfo = new RaycastHit();
-
-                if (Physics.Raycast(origin, direction, out hitInfo, magnitude))
+                if (Physics.Raycast(origin, direction, out _hitInfo, magnitude))
                 {
-                    DebugLogger.Log("return eat", hitInfo.transform.gameObject.name);
+                    DebugLogger.Log("return eat", _hitInfo.transform.gameObject.name);
 
                     return PlayerState.Eat;
                 }
@@ -254,9 +251,29 @@
 
         private PlayerState Eat()
         {
+            float timePassed = Time.time - _time;
+
+            Fruit fruit = _hitInfo.collider.gameObject.GetComponent<Fruit>();
+
             if (Time.time - _time > 5.0f)
             {
                 return PlayerState.Stand;
+            }
+            else if (timePassed > 4.0f)
+            {
+                fruit.DisplayState(4);
+            }
+            else if (timePassed > 3.0f)
+            {
+                fruit.DisplayState(3);
+            }
+            else if (timePassed > 2.0f)
+            {
+                fruit.DisplayState(2);
+            }
+            else if (timePassed > 1.0f)
+            {
+                fruit.DisplayState(1);
             }
 
             return PlayerState.Stay;
