@@ -40,29 +40,44 @@
 
         }
 
-        public void DisplayState(int state)
+        public void HideMesh(int index)
         {
-            DisablePhysics();
-            for (int i = 0; i < Mathf.Min(state, 4); ++i)
-            {
-                _skinnedMeshRenderers[i].enabled = false;
-            }
-            if (state == 4)
-            {
-                Pool();
-            }
+            index = Mathf.Clamp(index, 0, 3);
+            _skinnedMeshRenderers[index].enabled = false;
+        }
+
+        public void ShowMesh(int index)
+        {
+            index = Mathf.Clamp(index, 0, 3);
+            _skinnedMeshRenderers[index].enabled = true;
         }
 
         public void Pool()
         {
             DisablePhysics();
+            HideMesh(0);
+            HideMesh(1);
+            HideMesh(2);
+            HideMesh(3);
             transform.rotation = Quaternion.identity;
             transform.position = Vector3.zero;
+        }
+
+        public void Poll()
+        {
+            EnablePhysics();
+            ShowMesh(0);
+            ShowMesh(1);
+            ShowMesh(2);
+            ShowMesh(3);
         }
 
         public void EnablePhysics()
         {
             _planet.Entities.Add(gameObject);
+            _rigidbody.constraints = RigidbodyConstraints.None;
+            _rigidbody.isKinematic = false;
+            _collider.enabled = true;
         }
 
         public void DisablePhysics()

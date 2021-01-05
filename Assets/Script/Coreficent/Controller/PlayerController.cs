@@ -277,20 +277,23 @@
             }
             else if (timePassed > 4.0f)
             {
-                fruit.DisplayState(4);
+                fruit.HideMesh(3);
+                fruit.Pool();
             }
             else if (timePassed > 3.0f)
             {
-                fruit.DisplayState(3);
+                fruit.HideMesh(2);
             }
             else if (timePassed > 2.0f)
             {
-                fruit.DisplayState(2);
+                fruit.HideMesh(1);
             }
             else if (timePassed > 1.0f)
             {
-                fruit.DisplayState(1);
+                fruit.HideMesh(0);
+                fruit.DisablePhysics();
             }
+            
 
             return PlayerState.Stay;
         }
@@ -299,6 +302,10 @@
         {
             if (Time.time - _time > 2.0f)
             {
+                PokeTree pokeTree = _hitInfo.collider.gameObject.GetComponent<PokeTree>();
+
+                pokeTree.SpawnFruitNear(gameObject);
+
                 return PlayerState.Stand;
             }
 
