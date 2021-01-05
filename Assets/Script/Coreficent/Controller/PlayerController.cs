@@ -90,6 +90,10 @@
                     if (Inspect() != PlayerState.Stay)
                     {
                         nextState = Inspect();
+                        if (nextState == PlayerState.Eat)
+                        {
+                            _hitInfo.collider.gameObject.GetComponent<Fruit>().DisablePhysics();
+                        }
                     }
                     if (Turn())
                     {
@@ -290,33 +294,18 @@
 
         private PlayerState Eat()
         {
-            float timePassed = Time.time - _time;
-
             Fruit fruit = _hitInfo.collider.gameObject.GetComponent<Fruit>();
+
+            // TODO use the same variable or use a timer class Time.time - _time > 5.0f
+            DebugLogger.ToDo("use a timer");
 
             if (Time.time - _time > 5.0f)
             {
+                fruit.Pool();
                 return PlayerState.Stand;
             }
-            else if (timePassed > 4.0f)
-            {
-                fruit.HideMesh(3);
-                fruit.Pool();
-            }
-            else if (timePassed > 3.0f)
-            {
-                fruit.HideMesh(2);
-            }
-            else if (timePassed > 2.0f)
-            {
-                fruit.HideMesh(1);
-            }
-            else if (timePassed > 1.0f)
-            {
-                fruit.HideMesh(0);
-                fruit.DisablePhysics();
-            }
 
+            fruit.Feed((Time.time - _time) / 5.0f);
 
             return PlayerState.Stay;
         }

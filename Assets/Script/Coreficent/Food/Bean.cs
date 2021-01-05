@@ -17,5 +17,10 @@
         {
             
         }
+
+        public override void Feed(float percentage)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

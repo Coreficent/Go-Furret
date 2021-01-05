@@ -40,13 +40,20 @@
 
         }
 
-        public void HideMesh(int index)
+        public override void Feed(float percentage)
+        {
+            percentage = Mathf.Clamp(percentage, 0.0f, 1.0f);
+            int index = (int)(percentage * _skinnedMeshRenderers.Count);
+            HideMesh(index);
+        }
+
+        private void HideMesh(int index)
         {
             index = Mathf.Clamp(index, 0, 3);
             _skinnedMeshRenderers[index].enabled = false;
         }
 
-        public void ShowMesh(int index)
+        private void ShowMesh(int index)
         {
             index = Mathf.Clamp(index, 0, 3);
             _skinnedMeshRenderers[index].enabled = true;

@@ -1,12 +1,9 @@
 ﻿namespace Coreficent.Food
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
 
-    public class Edible : MonoBehaviour
+    public abstract class Edible : MonoBehaviour
     {
+        public abstract void Feed(float percentage);
     }
-
 }
-
