@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class Fruit : MonoBehaviour
+    public class Fruit : Edible
     {
         [SerializeField] private Planet _planet;
 
