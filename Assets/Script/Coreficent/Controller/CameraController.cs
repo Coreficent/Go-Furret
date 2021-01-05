@@ -13,9 +13,10 @@
         public float VerticalOffset = 1.0f;
         public float RotationSpeed = 90.0f;
 
-        private float _radian = 0.0f;
         private Vector3 _verticalVector = new Vector3();
         private Vector3 _horizontalVector = new Vector3();
+        private Color _debugColor = Color.white;
+        private float _radian = 0.0f;
 
         protected void Start()
         {
@@ -41,8 +42,8 @@
 
             Vector3 horizontalPosition = _player.transform.TransformVector(_horizontalVector);
 
-            DebugRender.Draw(_player.transform.position, verticalPosition, Color.black);
-            DebugRender.Draw(verticalPosition, verticalPosition + horizontalPosition, Color.black);
+            DebugRender.Draw(_player.transform.position, verticalPosition, _debugColor);
+            DebugRender.Draw(verticalPosition, verticalPosition + horizontalPosition, _debugColor);
 
             transform.position = verticalPosition + horizontalPosition;
         }
