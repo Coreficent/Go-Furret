@@ -131,5 +131,10 @@
 
             State = CookerState.Cook;
         }
+
+        public void Feed(float percentage)
+        {
+            _bean.Feed(percentage);
+        }
     }
 }

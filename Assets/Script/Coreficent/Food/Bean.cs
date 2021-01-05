@@ -23,6 +23,23 @@
             DebugLogger.Start(this);
         }
 
+        public override void Feed(float percentage)
+        {
+            percentage = Mathf.Clamp(percentage, 0.0f, 1.0f);
+            int index = (int)(percentage * _meshRenderers.Count);
+            ShowMesh(index);
+        }
+
+        public override void Pool()
+        {
+            DebugLogger.ToDo("pool");
+        }
+
+        public override void Poll()
+        {
+            DebugLogger.ToDo("poll");
+        }
+
         private void ShowMesh(int index)
         {
             HideAllMesh();
@@ -51,23 +68,6 @@
             {
                 meshRenderer.enabled = false;
             }
-        }
-
-        public override void Feed(float percentage)
-        {
-            percentage = 1.0f - Mathf.Clamp(percentage, 0.0f, 1.0f);
-            int index = (int)(percentage * _meshRenderers.Count);
-            ShowMesh(index);
-        }
-
-        public override void Pool()
-        {
-            DebugLogger.ToDo("pool");
-        }
-
-        public override void Poll()
-        {
-            DebugLogger.ToDo("poll");
         }
     }
 }
