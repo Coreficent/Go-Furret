@@ -10,13 +10,14 @@
     {
         [SerializeField] private Bean _bean;
 
-        public float CookTime = 5.0f;
+
 
         private readonly List<GameObject> _fruitVacuum = new List<GameObject>();
         private readonly TimeController _timeController = new TimeController();
 
         private int _lastVacuumSize = 0;
-
+        private float _cookTime = 5.0f;
+        private float _createTime = 5.0f;
 
         public enum CookerState
         {
@@ -27,6 +28,11 @@
         }
 
         public CookerState State = CookerState.Vacuum;
+
+        public float RecipeTime
+        {
+            get { return _cookTime + _createTime; }
+        }
 
         protected override void Start()
         {
@@ -58,27 +64,27 @@
 
                 case CookerState.Cook:
                     DebugLogger.Bug("cooking in cooker");
-                    if (_timeController.Passed(CookTime))
-                    {
-                        State = CookerState.Create;
-                    }
+
 
                     foreach (GameObject fruit in _fruitVacuum)
                     {
-                        fruit.transform.localScale = Vector3.one * (1.0f - _timeController.TimePassed / CookTime);
+                        fruit.transform.localScale = Vector3.one * (1.0f - _timeController.TimePassed / _cookTime);
+                    }
+
+                    if (_timeController.Passed(_cookTime))
+                    {
+                        _timeController.Reset();
+                        State = CookerState.Create;
                     }
 
                     break;
 
                 case CookerState.Create:
 
-                    if (_bean.transform.localScale.x < 1.0f)
+                    _bean.transform.localScale = Vector3.one * (_timeController.TimePassed / _cookTime);
+
+                    if (_timeController.Passed(_createTime))
                     {
-                        _bean.transform.localScale *= 1.1f;
-                    }
-                    else
-                    {
-                        _bean.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                         State = CookerState.Serve;
                     }
 
