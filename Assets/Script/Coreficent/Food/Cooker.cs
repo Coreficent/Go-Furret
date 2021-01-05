@@ -8,13 +8,16 @@
 
     public class Cooker : KinematicObject
     {
-        public List<GameObject> FruitVacuum = new List<GameObject>();
+        [SerializeField] private Bean _bean;
+
+        private readonly List<GameObject> _fruitVacuum = new List<GameObject>();
         private int _lastVacuumSize = 0;
 
         private enum CookerState
         {
             Vacuum,
-            Cook
+            Cook,
+            Create
         }
 
         private CookerState _cookerState = CookerState.Vacuum;
@@ -23,6 +26,8 @@
         protected override void Start()
         {
             base.Start();
+
+            SanityCheck.Check(this, _bean);
 
             DebugLogger.Start(this);
         }
@@ -33,7 +38,7 @@
             switch (_cookerState)
             {
                 case CookerState.Vacuum:
-                    foreach (GameObject fruit in FruitVacuum)
+                    foreach (GameObject fruit in _fruitVacuum)
                     {
                         float maximumHeightScaler = 1.0f;
                         float heightOffsetScaler = 0.5f;
@@ -46,14 +51,28 @@
                     break;
 
                 case CookerState.Cook:
-                    foreach (GameObject fruit in FruitVacuum)
+                    foreach (GameObject fruit in _fruitVacuum)
                     {
                         fruit.transform.localScale *= 0.9f;
 
                         if (fruit.transform.localScale.magnitude < 0.1f)
                         {
-                            _cookerState = CookerState.Vacuum;
+                            _cookerState = CookerState.Create;
                         }
+                    }
+
+                    break;
+
+                case CookerState.Create:
+
+                    if (_bean.transform.localScale.x < 1.0f)
+                    {
+                        _bean.transform.localScale *= 1.1f;
+                    }
+                    else
+                    {
+                        _bean.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                        _cookerState = CookerState.Vacuum;
                     }
 
                     break;
@@ -72,7 +91,7 @@
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 other.gameObject.GetComponent<Collider>().enabled = false;
 
-                FruitVacuum.Add(other.gameObject);
+                _fruitVacuum.Add(other.gameObject);
             }
         }
 
@@ -80,19 +99,19 @@
         {
             if (other.gameObject.GetComponent<Fruit>())
             {
-                FruitVacuum.Remove(other.gameObject);
+                _fruitVacuum.Remove(other.gameObject);
             }
         }
 
         public bool FruitVacuumSizeChanged()
         {
-            if (_lastVacuumSize == FruitVacuum.Count)
+            if (_lastVacuumSize == _fruitVacuum.Count)
             {
                 return false;
             }
             else
             {
-                _lastVacuumSize = FruitVacuum.Count;
+                _lastVacuumSize = _fruitVacuum.Count;
                 return true;
             }
         }
@@ -100,6 +119,9 @@
         public void Cook()
         {
             DebugLogger.ToDo("disable vaccuum");
+
+            _bean.transform.localScale *= 0.1f;
+
             _cookerState = CookerState.Cook;
         }
     }

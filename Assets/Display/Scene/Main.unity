@@ -1165,6 +1165,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36d8d7e7cba29574f891780d2ca412c3, type: 3}
+--- !u!1 &1017166339 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6228201026788130845, guid: 02e78487cbd8a2448b80fbdf18e62dd8,
+    type: 3}
+  m_PrefabInstance: {fileID: 6228201026861578782}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1017166341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017166339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac94686de19b54439cc31c8f121cd19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1200558546
 GameObject:
   m_ObjectHideFlags: 0
@@ -2124,5 +2142,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cooker
       objectReference: {fileID: 0}
+    - target: {fileID: 8879148405978491855, guid: d7f8feb3086b2b94ea0660b07a4fb0ec,
+        type: 3}
+      propertyPath: _bean
+      value: 
+      objectReference: {fileID: 1017166341}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7f8feb3086b2b94ea0660b07a4fb0ec, type: 3}
