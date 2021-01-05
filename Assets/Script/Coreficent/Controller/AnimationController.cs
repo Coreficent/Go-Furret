@@ -28,6 +28,7 @@
             _playerAnimator.SetBool("Rejecting", _playerController.State == PlayerController.PlayerState.Reject);
             _playerAnimator.SetBool("Eating", _playerController.State == PlayerController.PlayerState.Eat);
             _playerAnimator.SetBool("Shaking", _playerController.State == PlayerController.PlayerState.Shake);
+            _playerAnimator.SetBool("Throwing", _playerController.State == PlayerController.PlayerState.Throw);
         }
 
         public void UpdateExpression(AnimationEvent animationEvent)

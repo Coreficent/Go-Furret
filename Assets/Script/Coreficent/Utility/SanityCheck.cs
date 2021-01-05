@@ -17,13 +17,17 @@
                     if (i == null || i.ToString() == "null")
                     {
                         sanityCheckPassed = false;
-                        Debug.Log(owner + _delimiter + "has an unexpected null variable in" + _delimiter + SceneManager.GetActiveScene().name);
+                        DebugLogger.Warn(owner + _delimiter + "has an unexpected null variable in" + _delimiter + SceneManager.GetActiveScene().name);
                     }
                 }
 
                 if (sanityCheckPassed)
                 {
-                    Debug.Log(owner + _delimiter + "sanity check passed.");
+                    DebugLogger.Log(owner + _delimiter + "sanity check passed.");
+                }
+                else
+                {
+                    DebugLogger.Warn(owner + _delimiter + "sanity check failed.");
                 }
             }
         }

@@ -7,7 +7,9 @@
 
     public class Cooker : MonoBehaviour
     {
-        private List<GameObject> _fruitVacuum = new List<GameObject>();
+        public List<GameObject> FruitVacuum = new List<GameObject>();
+        private int _lastVacuumSize = 0;
+
 
         // Start is called before the first frame update
         protected void Start()
@@ -18,7 +20,7 @@
         // Update is called once per frame
         protected void Update()
         {
-            foreach (GameObject fruit in _fruitVacuum)
+            foreach (GameObject fruit in FruitVacuum)
             {
                 float maximumHeightScaler = 1.0f;
                 float heightOffsetScaler = 0.5f;
@@ -32,30 +34,34 @@
 
         protected void OnTriggerEnter(Collider other)
         {
-            DebugLogger.Log("trigger exit", other.gameObject.name);
-
             if (other.gameObject.GetComponent<Fruit>())
             {
-                //other.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-
                 other.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 other.gameObject.GetComponent<Collider>().enabled = false;
 
-                //other.gameObject.GetComponent<Animator>().Play("Cook");
-
-                _fruitVacuum.Add(other.gameObject);
+                FruitVacuum.Add(other.gameObject);
             }
         }
 
         protected void OnTriggerExit(Collider other)
         {
-            DebugLogger.Log("trigger exit", other.gameObject.name);
-
             if (other.gameObject.GetComponent<Fruit>())
             {
-                //other.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-                _fruitVacuum.Remove(other.gameObject);
+                FruitVacuum.Remove(other.gameObject);
+            }
+        }
+
+        public bool FruitVacuumSizeChanged()
+        {
+            if (_lastVacuumSize == FruitVacuum.Count)
+            {
+                return false;
+            }
+            else
+            {
+                _lastVacuumSize = FruitVacuum.Count;
+                return true;
             }
         }
     }

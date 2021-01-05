@@ -11,6 +11,7 @@
     {
         [SerializeField] private KeyboardInput _keyboardInput;
         [SerializeField] private Planet _planet;
+        [SerializeField] private Cooker _cooker;
 
         [SerializeField] private float _turnSpeed = 90.0f;
         [SerializeField] private float _walkSpeed = 1.0f;
@@ -25,7 +26,8 @@
             Move,
             Reject,
             Eat,
-            Shake
+            Shake,
+            Throw
         }
 
         public PlayerState State = PlayerState.Float;
@@ -47,7 +49,7 @@
             _rigidbody = GetComponent<Rigidbody>();
             _capsuleCollider = GetComponent<CapsuleCollider>();
 
-            SanityCheck.Check(this, _keyboardInput, _planet, _rigidbody, _capsuleCollider);
+            SanityCheck.Check(this, _keyboardInput, _planet, _cooker, _rigidbody, _capsuleCollider);
 
             _planet.Characters.Add(gameObject);
         }
@@ -119,6 +121,11 @@
                         nextState = PlayerState.Float;
                     }
 
+                    if (_cooker.FruitVacuumSizeChanged())
+                    {
+                        nextState = PlayerState.Throw;
+                    }
+
                     break;
 
                 case PlayerState.Reject:
@@ -135,6 +142,12 @@
 
                 case PlayerState.Shake:
                     nextState = Shake();
+
+                    break;
+
+                case PlayerState.Throw:
+                    Move();
+                    nextState = Throw();
 
                     break;
 
@@ -293,7 +306,7 @@
                 fruit.HideMesh(0);
                 fruit.DisablePhysics();
             }
-            
+
 
             return PlayerState.Stay;
         }
@@ -306,6 +319,16 @@
 
                 pokeTree.SpawnFruitNear(gameObject);
 
+                return PlayerState.Stand;
+            }
+
+            return PlayerState.Stay;
+        }
+
+        private PlayerState Throw()
+        {
+            if (Time.time - _time > 0.5f)
+            {
                 return PlayerState.Stand;
             }
 
