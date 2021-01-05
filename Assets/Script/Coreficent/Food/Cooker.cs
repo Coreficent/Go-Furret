@@ -105,9 +105,7 @@
         {
             if (other.gameObject.GetComponent<Fruit>())
             {
-                other.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-                other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                other.gameObject.GetComponent<Collider>().enabled = false;
+                other.gameObject.GetComponent<Fruit>().DisablePhysics();
 
                 _fruitVacuum.Add(other.gameObject);
             }

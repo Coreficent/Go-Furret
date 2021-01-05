@@ -43,6 +43,8 @@
         {
             HideAllMesh();
             ShowMesh(0);
+            transform.rotation = Quaternion.identity;
+            transform.localScale = Vector3.one;
         }
 
         public void ShowMesh(int index)

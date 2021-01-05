@@ -80,6 +80,8 @@
         {
             EnablePhysics();
             ShowAllMesh();
+            transform.rotation = Quaternion.identity;
+            transform.localScale = Vector3.one;
         }
 
         public void EnablePhysics()
