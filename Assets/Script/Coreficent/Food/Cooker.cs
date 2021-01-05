@@ -20,9 +20,11 @@
         {
             foreach (GameObject fruit in _fruitVacuum)
             {
-                Vector3 cookerTop = transform.position + transform.up;
-                float distance = Vector3.Magnitude(cookerTop - fruit.transform.position);
-                Vector3 destination = transform.position + transform.up * distance;
+                float maximumHeightScaler = 1.0f;
+                float heightOffsetScaler = 0.5f;
+
+                float distance = Vector2.SqrMagnitude(new Vector2(transform.position.x - fruit.transform.position.x, transform.position.z - fruit.transform.position.z));
+                Vector3 destination = transform.position + transform.up * distance * maximumHeightScaler + transform.up * heightOffsetScaler;
 
                 fruit.transform.position = Vector3.MoveTowards(fruit.transform.position, destination, 1.0f * Time.deltaTime);
             }
