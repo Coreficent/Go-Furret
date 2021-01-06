@@ -8,6 +8,12 @@
     public class Fruit : Edible
     {
         [SerializeField] private Planet _planet;
+        [SerializeField] private Texture _textureOrange;
+        [SerializeField] private Texture _texturePurple;
+        [SerializeField] private Texture _textureNova;
+        [SerializeField] private Texture _textureUmbra;
+
+        public Color Color = Color.clear;
 
         private readonly List<SkinnedMeshRenderer> _skinnedMeshRenderers = new List<SkinnedMeshRenderer>();
 
@@ -34,6 +40,34 @@
                 {
                     EnablePhysics();
                     ShowAllMesh();
+
+                    int index = Random.Range(0, 4);
+
+                    foreach (SkinnedMeshRenderer skinnedMeshRenderer in _skinnedMeshRenderers)
+                    {
+                        foreach (Material material in skinnedMeshRenderer.sharedMaterials)
+                        {
+                            switch (index)
+                            {
+                                case 0:
+                                    material.SetTexture("_MainTex", _textureOrange);
+                                    break;
+                                case 1:
+                                    material.SetTexture("_MainTex", _texturePurple);
+                                    break;
+                                case 2:
+                                    material.SetTexture("_MainTex", _textureNova);
+                                    break;
+                                case 3:
+                                    material.SetTexture("_MainTex", _textureUmbra);
+                                    break;
+                                default:
+                                    DebugLogger.Warn("unexpected texture index in fruit");
+                                    break;
+                            }
+                        }
+                    }
+
                     transform.rotation = Quaternion.identity;
                     transform.localScale = Vector3.one;
                     _pooled = false;
@@ -56,6 +90,8 @@
                     _skinnedMeshRenderers.Add(skinnedMeshRenderer);
                 }
             }
+
+            Pooled = false;
 
             DebugLogger.Start(this);
         }
@@ -84,7 +120,7 @@
             _skinnedMeshRenderers[index].enabled = false;
         }
 
-        private void ShowAllMesh()
+        public void ShowAllMesh()
         {
             foreach (SkinnedMeshRenderer meshRenderer in _skinnedMeshRenderers)
             {
@@ -92,7 +128,7 @@
             }
         }
 
-        private void HideAllMesh()
+        public void HideAllMesh()
         {
             foreach (SkinnedMeshRenderer meshRenderer in _skinnedMeshRenderers)
             {

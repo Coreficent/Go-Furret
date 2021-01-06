@@ -8,8 +8,8 @@
     {
         [SerializeField] private PlayerController _playerController;
         [SerializeField] private Animator _playerAnimator;
-        [SerializeField] Material _eye;
-        [SerializeField] Material _mouth;
+        [SerializeField] private Material _eye;
+        [SerializeField] private Material _mouth;
 
         private readonly string _expressionX = "_ExpressionX";
         private readonly string _expressionY = "_ExpressionY";

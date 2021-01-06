@@ -76,7 +76,7 @@
             _meshRenderers[index].enabled = false;
         }
 
-        private void ShowAllMesh()
+        public void ShowAllMesh()
         {
             foreach (MeshRenderer meshRenderer in _meshRenderers)
             {
@@ -84,7 +84,7 @@
             }
         }
 
-        private void HideAllMesh()
+        public void HideAllMesh()
         {
             foreach (MeshRenderer meshRenderer in _meshRenderers)
             {
