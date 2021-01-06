@@ -38,6 +38,11 @@
             percentage = Mathf.Clamp(percentage, 0.0f, 1.0f);
             int index = (int)(percentage * _skinnedMeshRenderers.Count);
             HideMesh(index);
+
+            if (percentage == 1.0f)
+            {
+                Pool();
+            }
         }
 
         public void ShowMesh(int index)

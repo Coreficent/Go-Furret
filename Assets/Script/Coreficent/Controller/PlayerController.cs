@@ -329,13 +329,14 @@
             // TODO use the same variable or use a timer class Time.time - _time > 5.0f
             DebugLogger.ToDo("use a timer");
 
-            if (Time.time - _time > 5.0f)
-            {
-                edible.Pool();
-                return PlayerState.Stand;
-            }
+
 
             edible.Feed((Time.time - _time) / 5.0f);
+
+            if (Time.time - _time > 5.0f)
+            {
+                return PlayerState.Stand;
+            }
 
             return PlayerState.Stay;
         }

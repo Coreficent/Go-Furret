@@ -30,6 +30,11 @@
             percentage = Mathf.Clamp(percentage, 0.0f, 1.0f);
             int index = (int)(percentage * _meshRenderers.Count);
             ShowMesh(index);
+
+            if (percentage == 1.0f)
+            {
+                Pool();
+            }
         }
 
         public override void Pool()
