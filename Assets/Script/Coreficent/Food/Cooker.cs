@@ -141,7 +141,7 @@
 
         public bool CanCook()
         {
-            return _fruitVacuum.Count > 0;
+            return _recipe.CanProduce(_fruitVacuum);
         }
 
         public void Cook()

@@ -7,7 +7,7 @@
     public class Recipe : MonoBehaviour
     {
         [SerializeField] private Bean _regularBean;
-        
+
         private Bean _bean;
 
         public Bean CurrentBean
@@ -22,6 +22,11 @@
             SanityCheck.Check(this, _regularBean, _bean);
         }
 
+        public bool CanProduce(List<Fruit> fruits)
+        {
+            return fruits.Count > 0 && fruits.Count < 4;
+        }
+
         public void Produce(List<Fruit> fruits)
         {
             switch (fruits.Count)
@@ -34,6 +39,7 @@
                     _bean.Pooled = false;
                     _bean.transform.localScale *= 0.1f;
                     _bean.transform.position = transform.position + transform.TransformDirection(new Vector3(0.0f, 1.0f, 0.0f));
+                    _bean.Color = fruits[0].Color;
                     break;
                 case 2:
                     break;

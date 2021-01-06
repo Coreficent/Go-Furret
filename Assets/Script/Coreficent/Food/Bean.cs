@@ -10,6 +10,20 @@
 
         private bool _pooled = false;
 
+        public Color Color
+        {
+            set
+            {
+                foreach (MeshRenderer meshRenderer in _meshRenderers)
+                {
+                    foreach (Material material in meshRenderer.sharedMaterials)
+                    {
+                        material.SetColor("_Color", value);
+                    }
+                }
+            }
+        }
+
         public override bool Pooled
         {
             get { return _pooled; }
