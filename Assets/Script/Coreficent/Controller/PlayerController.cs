@@ -328,9 +328,6 @@
         {
             Edible edible = _hitInfo.collider.gameObject.GetComponent<Edible>();
 
-            // TODO use the same variable or use a timer class Time.time - _time > 5.0f
-            DebugLogger.ToDo("use a timer");
-
             float eatTime = 5.0f;
 
             edible.Feed(_timeController.Progress(eatTime));
@@ -389,10 +386,6 @@
 
             if (_timeController.Passed(consumeTime))
             {
-                // edible.Pool();
-
-                DebugLogger.ToDo("pool bean");
-
                 return PlayerState.Stand;
             }
 
