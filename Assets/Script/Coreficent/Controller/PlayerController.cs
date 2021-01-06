@@ -381,6 +381,10 @@
         {
             Cooker edible = _hitInfo.collider.gameObject.GetComponent<Cooker>();
 
+
+
+            edible.Feed((Time.time - _time) / 10.0f);
+
             if (Time.time - _time > 10.0f)
             {
                 // edible.Pool();
@@ -389,8 +393,6 @@
 
                 return PlayerState.Stand;
             }
-
-            edible.Feed((Time.time - _time) / 10.0f);
 
             return PlayerState.Stay;
         }

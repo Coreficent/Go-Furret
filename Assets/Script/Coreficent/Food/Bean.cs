@@ -19,7 +19,9 @@
                 {
                     HideAllMesh();
                     transform.rotation = Quaternion.identity;
+                    transform.localScale = Vector3.zero;
                     transform.position = Vector3.zero;
+                    _pooled = true;
                 }
                 else
                 {
@@ -27,6 +29,7 @@
                     ShowMesh(0);
                     transform.rotation = Quaternion.identity;
                     transform.localScale = Vector3.one;
+                    _pooled = false;
                 }
             }
         }

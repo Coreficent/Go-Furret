@@ -98,6 +98,11 @@
 
                     DebugLogger.Log("serving");
 
+                    if (_bean.Pooled)
+                    {
+                        State = CookerState.Vacuum;
+                    }
+
                     break;
 
                 default:
