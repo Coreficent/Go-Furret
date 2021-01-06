@@ -8,7 +8,29 @@
     {
         private readonly List<MeshRenderer> _meshRenderers = new List<MeshRenderer>();
 
-        // Start is called before the first frame update
+        private bool _pooled = false;
+
+        public override bool Pooled
+        {
+            get { return _pooled; }
+            set
+            {
+                if (value)
+                {
+                    HideAllMesh();
+                    transform.rotation = Quaternion.identity;
+                    transform.position = Vector3.zero;
+                }
+                else
+                {
+                    HideAllMesh();
+                    ShowMesh(0);
+                    transform.rotation = Quaternion.identity;
+                    transform.localScale = Vector3.one;
+                }
+            }
+        }
+
         protected void Start()
         {
             foreach (Transform i in transform)
@@ -20,7 +42,7 @@
                 }
             }
 
-            Pool();
+            Pooled = true;
 
             DebugLogger.Start(this);
         }
@@ -33,23 +55,8 @@
 
             if (percentage == 1.0f)
             {
-                Pool();
+                Pooled = true;
             }
-        }
-
-        public override void Pool()
-        {
-            HideAllMesh();
-            transform.rotation = Quaternion.identity;
-            transform.position = Vector3.zero;
-        }
-
-        public override void Poll()
-        {
-            HideAllMesh();
-            ShowMesh(0);
-            transform.rotation = Quaternion.identity;
-            transform.localScale = Vector3.one;
         }
 
         public void ShowMesh(int index)

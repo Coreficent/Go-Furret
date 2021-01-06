@@ -14,6 +14,30 @@
         private Collider _collider;
         private Rigidbody _rigidbody;
 
+        private bool _pooled = false;
+
+        public override bool Pooled
+        {
+            get { return _pooled; }
+            set
+            {
+                if (value)
+                {
+                    DisablePhysics();
+                    HideAllMesh();
+                    transform.rotation = Quaternion.identity;
+                    transform.position = Vector3.zero;
+                }
+                else
+                {
+                    EnablePhysics();
+                    ShowAllMesh();
+                    transform.rotation = Quaternion.identity;
+                    transform.localScale = Vector3.one;
+                }
+            }
+        }
+
         protected void Start()
         {
             _collider = GetComponent<Collider>();
@@ -41,7 +65,7 @@
 
             if (percentage == 1.0f)
             {
-                Pool();
+                Pooled = true;
             }
         }
 
@@ -71,22 +95,6 @@
             {
                 meshRenderer.enabled = false;
             }
-        }
-
-        public override void Pool()
-        {
-            DisablePhysics();
-            HideAllMesh();
-            transform.rotation = Quaternion.identity;
-            transform.position = Vector3.zero;
-        }
-
-        public override void Poll()
-        {
-            EnablePhysics();
-            ShowAllMesh();
-            transform.rotation = Quaternion.identity;
-            transform.localScale = Vector3.one;
         }
 
         public void EnablePhysics()

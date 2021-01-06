@@ -33,7 +33,7 @@
         public void SpawnFruitNear(GameObject player)
         {
             _fruit.transform.position = player.transform.position + player.transform.up * 2.0f;
-            _fruit.Poll();
+            _fruit.Pooled = false;
         }
     }
 }

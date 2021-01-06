@@ -10,8 +10,6 @@
     {
         [SerializeField] private Bean _bean;
 
-
-
         private readonly List<GameObject> _fruitVacuum = new List<GameObject>();
         private readonly TimeController _timeController = new TimeController();
 
@@ -76,7 +74,7 @@
 
                         foreach (GameObject fruit in _fruitVacuum)
                         {
-                            fruit.GetComponent<Fruit>().Pool();
+                            fruit.GetComponent<Fruit>().Pooled = true;
                         }
 
                         _fruitVacuum.Clear();
@@ -151,7 +149,7 @@
         {
             DebugLogger.ToDo("disable vaccuum");
 
-            _bean.Poll();
+            _bean.Pooled = false;
             _bean.transform.localScale *= 0.1f;
             _bean.transform.position = transform.position + transform.TransformDirection(new Vector3(0.0f, 1.0f, 0.0f));
 
