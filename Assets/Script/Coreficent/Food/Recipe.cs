@@ -82,9 +82,22 @@
                     break;
 
                 case 3:
+                    bool rainbowProduct = true;
+
+                    foreach (Fruit fruit in fruits)
+                    {
+                        if (fruit.Color == Fruit.Orange || fruit.Color == Fruit.Purple)
+                        {
+                            rainbowProduct = false;
+                            break;
+                        }
+                    }
+
+                    SummonBean(rainbowProduct ? Color.white : Color.black, rainbowProduct ? Bean.BeanPattern.Rainbow : Bean.BeanPattern.Gray);
                     break;
 
                 default:
+                    DebugLogger.Log("unexpected number of fruits when producing in recipe");
                     break;
             }
         }
