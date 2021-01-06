@@ -38,8 +38,6 @@
 
             SanityCheck.Check(this, _bean);
 
-            DebugLogger.Log("pool test polled");
-
             DebugLogger.Start(this);
         }
 
@@ -78,7 +76,8 @@
                         }
 
                         _fruitVacuum.Clear();
-                        State = CookerState.Create;
+
+                        GoTo(CookerState.Create);
                     }
 
                     break;
@@ -89,7 +88,7 @@
 
                     if (_timeController.Passed(_createTime))
                     {
-                        State = CookerState.Serve;
+                        GoTo(CookerState.Serve);
                     }
 
                     break;
@@ -100,7 +99,7 @@
 
                     if (_bean.Pooled)
                     {
-                        State = CookerState.Vacuum;
+                        GoTo(CookerState.Vacuum);
                     }
 
                     break;
@@ -109,6 +108,12 @@
                     DebugLogger.Warn("unexpected cooker state");
                     return;
             }
+        }
+
+        private void GoTo(CookerState nextState)
+        {
+            _timeController.Reset();
+            State = nextState;
         }
 
         protected void OnTriggerEnter(Collider other)
@@ -148,8 +153,7 @@
             _bean.transform.localScale *= 0.1f;
             _bean.transform.position = transform.position + transform.TransformDirection(new Vector3(0.0f, 1.0f, 0.0f));
 
-            _timeController.Reset();
-            State = CookerState.Cook;
+            GoTo(CookerState.Cook);
         }
 
         public void Feed(float percentage)
