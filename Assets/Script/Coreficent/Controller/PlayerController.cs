@@ -43,8 +43,7 @@
         private Color _debugColor = new Color(0.85f, 0.7f, 0.5f, 1.0f);
         private Vector3 _landingPosition = new Vector3();
         private Vector3 _velocity = new Vector3();
-
-        private float _time = 0.0f;
+        private TimeController _timeController = new TimeController();
 
         protected void Start()
         {
@@ -199,7 +198,10 @@
 
         private void GoTo(PlayerState nextState)
         {
-            _time = nextState == PlayerState.Stay ? _time : Time.time;
+            if (nextState != PlayerState.Stay)
+            {
+                _timeController.Reset();
+            }
             State = nextState == PlayerState.Stay ? State : nextState;
         }
 
@@ -314,7 +316,7 @@
 
         private PlayerState Reject()
         {
-            if (Time.time - _time > 2.0f)
+            if (_timeController.Passed(2.0f))
             {
                 return PlayerState.Stand;
             }
@@ -329,11 +331,11 @@
             // TODO use the same variable or use a timer class Time.time - _time > 5.0f
             DebugLogger.ToDo("use a timer");
 
+            float eatTime = 5.0f;
 
+            edible.Feed(_timeController.Progress(eatTime));
 
-            edible.Feed((Time.time - _time) / 5.0f);
-
-            if (Time.time - _time > 5.0f)
+            if (_timeController.Passed(eatTime))
             {
                 return PlayerState.Stand;
             }
@@ -343,7 +345,7 @@
 
         private PlayerState Shake()
         {
-            if (Time.time - _time > 2.0f)
+            if (_timeController.Passed(2.0f))
             {
                 PokeTree pokeTree = _hitInfo.collider.gameObject.GetComponent<PokeTree>();
 
@@ -357,7 +359,7 @@
 
         private PlayerState Throw()
         {
-            if (Time.time - _time > 0.5f)
+            if (_timeController.Passed(0.5f))
             {
                 return PlayerState.Stand;
             }
@@ -369,7 +371,7 @@
         {
             DebugLogger.Log("player cooking");
 
-            if (Time.time - _time > _cooker.RecipeTime)
+            if (_timeController.Passed(_cooker.RecipeTime))
             {
                 return PlayerState.Stand;
             }
@@ -381,11 +383,11 @@
         {
             Cooker edible = _hitInfo.collider.gameObject.GetComponent<Cooker>();
 
+            float consumeTime = 10.0f;
 
+            edible.Feed(_timeController.Progress(consumeTime));
 
-            edible.Feed((Time.time - _time) / 10.0f);
-
-            if (Time.time - _time > 10.0f)
+            if (_timeController.Passed(consumeTime))
             {
                 // edible.Pool();
 
@@ -399,7 +401,7 @@
 
         private PlayerState Search()
         {
-            if (Time.time - _time > 2.0f)
+            if (_timeController.Passed(2.0f))
             {
                 return PlayerState.Stand;
             }
