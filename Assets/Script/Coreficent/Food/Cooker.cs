@@ -41,6 +41,16 @@
             DebugLogger.Start(this);
         }
 
+        protected void OnTriggerEnter(Collider other)
+        {
+            Throw(other);
+        }
+
+        protected void OnTriggerExit(Collider other)
+        {
+            Throw(other);
+        }
+
         protected void Update()
         {
             switch (State)
@@ -114,16 +124,6 @@
         {
             _timeController.Reset();
             State = nextState;
-        }
-
-        protected void OnTriggerEnter(Collider other)
-        {
-            Throw(other);
-        }
-
-        protected void OnTriggerExit(Collider other)
-        {
-            Throw(other);
         }
 
         public bool FruitVacuumSizeChanged()
