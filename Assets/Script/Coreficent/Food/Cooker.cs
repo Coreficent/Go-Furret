@@ -10,7 +10,7 @@
     {
         [SerializeField] private Bean _bean;
 
-        private readonly List<GameObject> _fruitVacuum = new List<GameObject>();
+        private readonly List<Fruit> _fruitVacuum = new List<Fruit>();
         private readonly TimeController _timeController = new TimeController();
 
         private int _lastVacuumSize = 0;
@@ -56,7 +56,7 @@
             switch (State)
             {
                 case CookerState.Vacuum:
-                    foreach (GameObject fruit in _fruitVacuum)
+                    foreach (Fruit fruit in _fruitVacuum)
                     {
                         float maximumHeightScaler = 1.0f;
                         float heightOffsetScaler = 0.5f;
@@ -71,7 +71,7 @@
                 case CookerState.Cook:
                     DebugLogger.Bug("cooking in cooker");
 
-                    foreach (GameObject fruit in _fruitVacuum)
+                    foreach (Fruit fruit in _fruitVacuum)
                     {
                         fruit.transform.localScale = Vector3.one * (1.0f - _timeController.Progress(_cookTime));
                     }
@@ -80,9 +80,9 @@
                     {
                         _timeController.Reset();
 
-                        foreach (GameObject fruit in _fruitVacuum)
+                        foreach (Fruit fruit in _fruitVacuum)
                         {
-                            fruit.GetComponent<Fruit>().Pooled = true;
+                            fruit.Pooled = true;
                         }
 
                         _fruitVacuum.Clear();
@@ -169,7 +169,7 @@
                 if (fruit)
                 {
                     fruit.DisablePhysics();
-                    _fruitVacuum.Add(other.gameObject);
+                    _fruitVacuum.Add(fruit);
                 }
             }
         }
