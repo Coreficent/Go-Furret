@@ -1,23 +1,23 @@
-﻿namespace Coreficent.Utility
+﻿namespace Coreficent.Setting
 {
+    using Coreficent.Utility;
     using UnityEngine;
 
     public class ApplicationMode : MonoBehaviour
     {
         internal static ApplicationState DebugMode = ApplicationState.Debug;
-
-        [SerializeField] private ApplicationState _mode = ApplicationState.Debug;
-
         public enum ApplicationState
         {
             Debug,
             Release
         }
 
+        [SerializeField] private ApplicationState _mode = ApplicationState.Debug;
+
+        
         private void Awake()
         {
             DebugMode = _mode;
-            DebugLogger.Awake(this);
         }
     }
 }

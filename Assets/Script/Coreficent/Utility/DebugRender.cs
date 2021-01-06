@@ -1,5 +1,6 @@
 ﻿namespace Coreficent.Utility
 {
+    using Coreficent.Setting;
     using UnityEngine;
 
     public class DebugRender

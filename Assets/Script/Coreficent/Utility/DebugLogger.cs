@@ -1,5 +1,6 @@
 ﻿namespace Coreficent.Utility
 {
+    using Coreficent.Setting;
     using UnityEngine;
 
     public class DebugLogger
@@ -26,14 +27,6 @@
         public static void ToDo(object message)
         {
             Output("Todo", message);
-        }
-        public static void Construct(object message)
-        {
-            Initialize("Construct", message);
-        }
-        public static void Awake(object message)
-        {
-            Initialize("Awake", message);
         }
         public static void Start(object message)
         {

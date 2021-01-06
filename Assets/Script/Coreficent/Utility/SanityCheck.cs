@@ -1,6 +1,6 @@
 ﻿namespace Coreficent.Utility
 {
-    using UnityEngine;
+    using Coreficent.Setting;
     using UnityEngine.SceneManagement;
 
     public class SanityCheck

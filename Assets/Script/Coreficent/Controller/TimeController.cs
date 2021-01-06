@@ -12,10 +12,7 @@
             get { return Time.time - _time; }
         }
 
-        public TimeController()
-        {
-            DebugLogger.Construct(this);
-        }
+        public TimeController() { }
 
         public void Reset()
         {

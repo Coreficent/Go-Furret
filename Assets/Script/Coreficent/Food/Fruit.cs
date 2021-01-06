@@ -1,6 +1,7 @@
 ﻿namespace Coreficent.Food
 {
     using Coreficent.Physics;
+    using Coreficent.Setting;
     using Coreficent.Utility;
     using System.Collections.Generic;
     using UnityEngine;
@@ -13,6 +14,7 @@
         public static Color Green = new Color(0.0f, 1.0f, 0.0f, 1.0f);
         public static Color Red = new Color(1.0f, 0.0f, 0.0f, 1.0f);
         public static Color Pink = new Color(1.0f, 0.5f, 1.0f, 1.0f);
+        public static Color Black = new Color(0.0f, 0.0f, 0.0f, 1.0f);
 
         public enum FruitSpecies
         {
@@ -57,7 +59,7 @@
                     EnablePhysics();
                     ShowAllMesh();
 
-                    int index = Random.Range(0, 4);
+                    int index = Random.Range(0, 3);
 
                     foreach (SkinnedMeshRenderer skinnedMeshRenderer in _skinnedMeshRenderers)
                     {
@@ -69,18 +71,37 @@
                                     material.SetTexture("_MainTex", _textureOrange);
                                     Color = Orange;
                                     break;
+
                                 case 1:
                                     material.SetTexture("_MainTex", _texturePurple);
                                     Color = Purple;
                                     break;
                                 case 2:
                                     material.SetTexture("_MainTex", _textureNova);
-                                    DebugLogger.ToDo("do version exclusive colors");
+                                    Color = Black;
+                                    if (Species == FruitSpecies.Razz)
+                                    {
+                                        Color = Red;
+                                    }
+                                    if (Species == FruitSpecies.Pinap)
+                                    {
+                                        Color = Yellow;
+                                    }
+                                    if (Species == FruitSpecies.Nanab)
+                                    {
+                                        if (Configuration.Singleton.Version == Configuration.ApplicationVersion.Nova)
+                                        {
+                                            Color = Pink;
+                                        }
+                                        if (Configuration.Singleton.Version == Configuration.ApplicationVersion.Umbra)
+                                        {
+                                            Color = Green;
+                                        }
+                                    }
+
+                                    DebugLogger.Assert("exclusive color set", Color != Black);
                                     break;
-                                case 3:
-                                    material.SetTexture("_MainTex", _textureUmbra);
-                                    DebugLogger.ToDo("do version exclusive colors");
-                                    break;
+
                                 default:
                                     DebugLogger.Warn("unexpected texture index in fruit");
                                     break;
