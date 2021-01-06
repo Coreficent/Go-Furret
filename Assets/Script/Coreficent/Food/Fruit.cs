@@ -7,6 +7,21 @@
 
     public class Fruit : Edible
     {
+        public static Color Orange = new Color(1.0f, 0.5f, 0.0f, 1.0f);
+        public static Color Purple = new Color(0.5f, 0.0f, 1.0f, 1.0f);
+        public static Color Yellow = new Color(1.0f, 1.0f, 0.0f, 1.0f);
+        public static Color Green = new Color(0.0f, 1.0f, 0.0f, 1.0f);
+        public static Color Red = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+        public static Color Pink = new Color(1.0f, 0.5f, 1.0f, 1.0f);
+
+        public enum FruitSpecies
+        {
+            None,
+            Razz,
+            Pinap,
+            Nanab
+        }
+
         [SerializeField] private Planet _planet;
         [SerializeField] private Texture _textureOrange;
         [SerializeField] private Texture _texturePurple;
@@ -14,6 +29,7 @@
         [SerializeField] private Texture _textureUmbra;
 
         public Color Color = Color.clear;
+        public FruitSpecies Species = FruitSpecies.None;
 
         private readonly List<SkinnedMeshRenderer> _skinnedMeshRenderers = new List<SkinnedMeshRenderer>();
 
@@ -51,15 +67,19 @@
                             {
                                 case 0:
                                     material.SetTexture("_MainTex", _textureOrange);
+                                    Color = Orange;
                                     break;
                                 case 1:
                                     material.SetTexture("_MainTex", _texturePurple);
+                                    Color = Purple;
                                     break;
                                 case 2:
                                     material.SetTexture("_MainTex", _textureNova);
+                                    DebugLogger.ToDo("do version exclusive colors");
                                     break;
                                 case 3:
                                     material.SetTexture("_MainTex", _textureUmbra);
+                                    DebugLogger.ToDo("do version exclusive colors");
                                     break;
                                 default:
                                     DebugLogger.Warn("unexpected texture index in fruit");
@@ -80,7 +100,7 @@
             _collider = GetComponent<Collider>();
             _rigidbody = GetComponent<Rigidbody>();
 
-            SanityCheck.Check(this, _planet, _collider, _rigidbody);
+            SanityCheck.Check(this, _planet, _collider, _rigidbody, Species != FruitSpecies.None);
 
             foreach (Transform i in transform.Find("Display").transform)
             {
