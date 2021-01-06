@@ -7,6 +7,18 @@
         private static readonly string _delimiter = "::";
         private static readonly string _ender = ".";
 
+        public static void Assert(string name, bool condition)
+        {
+            if (condition)
+            {
+                Log("Assert" + _delimiter + "Passed" + _delimiter + name);
+            }
+            else
+            {
+                Warn("Assert" + _delimiter + "Failed" + _delimiter + name);
+            }
+        }
+
         public static void Bug(object message)
         {
             Output("Bug", message);
