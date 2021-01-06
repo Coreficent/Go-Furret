@@ -31,46 +31,42 @@
                 case 0:
                     DebugLogger.Warn("tried to produce without a fruit");
                     break;
+
                 case 1:
-                    SummonBean();
-                    _bean.Color = fruits[0].Color;
-                    _bean.Pattern = Bean.BeanPattern.Gray;
+                    SummonBean(fruits[0].Color, Bean.BeanPattern.Gray);
                     break;
 
                 case 2:
-                    SummonBean();
-                    _bean.Color = Color.white;
-
-                    _bean.Pattern = Bean.BeanPattern.Gray;
+                    Bean.BeanPattern pattern = Bean.BeanPattern.Gray;
                     if (fruits[0].Species == Fruit.FruitSpecies.Razz && fruits[1].Species == Fruit.FruitSpecies.Pinap)
                     {
-                        _bean.Pattern = Bean.BeanPattern.Grass;
+                        pattern = Bean.BeanPattern.Grass;
                     }
                     else if (fruits[0].Species == Fruit.FruitSpecies.Razz && fruits[1].Species == Fruit.FruitSpecies.Nanab)
                     {
-                        _bean.Pattern = Bean.BeanPattern.Fire;
+                        pattern = Bean.BeanPattern.Fire;
                     }
                     else if (fruits[0].Species == Fruit.FruitSpecies.Pinap && fruits[1].Species == Fruit.FruitSpecies.Razz)
                     {
-                        _bean.Pattern = Bean.BeanPattern.Water;
+                        pattern = Bean.BeanPattern.Water;
                     }
                     else if (fruits[0].Species == Fruit.FruitSpecies.Pinap && fruits[1].Species == Fruit.FruitSpecies.Nanab)
                     {
-                        _bean.Pattern = Bean.BeanPattern.Electric;
+                        pattern = Bean.BeanPattern.Electric;
                     }
                     else if (fruits[0].Species == Fruit.FruitSpecies.Nanab && fruits[1].Species == Fruit.FruitSpecies.Razz)
                     {
-                        _bean.Pattern = Bean.BeanPattern.Ice;
+                        pattern = Bean.BeanPattern.Ice;
                     }
                     else if (fruits[0].Species == Fruit.FruitSpecies.Nanab && fruits[1].Species == Fruit.FruitSpecies.Pinap)
                     {
                         if (Configuration.Singleton.Version == Configuration.ApplicationVersion.Nova)
                         {
-                            _bean.Pattern = Bean.BeanPattern.Fighting;
+                            pattern = Bean.BeanPattern.Fighting;
                         }
                         else if (Configuration.Singleton.Version == Configuration.ApplicationVersion.Umbra)
                         {
-                            _bean.Pattern = Bean.BeanPattern.Ghost;
+                            pattern = Bean.BeanPattern.Ghost;
                         }
                         else
                         {
@@ -81,6 +77,8 @@
                     {
                         DebugLogger.Warn("unexpected pattern combination for two item recipe");
                     }
+
+                    SummonBean(Color.white, pattern);
                     break;
 
                 case 3:
@@ -91,11 +89,13 @@
             }
         }
 
-        private void SummonBean()
+        private void SummonBean(Color color, Bean.BeanPattern pattern)
         {
             _bean.Pooled = false;
             _bean.transform.localScale *= 0.01f;
             _bean.transform.position = transform.position + transform.TransformDirection(new Vector3(0.0f, 1.0f, 0.0f));
+            _bean.Color = color;
+            _bean.Pattern = pattern;
         }
     }
 }
