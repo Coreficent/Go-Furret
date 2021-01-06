@@ -17,7 +17,7 @@
 
         protected void Update()
         {
-            transform.Rotate(_eulerRotation);
+            transform.Rotate(_eulerRotation * Time.deltaTime);
         }
     }
 }
