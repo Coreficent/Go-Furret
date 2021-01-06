@@ -120,12 +120,6 @@
             }
         }
 
-        private void GoTo(CookerState nextState)
-        {
-            _timeController.Reset();
-            State = nextState;
-        }
-
         public bool FruitVacuumSizeChanged()
         {
             if (_lastVacuumSize == _fruitVacuum.Count)
@@ -159,6 +153,12 @@
         public void Feed(float percentage)
         {
             _bean.Feed(percentage);
+        }
+
+        private void GoTo(CookerState nextState)
+        {
+            _timeController.Reset();
+            State = nextState;
         }
 
         private void Throw(Collider other)

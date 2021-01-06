@@ -190,8 +190,6 @@
 
                 DebugRender.Draw(transform.position, transform.position + forceVector, _debugColor);
 
-                //DebugRender.Draw(collision.gameObject.transform.position, collision.gameObject.transform.position + forceVector * 5.0f, _debugColor);
-
                 collision.gameObject.GetComponent<Rigidbody>().AddForce(forceVector);
             }
         }
