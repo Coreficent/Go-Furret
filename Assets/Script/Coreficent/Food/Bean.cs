@@ -1,6 +1,7 @@
 ﻿namespace Coreficent.Food
 {
     using Coreficent.Utility;
+    using System;
     using System.Collections.Generic;
     using UnityEngine;
 
@@ -41,13 +42,7 @@
             get => _color;
             set
             {
-                foreach (MeshRenderer meshRenderer in _meshRenderers)
-                {
-                    foreach (Material material in meshRenderer.sharedMaterials)
-                    {
-                        material.SetColor("_Color", value);
-                    }
-                }
+                SetShaderProperty(material => material.SetColor("_Color", value));
                 _color = value;
             }
         }
@@ -57,63 +52,60 @@
             get => _pattern;
             set
             {
-                foreach (MeshRenderer meshRenderer in _meshRenderers)
+                SetShaderProperty(material =>
                 {
-                    foreach (Material material in meshRenderer.sharedMaterials)
+                    switch (value)
                     {
-                        switch (value)
-                        {
-                            case BeanPattern.Gray:
-                                material.SetTexture("_MainTex", _gray);
-                                _pattern = BeanPattern.Gray;
-                                break;
+                        case BeanPattern.Gray:
+                            material.SetTexture("_MainTex", _gray);
+                            _pattern = BeanPattern.Gray;
+                            break;
 
-                            case BeanPattern.Grass:
-                                material.SetTexture("_MainTex", _grass);
-                                _pattern = BeanPattern.Grass;
-                                break;
+                        case BeanPattern.Grass:
+                            material.SetTexture("_MainTex", _grass);
+                            _pattern = BeanPattern.Grass;
+                            break;
 
-                            case BeanPattern.Fire:
-                                material.SetTexture("_MainTex", _fire);
-                                _pattern = BeanPattern.Fire;
-                                break;
+                        case BeanPattern.Fire:
+                            material.SetTexture("_MainTex", _fire);
+                            _pattern = BeanPattern.Fire;
+                            break;
 
-                            case BeanPattern.Water:
-                                material.SetTexture("_MainTex", _water);
-                                _pattern = BeanPattern.Water;
-                                break;
+                        case BeanPattern.Water:
+                            material.SetTexture("_MainTex", _water);
+                            _pattern = BeanPattern.Water;
+                            break;
 
-                            case BeanPattern.Electric:
-                                material.SetTexture("_MainTex", _electric);
-                                _pattern = BeanPattern.Electric;
-                                break;
+                        case BeanPattern.Electric:
+                            material.SetTexture("_MainTex", _electric);
+                            _pattern = BeanPattern.Electric;
+                            break;
 
-                            case BeanPattern.Ice:
-                                material.SetTexture("_MainTex", _ice);
-                                _pattern = BeanPattern.Ice;
-                                break;
+                        case BeanPattern.Ice:
+                            material.SetTexture("_MainTex", _ice);
+                            _pattern = BeanPattern.Ice;
+                            break;
 
-                            case BeanPattern.Fighting:
-                                material.SetTexture("_MainTex", _fighting);
-                                _pattern = BeanPattern.Fighting;
-                                break;
+                        case BeanPattern.Fighting:
+                            material.SetTexture("_MainTex", _fighting);
+                            _pattern = BeanPattern.Fighting;
+                            break;
 
-                            case BeanPattern.Ghost:
-                                material.SetTexture("_MainTex", _ghost);
-                                _pattern = BeanPattern.Ghost;
-                                break;
+                        case BeanPattern.Ghost:
+                            material.SetTexture("_MainTex", _ghost);
+                            _pattern = BeanPattern.Ghost;
+                            break;
 
-                            case BeanPattern.Rainbow:
-                                material.SetTexture("_MainTex", _rainbow);
-                                _pattern = BeanPattern.Rainbow;
-                                break;
+                        case BeanPattern.Rainbow:
+                            material.SetTexture("_MainTex", _rainbow);
+                            _pattern = BeanPattern.Rainbow;
+                            break;
 
-                            default:
-                                DebugLogger.Log("unexpected pattern type");
-                                break;
-                        }
+                        default:
+                            DebugLogger.Log("unexpected pattern type");
+                            break;
                     }
-                }
+                });
             }
         }
 
@@ -198,6 +190,17 @@
             foreach (MeshRenderer meshRenderer in _meshRenderers)
             {
                 meshRenderer.enabled = false;
+            }
+        }
+
+        private void SetShaderProperty(Action<Material> action)
+        {
+            foreach (MeshRenderer meshRenderer in _meshRenderers)
+            {
+                foreach (Material material in meshRenderer.sharedMaterials)
+                {
+                    action(material);
+                }
             }
         }
     }
