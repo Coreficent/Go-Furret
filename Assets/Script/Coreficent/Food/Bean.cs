@@ -6,12 +6,39 @@
 
     public class Bean : Edible
     {
+        public enum BeanPattern
+        {
+            Gray,
+            Grass,
+            Fire,
+            Water,
+            Electric,
+            Ice,
+            Fighting,
+            Ghost,
+            Rainbow
+        }
+
+        [SerializeField] private Texture _gray;
+        [SerializeField] private Texture _grass;
+        [SerializeField] private Texture _fire;
+        [SerializeField] private Texture _water;
+        [SerializeField] private Texture _electric;
+        [SerializeField] private Texture _ice;
+        [SerializeField] private Texture _fighting;
+        [SerializeField] private Texture _ghost;
+        [SerializeField] private Texture _rainbow;
+
         private readonly List<MeshRenderer> _meshRenderers = new List<MeshRenderer>();
 
+        private Color _color = Color.clear;
         private bool _pooled = false;
+        private BeanPattern _pattern = BeanPattern.Gray;
+
 
         public Color Color
         {
+            get => _color;
             set
             {
                 foreach (MeshRenderer meshRenderer in _meshRenderers)
@@ -21,12 +48,78 @@
                         material.SetColor("_Color", value);
                     }
                 }
+                _color = value;
+            }
+        }
+
+        public BeanPattern Pattern
+        {
+            get => _pattern;
+            set
+            {
+                foreach (MeshRenderer meshRenderer in _meshRenderers)
+                {
+                    foreach (Material material in meshRenderer.sharedMaterials)
+                    {
+                        switch (value)
+                        {
+                            case BeanPattern.Gray:
+                                material.SetTexture("_MainTex", _gray);
+                                _pattern = BeanPattern.Gray;
+                                break;
+
+                            case BeanPattern.Grass:
+                                material.SetTexture("_MainTex", _grass);
+                                _pattern = BeanPattern.Grass;
+                                break;
+
+                            case BeanPattern.Fire:
+                                material.SetTexture("_MainTex", _fire);
+                                _pattern = BeanPattern.Fire;
+                                break;
+
+                            case BeanPattern.Water:
+                                material.SetTexture("_MainTex", _water);
+                                _pattern = BeanPattern.Water;
+                                break;
+
+                            case BeanPattern.Electric:
+                                material.SetTexture("_MainTex", _electric);
+                                _pattern = BeanPattern.Electric;
+                                break;
+
+                            case BeanPattern.Ice:
+                                material.SetTexture("_MainTex", _ice);
+                                _pattern = BeanPattern.Ice;
+                                break;
+
+                            case BeanPattern.Fighting:
+                                material.SetTexture("_MainTex", _fighting);
+                                _pattern = BeanPattern.Fighting;
+                                break;
+
+                            case BeanPattern.Ghost:
+                                material.SetTexture("_MainTex", _ghost);
+                                _pattern = BeanPattern.Ghost;
+                                break;
+
+                            case BeanPattern.Rainbow:
+                                material.SetTexture("_MainTex", _rainbow);
+                                _pattern = BeanPattern.Rainbow;
+                                break;
+
+                            default:
+                                DebugLogger.Log("unexpected pattern type");
+                                break;
+                        }
+                    }
+                }
             }
         }
 
         public override bool Pooled
         {
-            get { return _pooled; }
+            get => _pooled;
             set
             {
                 if (value)
@@ -50,6 +143,8 @@
 
         protected void Start()
         {
+            SanityCheck.Check(this, _gray, _fire, _water, _electric, _ice, _fighting, _ghost, _rainbow);
+
             foreach (Transform i in transform)
             {
                 MeshRenderer meshRenderer = i.GetComponent<MeshRenderer>();

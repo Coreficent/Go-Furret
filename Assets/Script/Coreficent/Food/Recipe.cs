@@ -41,6 +41,8 @@
                     _bean.transform.position = transform.position + transform.TransformDirection(new Vector3(0.0f, 1.0f, 0.0f));
                     _bean.Color = fruits[0].Color;
                     break;
+
+
                 case 2:
                     break;
                 case 3:

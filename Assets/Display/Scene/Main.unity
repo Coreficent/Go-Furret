@@ -548,7 +548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38115505bbce78e459efecfa7912f686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 1
+  _rotationSpeed: 0.1
 --- !u!1001 &789422004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -924,7 +924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46e99c594e35ee4ca41188dcc8dc9f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _version: 0
+  Version: 0
 --- !u!1 &2071184201
 GameObject:
   m_ObjectHideFlags: 0
