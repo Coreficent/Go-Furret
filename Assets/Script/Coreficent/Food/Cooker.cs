@@ -113,20 +113,12 @@
 
         protected void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.GetComponent<Fruit>())
-            {
-                other.gameObject.GetComponent<Fruit>().DisablePhysics();
-
-                _fruitVacuum.Add(other.gameObject);
-            }
+            Throw(other);
         }
 
         protected void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.GetComponent<Fruit>())
-            {
-                _fruitVacuum.Remove(other.gameObject);
-            }
+            Throw(other);
         }
 
         public bool FruitVacuumSizeChanged()
@@ -152,8 +144,6 @@
 
         public void Cook()
         {
-            DebugLogger.ToDo("disable vaccuum");
-
             _bean.Pooled = false;
             _bean.transform.localScale *= 0.1f;
             _bean.transform.position = transform.position + transform.TransformDirection(new Vector3(0.0f, 1.0f, 0.0f));
@@ -165,6 +155,19 @@
         public void Feed(float percentage)
         {
             _bean.Feed(percentage);
+        }
+
+        private void Throw(Collider other)
+        {
+            if (State == CookerState.Vacuum)
+            {
+                Fruit fruit = other.gameObject.GetComponent<Fruit>();
+                if (fruit)
+                {
+                    fruit.DisablePhysics();
+                    _fruitVacuum.Add(other.gameObject);
+                }
+            }
         }
     }
 }
