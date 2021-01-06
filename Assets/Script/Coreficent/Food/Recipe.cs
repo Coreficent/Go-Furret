@@ -7,14 +7,13 @@
     public class Recipe : MonoBehaviour
     {
         [SerializeField] private Bean _regularBean;
+        
+        private Bean _bean;
 
         public Bean CurrentBean
         {
             get => _bean;
         }
-
-        private Bean _bean;
-
 
         protected void Start()
         {
@@ -32,6 +31,9 @@
                     break;
                 case 1:
                     _bean = _regularBean;
+                    _bean.Pooled = false;
+                    _bean.transform.localScale *= 0.1f;
+                    _bean.transform.position = transform.position + transform.TransformDirection(new Vector3(0.0f, 1.0f, 0.0f));
                     break;
                 case 2:
                     break;

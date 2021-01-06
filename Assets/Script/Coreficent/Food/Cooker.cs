@@ -8,7 +8,7 @@
 
     public class Cooker : KinematicObject
     {
-        [SerializeField] private Bean _bean;
+        private Recipe _recipe;
 
         private readonly List<Fruit> _fruitVacuum = new List<Fruit>();
         private readonly TimeController _timeController = new TimeController();
@@ -36,7 +36,9 @@
         {
             base.Start();
 
-            SanityCheck.Check(this, _bean);
+            _recipe = GetComponent<Recipe>();
+
+            SanityCheck.Check(this, _recipe);
 
             DebugLogger.Start(this);
         }
@@ -78,7 +80,8 @@
 
                     if (_timeController.Passed(_cookTime))
                     {
-                        _timeController.Reset();
+
+                        _recipe.Produce(_fruitVacuum);
 
                         foreach (Fruit fruit in _fruitVacuum)
                         {
@@ -94,7 +97,7 @@
 
                 case CookerState.Create:
 
-                    _bean.transform.localScale = Vector3.one * _timeController.Progress(_createTime);
+                    _recipe.CurrentBean.transform.localScale = Vector3.one * _timeController.Progress(_createTime);
 
                     if (_timeController.Passed(_createTime))
                     {
@@ -107,7 +110,7 @@
 
                     DebugLogger.Log("serving");
 
-                    if (_bean.Pooled)
+                    if (_recipe.CurrentBean.Pooled)
                     {
                         GoTo(CookerState.Vacuum);
                     }
@@ -143,16 +146,12 @@
 
         public void Cook()
         {
-            _bean.Pooled = false;
-            _bean.transform.localScale *= 0.1f;
-            _bean.transform.position = transform.position + transform.TransformDirection(new Vector3(0.0f, 1.0f, 0.0f));
-
             GoTo(CookerState.Cook);
         }
 
         public void Feed(float percentage)
         {
-            _bean.Feed(percentage);
+            _recipe.CurrentBean.Feed(percentage);
         }
 
         private void GoTo(CookerState nextState)
