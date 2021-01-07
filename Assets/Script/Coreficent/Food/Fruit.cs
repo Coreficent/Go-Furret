@@ -40,6 +40,11 @@
 
         private bool _pooled = false;
 
+        public float ConsumeTime
+        {
+            get => Species == FruitSpecies.Razz ? 1.5f : Species == FruitSpecies.Pinap ? 2.0f : Species == FruitSpecies.Nanab ? 2.5f : 1.0f;
+        }
+
         public override bool Pooled
         {
             get { return _pooled; }

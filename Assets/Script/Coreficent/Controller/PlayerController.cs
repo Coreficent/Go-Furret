@@ -363,13 +363,11 @@
 
         private PlayerState Eat()
         {
-            Edible edible = _hitInfo.collider.gameObject.GetComponent<Edible>();
+            Fruit edible = _hitInfo.collider.gameObject.GetComponent<Fruit>();
 
-            float eatTime = 5.0f;
+            edible.Feed(_timeController.Progress(edible.ConsumeTime));
 
-            edible.Feed(_timeController.Progress(eatTime));
-
-            if (_timeController.Passed(eatTime))
+            if (_timeController.Passed(edible.ConsumeTime))
             {
                 return PlayerState.Stand;
             }
