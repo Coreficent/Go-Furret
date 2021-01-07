@@ -9,7 +9,7 @@
     {
         [SerializeField] private Bean _bean;
 
-        public Bean CurrentBean
+        public Bean Bean
         {
             get => _bean;
         }

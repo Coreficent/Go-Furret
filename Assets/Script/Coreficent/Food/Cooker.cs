@@ -97,7 +97,7 @@
 
                 case CookerState.Create:
 
-                    _recipe.CurrentBean.transform.localScale = Vector3.one * _timeController.Progress(_createTime);
+                    _recipe.Bean.transform.localScale = Vector3.one * _timeController.Progress(_createTime);
 
                     if (_timeController.Passed(_createTime))
                     {
@@ -110,7 +110,7 @@
 
                     DebugLogger.Log("serving");
 
-                    if (_recipe.CurrentBean.Pooled)
+                    if (_recipe.Bean.Pooled)
                     {
                         GoTo(CookerState.Vacuum);
                     }
@@ -151,7 +151,12 @@
 
         public void Feed(float percentage)
         {
-            _recipe.CurrentBean.Feed(percentage);
+            _recipe.Bean.Feed(percentage);
+        }
+
+        public float GetConsumeTime()
+        {
+            return _recipe.Bean.ConsumeTime;
         }
 
         private void GoTo(CookerState nextState)

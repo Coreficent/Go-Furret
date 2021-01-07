@@ -415,13 +415,11 @@
 
         private PlayerState Consume()
         {
-            Cooker edible = _hitInfo.collider.gameObject.GetComponent<Cooker>();
+            Cooker cooker = _hitInfo.collider.gameObject.GetComponent<Cooker>();
 
-            float consumeTime = 10.0f;
+            cooker.Feed(_timeController.Progress(cooker.GetConsumeTime()));
 
-            edible.Feed(_timeController.Progress(consumeTime));
-
-            if (_timeController.Passed(consumeTime))
+            if (_timeController.Passed(cooker.GetConsumeTime()))
             {
                 return PlayerState.Stand;
             }
