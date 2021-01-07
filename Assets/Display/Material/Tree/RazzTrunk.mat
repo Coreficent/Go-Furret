@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Razz
+  m_Name: RazzTrunk
   m_Shader: {fileID: 4800000, guid: be2ed0ef469cc3c42bdc7971a28673a6, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 2d5f5ae71ac4eac4a92a2bfd9c18f934, type: 3}
+        m_Texture: {fileID: 2800000, guid: d00114c5251c4984d9fb48e3579822ee, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -67,7 +67,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _OutlineDarkness: 0
-    - _OutlineThickness: 0.025
+    - _OutlineThickness: 0.05
     - _Parallax: 0.02
     - _PrecalculatedNormal: 0
     - _ShadeThreshold: 0.5

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e01f8f549d7fc9b4d8de8ed3e0027087
+guid: c4899bf22948a7242a34cdaef382618e
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -7,18 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: stitchMat
-    second: {fileID: 2100000, guid: 6b0de2f226f19304385df2eba84c0a17, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: treeMat
-    second: {fileID: 2100000, guid: 5b4cd5855ce89cb4b84ecf3ee5bbe813, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: woodMat
-    second: {fileID: 2100000, guid: 6b0de2f226f19304385df2eba84c0a17, type: 2}
+      name: N64Tree__a_treeMat
+    second: {fileID: 2100000, guid: c44641c23141b3949b6b0676e66c8977, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
