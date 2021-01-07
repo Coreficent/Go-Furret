@@ -14,7 +14,7 @@
             Stay,
             Float,
             Stand,
-            Move,
+            Walk,
             Run,
             Reject,
             Eat,
@@ -89,11 +89,11 @@
                 case PlayerState.Stand:
                     if (Turn())
                     {
-                        nextState = PlayerState.Move;
+                        nextState = PlayerState.Walk;
                     }
                     if (Move(_walkSpeed))
                     {
-                        nextState = PlayerState.Move;
+                        nextState = PlayerState.Walk;
                     }
                     if (Jump())
                     {
@@ -115,7 +115,7 @@
 
                     break;
 
-                case PlayerState.Move:
+                case PlayerState.Walk:
                     bool turning = Turn();
                     bool moving = Move(_walkSpeed);
 
@@ -148,7 +148,7 @@
 
                     if (!running)
                     {
-                        nextState = PlayerState.Move;
+                        nextState = PlayerState.Walk;
                     }
 
                     break;
