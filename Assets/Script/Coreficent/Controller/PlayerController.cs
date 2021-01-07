@@ -403,7 +403,7 @@
 
         private PlayerState Cook()
         {
-            DebugLogger.Log("player cooking");
+            DebugLogger.Log("player cooking", _cooker.RecipeTime);
 
             if (_timeController.Passed(_cooker.RecipeTime))
             {

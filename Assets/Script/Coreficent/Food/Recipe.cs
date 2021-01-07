@@ -19,6 +19,11 @@
             SanityCheck.Check(this, _bean);
         }
 
+        public float CalculateCookTime(List<Fruit> fruits)
+        {
+            return fruits.Count * 2.0f;
+        }
+
         public bool CanProduce(List<Fruit> fruits)
         {
             return fruits.Count > 0 && fruits.Count < 4;

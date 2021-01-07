@@ -31,6 +31,7 @@
         [SerializeField] private Texture _rainbow;
 
         public float ConsumeTime = 1.0f;
+        public float CreateTime = 1.0f;
 
         private readonly List<MeshRenderer> _meshRenderers = new List<MeshRenderer>();
 
@@ -61,54 +62,63 @@
                             material.SetTexture("_MainTex", _gray);
                             _pattern = BeanPattern.Gray;
                             ConsumeTime = 2.0f;
+                            CreateTime = 1.0f;
                             break;
 
                         case BeanPattern.Grass:
                             material.SetTexture("_MainTex", _grass);
                             _pattern = BeanPattern.Grass;
                             ConsumeTime = 4.0f;
+                            CreateTime = 4.0f;
                             break;
 
                         case BeanPattern.Fire:
                             material.SetTexture("_MainTex", _fire);
                             _pattern = BeanPattern.Fire;
                             ConsumeTime = 4.0f;
+                            CreateTime = 4.0f;
                             break;
 
                         case BeanPattern.Water:
                             material.SetTexture("_MainTex", _water);
                             _pattern = BeanPattern.Water;
                             ConsumeTime = 4.0f;
+                            CreateTime = 4.0f;
                             break;
 
                         case BeanPattern.Electric:
                             material.SetTexture("_MainTex", _electric);
                             _pattern = BeanPattern.Electric;
                             ConsumeTime = 6.0f;
+                            CreateTime = 2.0f;
                             break;
 
                         case BeanPattern.Ice:
                             material.SetTexture("_MainTex", _ice);
                             _pattern = BeanPattern.Ice;
                             ConsumeTime = 6.0f;
+                            CreateTime = 2.0f;
                             break;
 
                         case BeanPattern.Fighting:
                             material.SetTexture("_MainTex", _fighting);
                             _pattern = BeanPattern.Fighting;
                             ConsumeTime = 8.0f;
+                            CreateTime = 4.0f;
                             break;
 
                         case BeanPattern.Ghost:
                             material.SetTexture("_MainTex", _ghost);
                             _pattern = BeanPattern.Ghost;
                             ConsumeTime = 8.0f;
+                            CreateTime = 4.0f;
                             break;
 
                         case BeanPattern.Rainbow:
                             material.SetTexture("_MainTex", _rainbow);
                             _pattern = BeanPattern.Rainbow;
                             ConsumeTime = 10.0f;
+                            CreateTime = 10.0f;
                             break;
 
                         default:
