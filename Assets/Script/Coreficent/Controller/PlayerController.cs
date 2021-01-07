@@ -15,6 +15,7 @@
             Float,
             Stand,
             Move,
+            Run,
             Reject,
             Eat,
             Shake,
@@ -30,6 +31,8 @@
 
         [SerializeField] private float _turnSpeed = 90.0f;
         [SerializeField] private float _walkSpeed = 1.0f;
+        [SerializeField] private float _runSpeed = 5.0f;
+        [SerializeField] private float _runAcceleration = 0.1f;
         [SerializeField] private float _jumpSpeed = 100.0f;
 
         public PlayerState State = PlayerState.Float;
@@ -41,8 +44,8 @@
         private RaycastHit _hitInfo;
 
         private Color _debugColor = new Color(0.85f, 0.7f, 0.5f, 1.0f);
-        private Vector3 _landingPosition = new Vector3();
-        private Vector3 _velocity = new Vector3();
+        private Vector3 _landingPosition = Vector3.zero;
+        private Vector3 _velocity = Vector3.zero;
         private TimeController _timeController = new TimeController();
 
         protected void Start()
@@ -74,7 +77,7 @@
 
                 case PlayerState.Float:
                     Turn();
-                    Move();
+                    Move(_walkSpeed);
 
                     if (Land())
                     {
@@ -84,13 +87,11 @@
                     break;
 
                 case PlayerState.Stand:
-
-
                     if (Turn())
                     {
                         nextState = PlayerState.Move;
                     }
-                    if (Move())
+                    if (Move(_walkSpeed))
                     {
                         nextState = PlayerState.Move;
                     }
@@ -116,9 +117,36 @@
 
                 case PlayerState.Move:
                     bool turning = Turn();
-                    bool moving = Move();
+                    bool moving = Move(_walkSpeed);
 
                     if (!turning && !moving)
+                    {
+                        nextState = PlayerState.Stand;
+                    }
+
+                    if (Run())
+                    {
+                        nextState = PlayerState.Run;
+                    }
+
+                    if (Jump())
+                    {
+                        nextState = PlayerState.Float;
+                    }
+
+                    if (_cooker.FruitVacuumSizeChanged())
+                    {
+                        DebugLogger.Log("throw item");
+                        nextState = PlayerState.Throw;
+                    }
+
+                    break;
+
+                case PlayerState.Run:
+                    bool revoling = Turn();
+                    bool running = Move(_runSpeed);
+
+                    if (!revoling && !running)
                     {
                         nextState = PlayerState.Stand;
                     }
@@ -133,7 +161,6 @@
                         DebugLogger.Log("throw item");
                         nextState = PlayerState.Throw;
                     }
-
                     break;
 
                 case PlayerState.Reject:
@@ -154,7 +181,7 @@
                     break;
 
                 case PlayerState.Throw:
-                    Move();
+                    Move(_walkSpeed);
                     nextState = Throw();
 
                     break;
@@ -212,16 +239,31 @@
             return Mathf.Abs(turnSpeed) > 0.0f;
         }
 
-        private bool Move()
+        private bool Move(float speed)
         {
-            float forwardSpeed = _keyboardInput.Forward;
+            float forwardThrottle = _keyboardInput.Forward;
+            float previousSpeed = _velocity.magnitude;
 
-            _velocity.z = forwardSpeed * _walkSpeed * Time.fixedDeltaTime;
-            _rigidbody.MovePosition(_rigidbody.position + transform.TransformDirection(_velocity));
+            _velocity.z = forwardThrottle * speed;
 
-            return Mathf.Abs(forwardSpeed) > 0.0f;
+            if (_velocity.magnitude > previousSpeed)
+            {
+                _velocity.z = previousSpeed + _runAcceleration;
+            }
+
+            _rigidbody.MovePosition(_rigidbody.position + transform.TransformDirection(_velocity * Time.fixedDeltaTime));
+
+            return Mathf.Abs(forwardThrottle) > 0.0f;
         }
+        private bool Run()
+        {
+            if (_keyboardInput.GetAction)
+            {
+                return true;
+            }
 
+            return false;
+        }
         private bool Jump()
         {
             if (_keyboardInput.GetJump)
