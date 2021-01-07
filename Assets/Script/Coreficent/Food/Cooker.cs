@@ -28,7 +28,7 @@
 
         public float RecipeTime
         {
-            get { return _recipe.CookTime + Bean.CreateTime + 1.0f; }
+            get { return _recipe.CookTime + Bean.CreateTime + 0.5f; }
         }
 
         public Bean Bean
