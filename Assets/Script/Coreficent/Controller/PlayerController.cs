@@ -416,6 +416,11 @@
 
             if (_timeController.Passed(cooker.Bean.ConsumeTime))
             {
+                if (cooker.Bean.Pattern == Bean.BeanPattern.Gray)
+                {
+                    return PlayerState.Reject;
+                }
+
                 return PlayerState.Stand;
             }
 
