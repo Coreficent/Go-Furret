@@ -32,6 +32,11 @@
             get { return _cookTime + _createTime; }
         }
 
+        public Bean Bean
+        {
+            get => _recipe.Bean;
+        }
+
         protected override void Start()
         {
             base.Start();
@@ -147,16 +152,6 @@
         public void Cook()
         {
             GoTo(CookerState.Cook);
-        }
-
-        public void Feed(float percentage)
-        {
-            _recipe.Bean.Feed(percentage);
-        }
-
-        public float GetConsumeTime()
-        {
-            return _recipe.Bean.ConsumeTime;
         }
 
         private void GoTo(CookerState nextState)

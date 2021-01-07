@@ -417,9 +417,9 @@
         {
             Cooker cooker = _hitInfo.collider.gameObject.GetComponent<Cooker>();
 
-            cooker.Feed(_timeController.Progress(cooker.GetConsumeTime()));
+            cooker.Bean.Feed(_timeController.Progress(cooker.Bean.ConsumeTime));
 
-            if (_timeController.Passed(cooker.GetConsumeTime()))
+            if (_timeController.Passed(cooker.Bean.ConsumeTime))
             {
                 return PlayerState.Stand;
             }
