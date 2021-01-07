@@ -24,6 +24,7 @@
         protected void Update()
         {
             _playerAnimator.SetBool("Moving", _playerController.State == PlayerController.PlayerState.Move);
+            _playerAnimator.SetBool("Running", _playerController.State == PlayerController.PlayerState.Run);
             _playerAnimator.SetBool("Jumping", _playerController.State == PlayerController.PlayerState.Float);
             _playerAnimator.SetBool("Rejecting", _playerController.State == PlayerController.PlayerState.Reject);
             _playerAnimator.SetBool("Eating", _playerController.State == PlayerController.PlayerState.Eat);
