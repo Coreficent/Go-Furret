@@ -143,12 +143,19 @@
                     break;
 
                 case PlayerState.Run:
-                    Turn();
+                    bool revolving = Turn();
                     bool running = Move(_runSpeed);
 
                     if (!running)
                     {
-                        nextState = PlayerState.Walk;
+                        if (revolving)
+                        {
+                            nextState = PlayerState.Walk;
+                        }
+                        else
+                        {
+                            nextState = PlayerState.Stand;
+                        }
                     }
 
                     break;

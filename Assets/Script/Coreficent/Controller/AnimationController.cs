@@ -1,7 +1,6 @@
 ﻿namespace Coreficent.Controller
 {
     using Coreficent.Utility;
-    using System.Collections.Generic;
     using UnityEngine;
 
     public class AnimationController : MonoBehaviour
