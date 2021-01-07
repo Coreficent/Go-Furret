@@ -9,19 +9,21 @@
     {
         [SerializeField] private Bean _bean;
 
+        private int _fruitCount = 0;
+
         public Bean Bean
         {
             get => _bean;
         }
 
+        public float CookTime
+        {
+            get => _fruitCount * 2.0f;
+        }
+
         protected void Start()
         {
             SanityCheck.Check(this, _bean);
-        }
-
-        public float CalculateCookTime(List<Fruit> fruits)
-        {
-            return fruits.Count * 2.0f;
         }
 
         public bool CanProduce(List<Fruit> fruits)
@@ -105,6 +107,7 @@
                     DebugLogger.Log("unexpected number of fruits when producing in recipe");
                     break;
             }
+            _fruitCount = fruits.Count;
         }
 
         private void SummonBean(Color color, Bean.BeanPattern pattern)

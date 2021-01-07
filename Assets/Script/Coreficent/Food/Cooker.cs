@@ -28,7 +28,7 @@
 
         public float RecipeTime
         {
-            get { return _recipe.CalculateCookTime(_fruitVacuum) + Bean.CreateTime; }
+            get { return _recipe.CookTime + Bean.CreateTime + 1.0f; }
         }
 
         public Bean Bean
@@ -88,13 +88,13 @@
 
                     foreach (Fruit fruit in _fruitVacuum)
                     {
-                        fruit.transform.localScale = Vector3.one * (1.0f - _timeController.Progress(_recipe.CalculateCookTime(_fruitVacuum)));
+                        fruit.transform.localScale = Vector3.one * (1.0f - _timeController.Progress(_recipe.CookTime));
                     }
-                    DebugLogger.Bug("_recipe.CalculateCookTime(_fruitVacuum)" + _recipe.CalculateCookTime(_fruitVacuum));
-                    if (_timeController.Passed(_recipe.CalculateCookTime(_fruitVacuum)))
+
+                    DebugLogger.Bug("_recipe.CalculateCookTime(_fruitVacuum)" + _recipe.CookTime);
+                    if (_timeController.Passed(_recipe.CookTime))
                     {
 
-                        _recipe.Produce(_fruitVacuum);
 
                         foreach (Fruit fruit in _fruitVacuum)
                         {
@@ -161,6 +161,7 @@
 
         public void Cook()
         {
+            _recipe.Produce(_fruitVacuum);
             GoTo(CookerState.Cook);
         }
 
