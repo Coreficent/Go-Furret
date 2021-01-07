@@ -286,9 +286,6 @@
 
             bool movingUp = Vector3.Dot(Vector3.Normalize(_rigidbody.velocity), transform.up) >= 0.0f;
 
-            //DebugLogger.Log("state ray", rayHit);
-            //DebugLogger.Log("state up", movingUp);
-
             return rayHit && !movingUp;
         }
 

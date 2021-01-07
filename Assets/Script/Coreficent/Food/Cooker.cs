@@ -14,6 +14,7 @@
         private readonly TimeController _timeController = new TimeController();
 
         private int _lastVacuumSize = 0;
+        private bool _vacuumComplete = false;
 
         public enum CookerState
         {
@@ -61,6 +62,8 @@
             switch (State)
             {
                 case CookerState.Vacuum:
+                    bool vacuumComplete = true;
+
                     foreach (Fruit fruit in _fruitVacuum)
                     {
                         float maximumHeightScaler = 1.0f;
@@ -70,7 +73,14 @@
                         Vector3 destination = transform.position + transform.up * distance * maximumHeightScaler + transform.up * heightOffsetScaler;
 
                         fruit.transform.position = Vector3.MoveTowards(fruit.transform.position, destination, 1.0f * Time.deltaTime);
+
+                        if ((fruit.transform.position - destination).magnitude > 0.05f)
+                        {
+                            vacuumComplete = false;
+                        }
                     }
+
+                    _vacuumComplete = vacuumComplete;
                     break;
 
                 case CookerState.Cook:
@@ -146,7 +156,7 @@
 
         public bool CanCook()
         {
-            return _recipe.CanProduce(_fruitVacuum);
+            return _vacuumComplete && _recipe.CanProduce(_fruitVacuum);
         }
 
         public void Cook()
