@@ -143,24 +143,14 @@
                     break;
 
                 case PlayerState.Run:
-                    bool revoling = Turn();
+                    Turn();
                     bool running = Move(_runSpeed);
 
-                    if (!revoling && !running)
+                    if (!running)
                     {
-                        nextState = PlayerState.Stand;
+                        nextState = PlayerState.Move;
                     }
 
-                    if (Jump())
-                    {
-                        nextState = PlayerState.Float;
-                    }
-
-                    if (_cooker.FruitVacuumSizeChanged())
-                    {
-                        DebugLogger.Log("throw item");
-                        nextState = PlayerState.Throw;
-                    }
                     break;
 
                 case PlayerState.Reject:
