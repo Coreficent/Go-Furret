@@ -1591,6 +1591,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3238032068409320339, guid: 5cb3ee9abb4c5d34e985d89e71d7a042,
+        type: 3}
+      propertyPath: m_Mass
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3238032068409320340, guid: 5cb3ee9abb4c5d34e985d89e71d7a042,
         type: 3}
       propertyPath: _planet
