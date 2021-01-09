@@ -15,7 +15,6 @@
 
         private int _lastVacuumSize = 0;
         private bool _vacuumComplete = false;
-        private Vector3 _cookOffset = new Vector3(0.0f, -0.5f, 0.0f);
 
         public enum CookerState
         {
@@ -49,11 +48,6 @@
         }
 
         protected void OnTriggerEnter(Collider other)
-        {
-            Throw(other);
-        }
-
-        protected void OnTriggerExit(Collider other)
         {
             Throw(other);
         }
@@ -138,22 +132,6 @@
             }
         }
 
-        public bool FruitVacuumSizeChanged()
-        {
-            if (_lastVacuumSize == _fruitVacuum.Count)
-            {
-                return false;
-            }
-            else
-            {
-                DebugLogger.Log("_lastVacuumSize", _lastVacuumSize);
-                DebugLogger.Log("_fruitVacuum.Count", _fruitVacuum.Count);
-
-                _lastVacuumSize = _fruitVacuum.Count;
-                return true;
-            }
-        }
-
         public bool CanCook()
         {
             return _vacuumComplete && _recipe.CanProduce(_fruitVacuum);
@@ -165,10 +143,10 @@
             GoTo(CookerState.Cook);
         }
 
-        private void GoTo(CookerState nextState)
+
+        public bool CanThrow(Vector3 playerPosition)
         {
-            _timeController.Reset();
-            State = nextState;
+            return FruitVacuumSizeIncreased() && (playerPosition.magnitude - Mathf.Abs(_fruitVacuum[_fruitVacuum.Count - 1].transform.position.magnitude)) < 1.0f;
         }
 
         private void Throw(Collider other)
@@ -182,6 +160,28 @@
                     _fruitVacuum.Add(fruit);
                 }
             }
+        }
+
+        public bool FruitVacuumSizeIncreased()
+        {
+            if (_lastVacuumSize < _fruitVacuum.Count)
+            {
+                DebugLogger.Log("_lastVacuumSize", _lastVacuumSize);
+                DebugLogger.Log("_fruitVacuum.Count", _fruitVacuum.Count);
+
+                _lastVacuumSize = _fruitVacuum.Count;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void GoTo(CookerState nextState)
+        {
+            _timeController.Reset();
+            State = nextState;
         }
     }
 }

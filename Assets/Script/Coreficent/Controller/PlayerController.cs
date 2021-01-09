@@ -142,7 +142,7 @@
                         nextState = PlayerState.Float;
                     }
 
-                    if (_cooker.FruitVacuumSizeChanged())
+                    if (_cooker.CanThrow(transform.position))
                     {
                         DebugLogger.Log("throw item");
                         nextState = PlayerState.Throw;
