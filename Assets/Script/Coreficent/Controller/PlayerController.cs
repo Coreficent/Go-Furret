@@ -71,22 +71,13 @@
             switch (State)
             {
                 case PlayerState.Stay:
-                    if (Land())
-                    {
-                        nextState = PlayerState.Stand;
-                    }
-
+                    nextState = Land();
                     break;
 
                 case PlayerState.Float:
                     Turn();
                     Move(_walkSpeed);
-
-                    if (Land())
-                    {
-                        nextState = PlayerState.Stand;
-                    }
-
+                    nextState = Land();
                     break;
 
                 case PlayerState.Stand:
@@ -286,7 +277,7 @@
             return false;
         }
 
-        private bool Land()
+        private PlayerState Land()
         {
             _landingPosition.y = _capsuleCollider.center.y;
 
@@ -300,7 +291,14 @@
 
             bool movingUp = Vector3.Dot(Vector3.Normalize(_rigidbody.velocity), transform.up) >= 0.0f;
 
-            return rayHit && !movingUp;
+            if (rayHit && !movingUp)
+            {
+                return PlayerState.Stand;
+            }
+            else
+            {
+                return PlayerState.Stay;
+            }
         }
 
         private PlayerState Inspect()
