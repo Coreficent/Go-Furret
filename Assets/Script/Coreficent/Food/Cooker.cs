@@ -15,6 +15,7 @@
 
         private int _lastVacuumSize = 0;
         private bool _vacuumComplete = false;
+        private Vector3 _cookOffset = new Vector3(0.0f, -0.5f, 0.0f);
 
         public enum CookerState
         {
@@ -88,14 +89,13 @@
 
                     foreach (Fruit fruit in _fruitVacuum)
                     {
-                        fruit.transform.localScale = Vector3.one * (1.0f - _timeController.Progress(_recipe.CookTime));
+                        fruit.transform.localScale = Vector3.Lerp(Vector3.one, Vector3.zero, _timeController.Progress(_recipe.CookTime));
+                        fruit.transform.position += (transform.position - fruit.transform.position) * 0.25f * Time.deltaTime;
                     }
 
                     DebugLogger.Bug("_recipe.CalculateCookTime(_fruitVacuum)" + _recipe.CookTime);
                     if (_timeController.Passed(_recipe.CookTime))
                     {
-
-
                         foreach (Fruit fruit in _fruitVacuum)
                         {
                             fruit.Pooled = true;

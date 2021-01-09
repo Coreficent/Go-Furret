@@ -49,7 +49,7 @@
         private Color _debugColor = new Color(0.85f, 0.7f, 0.5f, 1.0f);
         private Vector3 _landingPosition = Vector3.zero;
         private Vector3 _velocity = Vector3.zero;
-        private TimeController _timeController = new TimeController();
+        private readonly TimeController _timeController = new TimeController();
 
         protected void Start()
         {
