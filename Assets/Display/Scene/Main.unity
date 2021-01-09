@@ -843,6 +843,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 854610759}
     m_Modifications:
+    - target: {fileID: 2296055400780346922, guid: 4ef39ef8df15eb846baf9ae2cf80c634,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2296055400780346922, guid: 4ef39ef8df15eb846baf9ae2cf80c634,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.025
+      objectReference: {fileID: 0}
     - target: {fileID: 2296055400780346923, guid: 4ef39ef8df15eb846baf9ae2cf80c634,
         type: 3}
       propertyPath: _planet
@@ -1668,19 +1678,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2977110022712645765}
   m_PrefabAsset: {fileID: 0}
---- !u!135 &4535256326537547843
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4535256326537547839}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!4 &4785035759308585654 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7725658397888733747, guid: 5e762a9f9e2c9a6428e7233b4b1e86a2,

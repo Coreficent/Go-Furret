@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3678323247440632686}
-  - component: {fileID: 3678323247440632687}
   - component: {fileID: 3678323247440632680}
   - component: {fileID: 9086745874867778367}
+  - component: {fileID: 3678323247440632687}
   m_Layer: 0
   m_Name: Razz
   m_TagString: Untagged
@@ -34,25 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3678323247440632687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3678323247440632685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2b7c6dc363900a4f80471794aa56991, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _planet: {fileID: 0}
-  _textureOrange: {fileID: 2800000, guid: d0123a6d577422547b6a876903c6230f, type: 3}
-  _texturePurple: {fileID: 2800000, guid: 2d5f5ae71ac4eac4a92a2bfd9c18f934, type: 3}
-  _textureNova: {fileID: 2800000, guid: 269ad628240e58547b1961b9cf02b8fd, type: 3}
-  _textureUmbra: {fileID: 2800000, guid: 269ad628240e58547b1961b9cf02b8fd, type: 3}
-  Color: {r: 0, g: 0, b: 0, a: 0}
-  Species: 1
 --- !u!54 &3678323247440632680
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -83,6 +64,25 @@ CapsuleCollider:
   m_Height: 0.75
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3678323247440632687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3678323247440632685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2b7c6dc363900a4f80471794aa56991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _planet: {fileID: 0}
+  _textureOrange: {fileID: 2800000, guid: d0123a6d577422547b6a876903c6230f, type: 3}
+  _texturePurple: {fileID: 2800000, guid: 2d5f5ae71ac4eac4a92a2bfd9c18f934, type: 3}
+  _textureNova: {fileID: 2800000, guid: 269ad628240e58547b1961b9cf02b8fd, type: 3}
+  _textureUmbra: {fileID: 2800000, guid: 269ad628240e58547b1961b9cf02b8fd, type: 3}
+  Color: {r: 0, g: 0, b: 0, a: 0}
+  Species: 1
 --- !u!1001 &3678323247482702802
 PrefabInstance:
   m_ObjectHideFlags: 0
