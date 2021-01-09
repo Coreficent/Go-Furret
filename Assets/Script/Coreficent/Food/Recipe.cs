@@ -114,7 +114,7 @@
         {
             _bean.Pooled = false;
             _bean.transform.localScale *= 0.01f;
-            _bean.transform.position = transform.position + transform.TransformDirection(new Vector3(0.0f, 1.0f, 0.0f));
+            _bean.transform.position = transform.position;
             _bean.Color = color;
             _bean.Pattern = pattern;
         }
