@@ -11,8 +11,6 @@
         protected void Start()
         {
             SanityCheck.Check(this, _rotationSpeed);
-
-            _eulerRotation.x += _rotationSpeed;
         }
 
         protected void Update()
