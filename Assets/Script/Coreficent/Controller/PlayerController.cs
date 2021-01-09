@@ -437,7 +437,8 @@
                     return PlayerState.Reject;
                 }
 
-                DebugLogger.Bug("bean color", Bean.BeanPattern.Gray, cooker.Bean.Color);
+                DebugLogger.Bug("bean color from", cooker.Bean.Pattern, cooker.Bean.Color);
+                DebugLogger.Bug("bean color to", Bean.BeanPattern.Gray, Fruit.Black);
 
                 return PlayerState.Stand;
             }

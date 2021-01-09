@@ -15,6 +15,7 @@
         public static Color Red = new Color(1.0f, 0.7f, 0.6f, 1.0f);
         public static Color Pink = new Color(1.0f, 0.6f, 1.0f, 1.0f);
         public static Color Black = new Color(0.6f, 0.6f, 0.6f, 1.0f);
+        public static Color White = new Color(0.9f, 0.9f, 0.9f, 1.0f);
 
         public enum FruitSpecies
         {

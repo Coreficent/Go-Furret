@@ -100,7 +100,7 @@
                         }
                     }
 
-                    SummonBean(rainbowProduct ? Color.white : Color.black, rainbowProduct ? Bean.BeanPattern.Rainbow : Bean.BeanPattern.Gray);
+                    SummonBean(rainbowProduct ? Fruit.White : Fruit.Black, rainbowProduct ? Bean.BeanPattern.Rainbow : Bean.BeanPattern.Gray);
                     break;
 
                 default:
