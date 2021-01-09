@@ -309,7 +309,7 @@
         {
             if (_keyboardInput.GetAction)
             {
-                Vector3 origin = transform.position + transform.TransformDirection(_capsuleCollider.center);
+                Vector3 origin = transform.position + transform.TransformDirection(_capsuleCollider.center) * 0.5f + transform.TransformDirection(Vector3.forward) * 0.5f;
                 Vector3 direction = transform.TransformDirection(Vector3.forward);
                 float magnitude = 1.0f;
 
@@ -345,11 +345,14 @@
                         }
                         else
                         {
+                            DebugLogger.Bug("hit" + _hitInfo.collider.gameObject.name);
+
                             return PlayerState.Stay;
                         }
                     }
                     else
                     {
+                        DebugLogger.Bug("hit no collider" + _hitInfo.collider.gameObject.name);
                         return PlayerState.Stay;
                     }
                 }
@@ -360,6 +363,7 @@
             }
             else
             {
+                DebugLogger.Bug("not hit");
                 return PlayerState.Stay;
             }
         }
