@@ -1174,7 +1174,7 @@ PrefabInstance:
     - target: {fileID: 2977110022961926894, guid: 5e762a9f9e2c9a6428e7233b4b1e86a2,
         type: 3}
       propertyPath: _boreTime
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3327760926984388559, guid: 5e762a9f9e2c9a6428e7233b4b1e86a2,
         type: 3}

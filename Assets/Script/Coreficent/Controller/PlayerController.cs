@@ -36,7 +36,7 @@
         [SerializeField] private float _runSpeed = 5.0f;
         [SerializeField] private float _runAcceleration = 0.1f;
         [SerializeField] private float _jumpSpeed = 100.0f;
-        [SerializeField] private float _boreTime = 5.0f;
+        [SerializeField] private float _boreTime = 10.0f;
 
         public PlayerState State = PlayerState.Float;
 
