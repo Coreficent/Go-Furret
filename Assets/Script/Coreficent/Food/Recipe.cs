@@ -85,7 +85,7 @@
                         DebugLogger.Warn("unexpected pattern combination for two item recipe");
                     }
 
-                    SummonBean(Color.white, pattern);
+                    SummonBean(Fruit.White, pattern);
                     break;
 
                 case 3:
