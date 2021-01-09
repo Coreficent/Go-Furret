@@ -384,12 +384,12 @@ PrefabInstance:
     - target: {fileID: 1272216981929553414, guid: c7ec810c914785945a069fa121c3b0b4,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.35
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1272216981929553415, guid: c7ec810c914785945a069fa121c3b0b4,
         type: 3}
       propertyPath: m_Radius
-      value: 1.15
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 1272216981929553415, guid: c7ec810c914785945a069fa121c3b0b4,
         type: 3}
@@ -804,6 +804,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Version: 0
+--- !u!1 &1881736860 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1272216981929553409, guid: c7ec810c914785945a069fa121c3b0b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 695832849}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1881736864
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881736860}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.075
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.75, z: -1.45}
 --- !u!4 &2019952693 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6390046091882064468, guid: ecd7fd0d9935f9b4c942a7201c80ffd8,
