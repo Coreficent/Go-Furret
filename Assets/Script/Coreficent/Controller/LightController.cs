@@ -8,9 +8,11 @@
         [SerializeField] private float _rotationSpeed;
 
         private Vector3 _eulerRotation = Vector3.zero;
+
         protected void Start()
         {
-            SanityCheck.Check(this, _rotationSpeed);
+            _eulerRotation = new Vector3(_rotationSpeed, _rotationSpeed, _rotationSpeed);
+            SanityCheck.Check(this, _rotationSpeed > 0.0f);
         }
 
         protected void Update()
