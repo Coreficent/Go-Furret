@@ -32,6 +32,7 @@
             _playerAnimator.SetBool("Cooking", _playerController.State == PlayerController.PlayerState.Cook);
             _playerAnimator.SetBool("Consuming", _playerController.State == PlayerController.PlayerState.Consume);
             _playerAnimator.SetBool("Searching", _playerController.State == PlayerController.PlayerState.Search);
+            _playerAnimator.SetBool("Sleeping", _playerController.State == PlayerController.PlayerState.Sleep);
         }
 
         public void UpdateExpression(AnimationEvent animationEvent)

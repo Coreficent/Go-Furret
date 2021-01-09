@@ -22,7 +22,9 @@
             Throw,
             Cook,
             Consume,
-            Search
+            Search,
+            Sleep,
+            Wake
         }
 
         [SerializeField] private KeyboardInput _keyboardInput;
@@ -34,6 +36,7 @@
         [SerializeField] private float _runSpeed = 5.0f;
         [SerializeField] private float _runAcceleration = 0.1f;
         [SerializeField] private float _jumpSpeed = 100.0f;
+        [SerializeField] private float _boreTime = 5.0f;
 
         public PlayerState State = PlayerState.Float;
 
@@ -111,6 +114,11 @@
                         }
 
                         DebugLogger.Log("inspect state", nextState);
+                    }
+
+                    if (_timeController.Passed(_boreTime))
+                    {
+                        nextState = PlayerState.Sleep;
                     }
 
                     break;
@@ -193,6 +201,14 @@
 
                 case PlayerState.Search:
                     nextState = Search();
+                    break;
+
+                case PlayerState.Sleep:
+                    nextState = Sleep();
+                    break;
+
+                case PlayerState.Wake:
+                    nextState = Wake();
                     break;
 
                 default:
@@ -416,7 +432,7 @@
 
             if (_timeController.Passed(cooker.Bean.ConsumeTime))
             {
-                if (cooker.Bean.Pattern == Bean.BeanPattern.Gray)
+                if (cooker.Bean.Pattern == Bean.BeanPattern.Gray && cooker.Bean.Color == Fruit.Black)
                 {
                     return PlayerState.Reject;
                 }
@@ -430,6 +446,28 @@
         private PlayerState Search()
         {
             if (_timeController.Passed(2.0f))
+            {
+                return PlayerState.Stand;
+            }
+
+            return PlayerState.Stay;
+        }
+
+        private PlayerState Sleep()
+        {
+            float threshold = 0.5f;
+
+            if (_keyboardInput.Forward > threshold || _keyboardInput.Left > threshold || _keyboardInput.Right > threshold || _keyboardInput.GetAction || _keyboardInput.GetJump)
+            {
+                return PlayerState.Wake;
+            }
+
+            return PlayerState.Stay;
+        }
+
+        private PlayerState Wake()
+        {
+            if (_timeController.Passed(3.0f))
             {
                 return PlayerState.Stand;
             }

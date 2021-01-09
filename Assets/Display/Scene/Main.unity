@@ -1171,6 +1171,11 @@ PrefabInstance:
       propertyPath: _runSpeed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2977110022961926894, guid: 5e762a9f9e2c9a6428e7233b4b1e86a2,
+        type: 3}
+      propertyPath: _boreTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3327760926984388559, guid: 5e762a9f9e2c9a6428e7233b4b1e86a2,
         type: 3}
       propertyPath: m_AABB.m_Center.x
@@ -1674,6 +1679,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 854610759}
     m_Modifications:
+    - target: {fileID: 5587356422882418758, guid: 182165b5b1c212e4e858cb2224582c9b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587356422882418758, guid: 182165b5b1c212e4e858cb2224582c9b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 5587356423543734313, guid: 182165b5b1c212e4e858cb2224582c9b,
         type: 3}
       propertyPath: _fruit
@@ -2124,6 +2139,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cooker
+      objectReference: {fileID: 0}
+    - target: {fileID: 8580870728148852694, guid: d7f8feb3086b2b94ea0660b07a4fb0ec,
+        type: 3}
+      propertyPath: m_Height
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8580870728148852694, guid: d7f8feb3086b2b94ea0660b07a4fb0ec,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8580870728148852694, guid: d7f8feb3086b2b94ea0660b07a4fb0ec,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8879148405978491855, guid: d7f8feb3086b2b94ea0660b07a4fb0ec,
         type: 3}
