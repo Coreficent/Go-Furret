@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3678323247440632686}
   - component: {fileID: 3678323247440632687}
-  - component: {fileID: 3678323247440632681}
   - component: {fileID: 3678323247440632680}
+  - component: {fileID: 9086745874867778367}
   m_Layer: 0
   m_Name: Razz
   m_TagString: Untagged
@@ -53,19 +53,6 @@ MonoBehaviour:
   _textureUmbra: {fileID: 2800000, guid: 269ad628240e58547b1961b9cf02b8fd, type: 3}
   Color: {r: 0, g: 0, b: 0, a: 0}
   Species: 1
---- !u!135 &3678323247440632681
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3678323247440632685}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3678323247440632680
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -82,6 +69,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &9086745874867778367
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3678323247440632685}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 0.75
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3678323247482702802
 PrefabInstance:
   m_ObjectHideFlags: 0
