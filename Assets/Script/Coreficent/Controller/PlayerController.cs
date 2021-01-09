@@ -225,11 +225,9 @@
             if (fruit)
             {
                 Vector3 fruitDirection = Vector3.Normalize(collision.gameObject.transform.position - transform.position);
-
-                Vector3 forceVector = Vector3.Normalize(transform.forward - fruitDirection) * 1.0f;
-
+                float force = 1.0f;
+                Vector3 forceVector = Vector3.Normalize(transform.forward - fruitDirection) * force;
                 DebugRender.Draw(transform.position, transform.position + forceVector, _debugColor);
-
                 collision.gameObject.GetComponent<Rigidbody>().AddForce(forceVector);
             }
         }
