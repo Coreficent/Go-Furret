@@ -503,7 +503,7 @@
 
         private PlayerState Exclaim()
         {
-            if (_timeController.Passed(3.0f))
+            if (_timeController.Passed(2.5f))
             {
                 return PlayerState.Stand;
             }
@@ -513,7 +513,7 @@
 
         private PlayerState Delight()
         {
-            if (_timeController.Passed(3.0f))
+            if (_timeController.Passed(2.5f))
             {
                 return PlayerState.Stand;
             }
@@ -523,7 +523,7 @@
 
         private PlayerState Faint()
         {
-            if (_timeController.Passed(3.0f))
+            if (_timeController.Passed(2.5f))
             {
                 return PlayerState.Stand;
             }
