@@ -70,7 +70,7 @@
 
             Material[] materials = transform.Find("Display").transform.Find("model").GetComponent<SkinnedMeshRenderer>().sharedMaterials;
 
-            if (Random.Range(0, 2) == 0)
+            if (Random.Range(0, 8192) == 0)
             {
                 materials[0].SetTexture("_MainTex", _bodyShiny);
                 materials[1].SetTexture("_MainTex", _eyeShiny);
