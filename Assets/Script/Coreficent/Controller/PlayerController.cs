@@ -441,9 +441,16 @@
 
             if (_timeController.Passed(cooker.Bean.ConsumeTime))
             {
-                if (cooker.Bean.Pattern == Bean.BeanPattern.Gray && cooker.Bean.Color == Fruit.Black)
+                if (cooker.Bean.Pattern == Bean.BeanPattern.Gray)
                 {
-                    return PlayerState.Reject;
+                    if (cooker.Bean.Color == Fruit.Black)
+                    {
+                        return PlayerState.Reject;
+                    }
+                    else
+                    {
+                        return PlayerState.Stand;
+                    } 
                 }
                 else if (cooker.Bean.Pattern == Bean.BeanPattern.Rainbow)
                 {
@@ -453,13 +460,7 @@
                 {
                     return PlayerState.Exclaim;
                 }
-
-                DebugLogger.Bug("bean color from", cooker.Bean.Pattern, cooker.Bean.Color);
-                DebugLogger.Bug("bean color to", Bean.BeanPattern.Gray, Fruit.Black);
-
-                return PlayerState.Stand;
             }
-
             return PlayerState.Stay;
         }
 
