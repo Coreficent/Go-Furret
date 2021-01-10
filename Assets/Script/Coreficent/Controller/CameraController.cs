@@ -22,8 +22,8 @@
         {
             get
             {
-                _radian -= _keyboardInput.CameraLeft * RotationSpeed * Mathf.Deg2Rad * Time.deltaTime;
-                _radian += _keyboardInput.CameraRight * RotationSpeed * Mathf.Deg2Rad * Time.deltaTime;
+                _radian -= (enabled ? _keyboardInput.CameraLeft : 0.0f) * RotationSpeed * Mathf.Deg2Rad * Time.deltaTime;
+                _radian += (enabled ? _keyboardInput.CameraRight : 0.0f) * RotationSpeed * Mathf.Deg2Rad * Time.deltaTime;
 
                 _verticalVector.y = VerticalOffset;
                 Vector3 verticalPosition = _player.transform.position + _player.transform.TransformVector(_verticalVector);
