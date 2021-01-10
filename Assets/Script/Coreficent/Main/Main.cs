@@ -55,6 +55,10 @@
 
         protected void Update()
         {
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
             switch (State)
             {
                 case GameState.Menu:
