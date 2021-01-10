@@ -43,8 +43,7 @@
         public float Throttle = 0.0f;
 
         private Rigidbody _rigidbody;
-        private CapsuleCollider _capsuleCollider;
-        private SphereCollider _sphereCollider;
+        private BoxCollider _boxCollider;
         private RaycastHit _hitInfo;
 
         private Color _debugColor = new Color(0.85f, 0.7f, 0.5f, 1.0f);
@@ -55,10 +54,9 @@
         protected void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
-            _capsuleCollider = GetComponent<CapsuleCollider>();
-            _sphereCollider = GetComponent<SphereCollider>();
+            _boxCollider = GetComponent<BoxCollider>();
 
-            SanityCheck.Check(this, _keyboardInput, _planet, _cooker, _rigidbody, _capsuleCollider, _sphereCollider);
+            SanityCheck.Check(this, _keyboardInput, _planet, _cooker, _rigidbody, _boxCollider);
         }
 
         protected void FixedUpdate()
@@ -281,11 +279,11 @@
 
         private PlayerState Land()
         {
-            _landingPosition.y = _sphereCollider.center.y;
+            _landingPosition.y = _boxCollider.center.y;
 
             Vector3 origin = transform.position + transform.TransformDirection(_landingPosition);
             Vector3 direction = -transform.up;
-            float magnitude = _sphereCollider.radius + 0.25f;
+            float magnitude = _boxCollider.size.y * 0.5f + 0.25f;
 
             DebugRender.Draw(origin, origin + direction * magnitude, _debugColor);
 
@@ -305,15 +303,17 @@
 
         private PlayerState Inspect()
         {
+
+            Vector3 origin = transform.position + transform.up * 0.25f;
+            Vector3 direction = transform.TransformDirection(Vector3.forward);
+            float magnitude = 1.5f;
+
+            DebugRender.Draw(origin, origin + direction * magnitude, _debugColor);
             if (_keyboardInput.GetAction)
             {
-                Vector3 origin = transform.position + transform.TransformDirection(_capsuleCollider.center) * 0.5f + transform.TransformDirection(Vector3.forward) * 0.5f;
-                Vector3 direction = transform.TransformDirection(Vector3.forward);
-                float magnitude = 1.0f;
 
-                DebugRender.Draw(origin, origin + direction * magnitude, _debugColor);
 
-                if (Physics.Raycast(origin, direction, out _hitInfo, magnitude))
+                if (Physics.Raycast(origin, direction, out _hitInfo, magnitude, 1 << LayerMask.NameToLayer("Default"), QueryTriggerInteraction.Ignore))
                 {
                     if (_hitInfo.collider.gameObject.GetComponent<Fruit>())
                     {
