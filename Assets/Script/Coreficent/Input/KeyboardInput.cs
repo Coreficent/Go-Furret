@@ -38,37 +38,69 @@
 
         public float Forward
         {
-            get { return _forward.Axis; }
+            get => _forward.Axis;
         }
 
         public float Left
         {
-            get { return _left.Axis; }
+            get => _left.Axis;
         }
 
         public float Right
         {
-            get { return _right.Axis; }
+            get => _right.Axis;
         }
 
         public float CameraLeft
         {
-            get { return _cameraLeft.Axis; }
+            get => _cameraLeft.Axis;
         }
 
         public float CameraRight
         {
-            get { return _cameraRight.Axis; }
+            get => _cameraRight.Axis;
         }
 
         public bool GetJump
         {
-            get { return _jump.GetKey; }
+            get => _jump.GetKey;
         }
 
         public bool GetAction
         {
-            get { return _action.GetKey; }
+            get => _action.GetKey;
+        }
+
+        public bool GetForward
+        {
+            get => _forward.GetKey;
+        }
+
+        public bool GetCameraLeft
+        {
+            get => _cameraLeft.GetKey;
+        }
+        public bool GetCameraRight
+        {
+            get => _cameraRight.GetKey;
+        }
+        public bool GetLeft
+        {
+            get => _left.GetKey;
+        }
+        public bool GetRight
+        {
+            get => _right.GetKey;
+        }
+
+        public bool KeyInvalid
+        {
+            get => !GetForward && !GetCameraLeft && !GetCameraRight && !GetLeft && !GetRight && !GetAction && !GetJump;
+        }
+
+        public bool AnyKey
+        {
+            get => Input.anyKey;
         }
     }
 }
