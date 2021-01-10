@@ -66,15 +66,11 @@
         {
             DebugLogger.Log("current state", State);
 
-            //DebugLogger.Log("state animation state", _animator.GetCurrentAnimatorStateInfo(0).IsName("Reject"));
-
-
             PlayerState nextState = PlayerState.Stay;
 
             switch (State)
             {
                 case PlayerState.Stay:
-                    nextState = Land();
                     break;
 
                 case PlayerState.Float:
@@ -238,7 +234,7 @@
             }
         }
 
-        private void GoTo(PlayerState nextState)
+        public void GoTo(PlayerState nextState)
         {
             if (nextState != PlayerState.Stay)
             {
