@@ -103,7 +103,25 @@
                     break;
 
                 case CookerState.Create:
-                    _recipe.Bean.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, _timeController.Progress(Bean.CreateTime));
+                    float sizeScaler = 0.75f;
+
+                    if (_recipe.Bean.Pattern == Bean.BeanPattern.Gray)
+                    {
+                        if (_recipe.Bean.Color == Fruit.Black)
+                        {
+                            sizeScaler = 1.0f;
+                        }
+                        else
+                        {
+                            sizeScaler = 0.5f;
+                        }
+                    }
+                    if (_recipe.Bean.Pattern == Bean.BeanPattern.Rainbow)
+                    {
+                        sizeScaler = 1.25f;
+                    }
+
+                    _recipe.Bean.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * sizeScaler, _timeController.Progress(Bean.CreateTime));
                     _recipe.Bean.transform.position = Vector3.Lerp(transform.position + transform.TransformVector(Vector3.up * 0.35f), transform.position + transform.TransformVector(Vector3.up * 0.55f), _timeController.Progress(Bean.CreateTime));
 
                     DebugLogger.Bug("Bean.CreateTime" + Bean.CreateTime);
