@@ -14,7 +14,8 @@
             Transition,
             Initialization,
             Execution,
-            Hint
+            Hint,
+            Win
         }
 
         public GameState State = GameState.Menu;
@@ -23,6 +24,7 @@
         [SerializeField] private CameraController _camera;
         [SerializeField] private Text _title;
         [SerializeField] private Text _control;
+        [SerializeField] private Text _win;
         [SerializeField] private KeyboardInput _keyboardInput;
 
         private readonly TimeController _timeController = new TimeController();
@@ -31,6 +33,8 @@
         private Quaternion _initialCameraRotation = Quaternion.identity;
         private Color _initialTitleColor = Color.clear;
         private Color _initialControlColor = Color.clear;
+
+        private bool _winComplete = false;
 
         protected void Start()
         {
@@ -80,6 +84,11 @@
                     {
                         GoTo(GameState.Hint);
                     }
+
+                    if (_furret.FoundRainbowBean && !_winComplete)
+                    {
+                        GoTo(GameState.Win);
+                    }
                     break;
 
                 case GameState.Hint:
@@ -93,6 +102,20 @@
                     {
                         GoTo(GameState.Execution);
                     }
+                    break;
+
+                case GameState.Win:
+                    float appearTime = 3.0f;
+
+                    _win.color = Color.Lerp(Color.clear, Color.black, _timeController.Progress(appearTime));
+
+                    if (_timeController.Passed(appearTime))
+                    {
+                        GoTo(GameState.Execution);
+                    }
+
+                    _winComplete = true;
+
                     break;
 
                 default:

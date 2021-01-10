@@ -6,7 +6,6 @@
     using Coreficent.Food;
     using UnityEngine;
     using Coreficent.Plant;
-    using System.Collections.Generic;
 
     public class PlayerController : MonoBehaviour
     {
@@ -48,10 +47,9 @@
         [SerializeField] private float _jumpSpeed = 100.0f;
         [SerializeField] private float _boreTime = 10.0f;
 
-
         public PlayerState State = PlayerState.Float;
 
-        public float Throttle = 0.0f;
+        public bool FoundRainbowBean = false;
 
         private Rigidbody _rigidbody;
         private BoxCollider _boxCollider;
@@ -230,6 +228,7 @@
                     break;
 
                 case PlayerState.Delight:
+                    FoundRainbowBean = true;
                     nextState = Delight();
                     break;
 
