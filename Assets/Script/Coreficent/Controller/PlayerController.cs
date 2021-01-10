@@ -6,6 +6,7 @@
     using Coreficent.Food;
     using UnityEngine;
     using Coreficent.Plant;
+    using System.Collections.Generic;
 
     public class PlayerController : MonoBehaviour
     {
@@ -33,6 +34,12 @@
         [SerializeField] private KeyboardInput _keyboardInput;
         [SerializeField] private Planet _planet;
         [SerializeField] private Cooker _cooker;
+        [SerializeField] private Texture _bodyNormal;
+        [SerializeField] private Texture _eyeNormal;
+        [SerializeField] private Texture _mouthNormal;
+        [SerializeField] private Texture _bodyShiny;
+        [SerializeField] private Texture _eyeShiny;
+        [SerializeField] private Texture _mouthShiny;
 
         [SerializeField] private float _turnSpeed = 90.0f;
         [SerializeField] private float _walkSpeed = 1.0f;
@@ -40,6 +47,7 @@
         [SerializeField] private float _runAcceleration = 0.1f;
         [SerializeField] private float _jumpSpeed = 100.0f;
         [SerializeField] private float _boreTime = 10.0f;
+
 
         public PlayerState State = PlayerState.Float;
 
@@ -59,7 +67,23 @@
             _rigidbody = GetComponent<Rigidbody>();
             _boxCollider = GetComponent<BoxCollider>();
 
-            SanityCheck.Check(this, _keyboardInput, _planet, _cooker, _rigidbody, _boxCollider);
+            SanityCheck.Check(this, _keyboardInput, _planet, _cooker, _rigidbody, _boxCollider, _bodyNormal, _bodyShiny);
+
+
+            Material[] materials = transform.Find("Display").transform.Find("model").GetComponent<SkinnedMeshRenderer>().sharedMaterials;
+
+            if (Random.Range(0, 2) == 0)
+            {
+                materials[0].SetTexture("_MainTex", _bodyShiny);
+                materials[1].SetTexture("_MainTex", _eyeShiny);
+                materials[2].SetTexture("_MainTex", _mouthShiny);
+            }
+            else
+            {
+                materials[0].SetTexture("_MainTex", _bodyNormal);
+                materials[1].SetTexture("_MainTex", _eyeNormal);
+                materials[2].SetTexture("_MainTex", _mouthNormal);
+            }
         }
 
         protected void FixedUpdate()
