@@ -303,7 +303,6 @@
 
         private PlayerState Inspect()
         {
-
             Vector3 origin = transform.position + transform.up * 0.25f;
             Vector3 direction = transform.TransformDirection(Vector3.forward);
             float magnitude = 1.5f;
@@ -311,8 +310,6 @@
             DebugRender.Draw(origin, origin + direction * magnitude, _debugColor);
             if (_keyboardInput.GetAction)
             {
-
-
                 if (Physics.Raycast(origin, direction, out _hitInfo, magnitude, 1 << LayerMask.NameToLayer("Default"), QueryTriggerInteraction.Ignore))
                 {
                     if (_hitInfo.collider.gameObject.GetComponent<Fruit>())
