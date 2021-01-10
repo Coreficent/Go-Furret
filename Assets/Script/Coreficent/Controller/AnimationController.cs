@@ -33,6 +33,8 @@
             _playerAnimator.SetBool("Consuming", _playerController.State == PlayerController.PlayerState.Consume);
             _playerAnimator.SetBool("Searching", _playerController.State == PlayerController.PlayerState.Search);
             _playerAnimator.SetBool("Sleeping", _playerController.State == PlayerController.PlayerState.Sleep);
+            _playerAnimator.SetBool("Exclaiming", _playerController.State == PlayerController.PlayerState.Exclaim);
+            _playerAnimator.SetBool("Delighting", _playerController.State == PlayerController.PlayerState.Delight);
         }
 
         public void UpdateExpression(AnimationEvent animationEvent)

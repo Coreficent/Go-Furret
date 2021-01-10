@@ -24,7 +24,9 @@
             Consume,
             Search,
             Sleep,
-            Wake
+            Wake,
+            Exclaim,
+            Delight
         }
 
         [SerializeField] private KeyboardInput _keyboardInput;
@@ -200,6 +202,14 @@
 
                 case PlayerState.Wake:
                     nextState = Wake();
+                    break;
+
+                case PlayerState.Exclaim:
+                    nextState = Exclaim();
+                    break;
+
+                case PlayerState.Delight:
+                    nextState = Delight();
                     break;
 
                 default:
@@ -435,6 +445,14 @@
                 {
                     return PlayerState.Reject;
                 }
+                else if (cooker.Bean.Pattern == Bean.BeanPattern.Rainbow)
+                {
+                    return PlayerState.Delight;
+                }
+                else
+                {
+                    return PlayerState.Exclaim;
+                }
 
                 DebugLogger.Bug("bean color from", cooker.Bean.Pattern, cooker.Bean.Color);
                 DebugLogger.Bug("bean color to", Bean.BeanPattern.Gray, Fruit.Black);
@@ -468,6 +486,26 @@
         }
 
         private PlayerState Wake()
+        {
+            if (_timeController.Passed(3.0f))
+            {
+                return PlayerState.Stand;
+            }
+
+            return PlayerState.Stay;
+        }
+
+        private PlayerState Exclaim()
+        {
+            if (_timeController.Passed(3.0f))
+            {
+                return PlayerState.Stand;
+            }
+
+            return PlayerState.Stay;
+        }
+
+        private PlayerState Delight()
         {
             if (_timeController.Passed(3.0f))
             {
