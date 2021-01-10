@@ -417,7 +417,42 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.077083334
+        functionName: UpdateExpression
+        data: Eye:Sad Mouth:Closed
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.34688348
+        functionName: UpdateExpression
+        data: Eye:Sad Mouth:Exclaim
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5799458
+        functionName: UpdateExpression
+        data: Eye:Wincing Mouth:Exclaim
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.6531165
+        functionName: UpdateExpression
+        data: Eye:Wincing Mouth:Exclaim
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7114498
+        functionName: UpdateExpression
+        data: Eye:Wincing Mouth:Angry
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
