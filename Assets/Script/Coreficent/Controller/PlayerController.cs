@@ -519,7 +519,7 @@
 
         private PlayerState Faint()
         {
-            if (_timeController.Passed(2.5f))
+            if (_timeController.Passed(4.0f))
             {
                 return PlayerState.Stand;
             }
