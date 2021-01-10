@@ -290,42 +290,42 @@ ModelImporter:
       events:
       - time: 0.13008131
         functionName: UpdateExpression
-        data: Eye:Closed Mouth:Open
+        data: Eye:Happy Mouth:Open
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.6233062
         functionName: UpdateExpression
-        data: Eye:Closed Mouth:Closed
+        data: Eye:Happy Mouth:Closed
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.59349597
         functionName: UpdateExpression
-        data: Eye:Closed Mouth:Semi
+        data: Eye:Happy Mouth:Semi
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.6612466
         functionName: UpdateExpression
-        data: Eye:Closed Mouth:Semi
+        data: Eye:Happy Mouth:Semi
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.8157181
         functionName: UpdateExpression
-        data: Eye:Closed Mouth:Semi
+        data: Eye:Happy Mouth:Semi
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.83468837
         functionName: UpdateExpression
-        data: Eye:Closed Mouth:Closed
+        data: Eye:Happy Mouth:Closed
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0

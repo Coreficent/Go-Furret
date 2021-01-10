@@ -17,15 +17,13 @@
             SanityCheck.Check(this, _fruit);
 
             DebugLogger.Start(this);
-
-
         }
 
         public void SpawnFruitNear(GameObject player)
         {
             if (_fruit.Pooled)
             {
-                _fruit.transform.position = player.transform.position + player.transform.up * 2.0f;
+                _fruit.transform.position = player.transform.position + player.transform.up * 2.0f + player.transform.right * (Random.value < .5 ? 1.0f : -1.0f);
                 _fruit.Pooled = false;
             }
         }
