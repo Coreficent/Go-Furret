@@ -26,7 +26,8 @@
             Sleep,
             Wake,
             Exclaim,
-            Delight
+            Delight,
+            Faint
         }
 
         [SerializeField] private KeyboardInput _keyboardInput;
@@ -210,6 +211,10 @@
 
                 case PlayerState.Delight:
                     nextState = Delight();
+                    break;
+
+                case PlayerState.Faint:
+                    nextState = Faint();
                     break;
 
                 default:
@@ -445,12 +450,12 @@
                 {
                     if (cooker.Bean.Color == Fruit.Black)
                     {
-                        return PlayerState.Reject;
+                        return PlayerState.Faint;
                     }
                     else
                     {
                         return PlayerState.Stand;
-                    } 
+                    }
                 }
                 else if (cooker.Bean.Pattern == Bean.BeanPattern.Rainbow)
                 {
@@ -507,6 +512,16 @@
         }
 
         private PlayerState Delight()
+        {
+            if (_timeController.Passed(3.0f))
+            {
+                return PlayerState.Stand;
+            }
+
+            return PlayerState.Stay;
+        }
+
+        private PlayerState Faint()
         {
             if (_timeController.Passed(3.0f))
             {

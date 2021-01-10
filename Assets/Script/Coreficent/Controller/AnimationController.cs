@@ -35,6 +35,7 @@
             _playerAnimator.SetBool("Sleeping", _playerController.State == PlayerController.PlayerState.Sleep);
             _playerAnimator.SetBool("Exclaiming", _playerController.State == PlayerController.PlayerState.Exclaim);
             _playerAnimator.SetBool("Delighting", _playerController.State == PlayerController.PlayerState.Delight);
+            _playerAnimator.SetBool("Fainting", _playerController.State == PlayerController.PlayerState.Faint);
         }
 
         public void UpdateExpression(AnimationEvent animationEvent)
