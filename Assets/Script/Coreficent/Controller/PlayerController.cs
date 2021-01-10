@@ -290,11 +290,11 @@
 
         private PlayerState Land()
         {
-            _landingPosition.y = _boxCollider.center.y;
+            _landingPosition.y = 0.5f;
 
             Vector3 origin = transform.position + transform.TransformDirection(_landingPosition);
             Vector3 direction = -transform.up;
-            float magnitude = _boxCollider.size.y * 0.5f + 0.25f;
+            float magnitude = 1.25f;
 
             DebugRender.Draw(origin, origin + direction * magnitude, _debugColor);
 
