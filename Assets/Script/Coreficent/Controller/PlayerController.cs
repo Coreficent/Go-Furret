@@ -44,6 +44,7 @@
 
         private Rigidbody _rigidbody;
         private CapsuleCollider _capsuleCollider;
+        private SphereCollider _sphereCollider;
         private RaycastHit _hitInfo;
 
         private Color _debugColor = new Color(0.85f, 0.7f, 0.5f, 1.0f);
@@ -55,8 +56,9 @@
         {
             _rigidbody = GetComponent<Rigidbody>();
             _capsuleCollider = GetComponent<CapsuleCollider>();
+            _sphereCollider = GetComponent<SphereCollider>();
 
-            SanityCheck.Check(this, _keyboardInput, _planet, _cooker, _rigidbody, _capsuleCollider);
+            SanityCheck.Check(this, _keyboardInput, _planet, _cooker, _rigidbody, _capsuleCollider, _sphereCollider);
         }
 
         protected void FixedUpdate()
@@ -279,19 +281,19 @@
 
         private PlayerState Land()
         {
-            _landingPosition.y = _capsuleCollider.center.y;
+            _landingPosition.y = _sphereCollider.center.y;
 
             Vector3 origin = transform.position + transform.TransformDirection(_landingPosition);
             Vector3 direction = -transform.up;
-            float magnitude = _capsuleCollider.height * 0.5f + 0.125f;
+            float magnitude = _sphereCollider.radius + 0.25f;
 
             DebugRender.Draw(origin, origin + direction * magnitude, _debugColor);
 
-            bool rayHit = Physics.Raycast(origin, direction, magnitude);
-
             bool movingUp = Vector3.Dot(Vector3.Normalize(_rigidbody.velocity), transform.up) >= 0.0f;
 
-            if (rayHit && !movingUp)
+            bool rayHit = Physics.Raycast(origin, direction, out RaycastHit raycastHit, magnitude);
+
+            if (rayHit && !movingUp && !raycastHit.collider.isTrigger)
             {
                 return PlayerState.Stand;
             }

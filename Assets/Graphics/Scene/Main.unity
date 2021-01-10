@@ -396,6 +396,21 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 1598052086903816047, guid: c7ec810c914785945a069fa121c3b0b4,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.0115
+      objectReference: {fileID: 0}
+    - target: {fileID: 1598052086903816047, guid: c7ec810c914785945a069fa121c3b0b4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.0115
+      objectReference: {fileID: 0}
+    - target: {fileID: 1598052086903816047, guid: c7ec810c914785945a069fa121c3b0b4,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.0115
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7ec810c914785945a069fa121c3b0b4, type: 3}
 --- !u!1 &705507993
@@ -1339,6 +1354,11 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 2977110022961926889, guid: 5e762a9f9e2c9a6428e7233b4b1e86a2,
+        type: 3}
+      propertyPath: m_Height
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2977110022961926894, guid: 5e762a9f9e2c9a6428e7233b4b1e86a2,
         type: 3}
       propertyPath: _planet
@@ -1428,6 +1448,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 9.4851055
+      objectReference: {fileID: 0}
+    - target: {fileID: 4062038307879907926, guid: 5e762a9f9e2c9a6428e7233b4b1e86a2,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4137398529485628758, guid: 5e762a9f9e2c9a6428e7233b4b1e86a2,
         type: 3}
@@ -1791,7 +1816,7 @@ PrefabInstance:
     - target: {fileID: 3678323247440632680, guid: e3aba5dce94b6d14e867044543cfd899,
         type: 3}
       propertyPath: m_Mass
-      value: 0.75
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3678323247440632685, guid: e3aba5dce94b6d14e867044543cfd899,
         type: 3}
@@ -1858,6 +1883,16 @@ PrefabInstance:
       propertyPath: _planet
       value: 
       objectReference: {fileID: 1518679852}
+    - target: {fileID: 9086745874867778367, guid: e3aba5dce94b6d14e867044543cfd899,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9086745874867778367, guid: e3aba5dce94b6d14e867044543cfd899,
+        type: 3}
+      propertyPath: m_Height
+      value: 0.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3aba5dce94b6d14e867044543cfd899, type: 3}
 --- !u!1 &4535256326537547839 stripped
@@ -2353,7 +2388,7 @@ PrefabInstance:
     - target: {fileID: 8580870728148852694, guid: d7f8feb3086b2b94ea0660b07a4fb0ec,
         type: 3}
       propertyPath: m_Center.y
-      value: 0.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8879148405978491855, guid: d7f8feb3086b2b94ea0660b07a4fb0ec,
         type: 3}
