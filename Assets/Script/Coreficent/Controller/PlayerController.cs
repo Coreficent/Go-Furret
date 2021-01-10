@@ -154,7 +154,7 @@
                         nextState = PlayerState.Float;
                     }
 
-                    if (_cooker.CanThrow(transform.position))
+                    if (_cooker.CanThrow())
                     {
                         DebugLogger.Log("throw item");
                         nextState = PlayerState.Throw;

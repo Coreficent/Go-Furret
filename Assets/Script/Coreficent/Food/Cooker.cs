@@ -162,9 +162,9 @@
         }
 
 
-        public bool CanThrow(Vector3 playerPosition)
+        public bool CanThrow()
         {
-            return FruitVacuumSizeIncreased() && (playerPosition.magnitude - Mathf.Abs(_fruitVacuum[_fruitVacuum.Count - 1].transform.position.magnitude)) < 0.5f;
+            return FruitVacuumSizeIncreased();
         }
 
         private void Throw(Collider other)
