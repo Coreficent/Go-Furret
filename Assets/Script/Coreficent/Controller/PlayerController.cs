@@ -374,14 +374,14 @@
                         }
                         else
                         {
-                            DebugLogger.Bug("hit" + _hitInfo.collider.gameObject.name);
+                            DebugLogger.Log("hit" + _hitInfo.collider.gameObject.name);
 
                             return PlayerState.Stay;
                         }
                     }
                     else
                     {
-                        DebugLogger.Bug("hit no collider" + _hitInfo.collider.gameObject.name);
+                        DebugLogger.Log("hit no collider" + _hitInfo.collider.gameObject.name);
                         return PlayerState.Stay;
                     }
                 }
@@ -392,7 +392,7 @@
             }
             else
             {
-                DebugLogger.Bug("not hit");
+                DebugLogger.Log("not hit");
                 return PlayerState.Stay;
             }
         }

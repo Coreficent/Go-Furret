@@ -5,6 +5,7 @@
     using Coreficent.Controller;
     using UnityEngine.UI;
     using Coreficent.Input;
+    using Coreficent.Setting;
 
     public class Main : MonoBehaviour
     {
@@ -45,6 +46,11 @@
 
             _initialTitleColor = _title.color;
             _initialControlColor = _control.color;
+
+            if (ApplicationMode.DebugMode == ApplicationMode.ApplicationState.Debug)
+            {
+                _title.color = _initialTitleColor = Color.green;
+            }
         }
 
         protected void Update()
@@ -107,7 +113,7 @@
                 case GameState.Win:
                     float appearTime = 3.0f;
 
-                    _win.color = Color.Lerp(Color.clear, Color.black, _timeController.Progress(appearTime));
+                    _win.color = Color.Lerp(Color.clear, _initialTitleColor, _timeController.Progress(appearTime));
 
                     if (_timeController.Passed(appearTime))
                     {

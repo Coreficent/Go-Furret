@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3027dd4dbc6513b4091a902588d7f1d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mode: 0
+  _mode: 1
 --- !u!114 &41221134 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8879148405978491855, guid: d7f8feb3086b2b94ea0660b07a4fb0ec,
@@ -869,7 +869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.4198113, b: 0.69980276, a: 1}
+  m_Color: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

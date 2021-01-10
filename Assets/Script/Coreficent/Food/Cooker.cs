@@ -79,7 +79,7 @@
                     break;
 
                 case CookerState.Cook:
-                    DebugLogger.Bug("cooking in cooker");
+                    DebugLogger.Log("cooking in cooker");
 
                     foreach (Fruit fruit in _fruitVacuum)
                     {
@@ -87,7 +87,7 @@
                         fruit.transform.position += (transform.position - fruit.transform.position) * 0.25f * Time.deltaTime;
                     }
 
-                    DebugLogger.Bug("_recipe.CalculateCookTime(_fruitVacuum)" + _recipe.CookTime);
+                    DebugLogger.Log("_recipe.CalculateCookTime(_fruitVacuum)" + _recipe.CookTime);
                     if (_timeController.Passed(_recipe.CookTime))
                     {
                         foreach (Fruit fruit in _fruitVacuum)
@@ -96,6 +96,7 @@
                         }
 
                         _fruitVacuum.Clear();
+                        _lastVacuumSize = 0;
 
                         GoTo(CookerState.Create);
                     }
@@ -124,7 +125,7 @@
                     _recipe.Bean.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * sizeScaler, _timeController.Progress(Bean.CreateTime));
                     _recipe.Bean.transform.position = Vector3.Lerp(transform.position + transform.TransformVector(Vector3.up * 0.35f), transform.position + transform.TransformVector(Vector3.up * 0.55f), _timeController.Progress(Bean.CreateTime));
 
-                    DebugLogger.Bug("Bean.CreateTime" + Bean.CreateTime);
+                    DebugLogger.Log("Bean.CreateTime" + Bean.CreateTime);
 
                     if (_timeController.Passed(Bean.CreateTime))
                     {
