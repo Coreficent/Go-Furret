@@ -65,7 +65,7 @@
                     break;
 
                 case GameState.Transition:
-                    float transitionTime = 10.0f;
+                    float transitionTime = 12.5f;
 
                     _camera.transform.position = Vector3.Lerp(_initialCameraPosition, _camera.PositionDestination, _timeController.Progress(transitionTime));
                     _camera.transform.rotation = Quaternion.Lerp(_initialCameraRotation, _camera.RotationDestination, _timeController.Progress(transitionTime));
